@@ -1,0 +1,45 @@
+{
+  "totalBoxes": 378,
+  "occupiedBoxes": 203,
+  "occupancyRate": 53.7,
+  "lastUpdated": "2026-01-29",
+  "boxTypeDistribution": [
+    { "type": "Bat Bank", "count": 84, "occupied": 66, "occupancyRate": 78.5 },
+    { "type": "Nursery Bat Box", "count": 69, "occupied": 36, "occupancyRate": 52.1 },
+    { "type": "Old George Bat Box", "count": 2, "occupied": 0, "occupancyRate": 0 },
+    { "type": "Rocket Bat Box", "count": 130, "occupied": 85, "occupancyRate": 65.3 },
+    { "type": "Six Chamber Bat Box", "count": 1, "occupied": 0, "occupancyRate": 0 },
+    { "type": "Slimline Bat Box", "count": 32, "occupied": 16, "occupancyRate": 50.0 }
+  ],
+  "occupancyByWaterDistance": [
+    { "range": "0 - 50m", "occupancyRate": 59.6, "count": 109 },
+    { "range": "50 - 500m", "occupancyRate": 66.3, "count": 116 },
+    { "range": "500 - 1km", "occupancyRate": 61.2, "count": 62 },
+    { "range": "1km or more", "occupancyRate": 76.6, "count": 30 }
+  ],
+  "occupancyByNeighborDistance": [
+    { "range": "0 - 100m", "occupancyRate": 72.2, "count": 72 },
+    { "range": "100 - 500m", "occupancyRate": 64.0, "count": 114 },
+    { "range": "500m - 2km", "occupancyRate": 61.5, "count": 91 },
+    { "range": "2km or more", "occupancyRate": 60.6, "count": 33 }
+  ],
+  "occupancyByVegetation": [
+    { "type": "Open grassland", "occupancyRate": 70.7, "count": 123 },
+    { "type": "Mixed", "occupancyRate": 58.6, "count": 116 },
+    { "type": "Farmland", "occupancyRate": 63.2, "count": 68 },
+    { "type": "Wooded area", "occupancyRate": 50.0, "count": 8 }
+  ],
+  "featureImportance": [
+    { "feature": "Distance to Neighbor", "importance": 12 },
+    { "feature": "Vegetation Type", "importance": 17 },
+    { "feature": "Box Type", "importance": 28 },
+    { "feature": "Distance to Water", "importance": 17 }
+  ],
+  "topLocations": [
+    { "name": "Darton Wartburg", "boxes": 25, "occupied": 23, "occupancyRate": 92.0 },
+    { "name": "Umbhaba", "boxes": 30, "occupied": 28, "occupancyRate": 93.3 },
+    { "name": "Xanadu Nature Estate", "boxes": 12, "occupied": 9, "occupancyRate": 75.0 },
+    { "name": "Baplass Forever Resort", "boxes": 49, "occupied": 28, "occupancyRate": 57.1 },
+    { "name": "Dainfern Estate", "boxes": 8, "occupied": 6, "occupancyRate": 75.0 }
+  ]
+}

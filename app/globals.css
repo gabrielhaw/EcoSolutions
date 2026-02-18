@@ -15,6 +15,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global text justification */
+p {
+  text-align: justify;
+}
+
 ::selection {
   background-color: rgb(209 250 229);
 }
@@ -31,6 +36,24 @@ body {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+/* Testimonial slider animation */
+@keyframes scroll-slow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-80%);
+  }
+}
+
+.animate-scroll-slow {
+  animation: scroll-slow 25s linear infinite;
+}
+
+.animate-scroll-slow:hover {
+  animation-play-state: paused;
 }
 
 /* Hide scrollbar for horizontal slider */

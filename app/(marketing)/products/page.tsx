@@ -12,7 +12,7 @@ export const metadata = {
 export default function ProductsPage() {
   return (
     <>
-      <section className="py-14">
+      <section className="py-14 pt-28">
         <Container>
           <SectionHeading
             title="Products"

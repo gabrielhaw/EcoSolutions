@@ -11,6 +11,20 @@ export const site = {
     { label: "Products", href: "/products" },
     { label: "Projects", href: "/projects" },
     { label: "Conservation", href: "/conservation" },
+    { label: "Schools", href: "/schools" },
+    { label: "Owlproject.org", href: "/owlproject" },
+    { label: "Dashboard", href: "/dashboard" },
     { label: "Contact", href: "/contact" },
+  ],
+  pestControlPages: [
+    { 
+      label: "Bats & Agricultural Pest Control", 
+      href: "/non-toxic-pest-control/bats-and-agricultural-pest-control",
+      description: "How bats provide natural pest control in agricultural settings"
+    },
+    // Add more pages as content is created:
+    // { label: "Owls & Rodent Control", href: "/non-toxic-pest-control/owls-and-agricultural-rodent-control" },
+    // { label: "Non-toxic Rodent Control", href: "/non-toxic-pest-control/non-toxic-rodent-control" },
+    // { label: "Poison-free Suburbs", href: "/non-toxic-pest-control/poison-free-suburbs" },
   ],
 };

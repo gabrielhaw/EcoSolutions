@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="py-14">
+    <section className="py-14 pt-28">
       <Container>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>

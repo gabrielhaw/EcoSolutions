@@ -14,17 +14,19 @@ export default function PartnersMarquee() {
   ];
 
   return (
-    <section className="border-y border-neutral-200 bg-neutral-50 py-20 overflow-hidden">
-      <p className="text-center text-sm font-semibold tracking-wide text-neutral-700 mb-12 uppercase">
-        Trusted by leading organizations
-      </p>
-      <div className="relative">
+    <section className="border-y border-neutral-200 bg-neutral-50 py-20">
+      <div className="w-full flex justify-center mb-12">
+        <p className="text-sm font-semibold tracking-wide text-neutral-700 uppercase text-center">
+          Trusted by leading organizations
+        </p>
+      </div>
+      <div className="relative overflow-hidden">
         <div className="flex items-center gap-24 animate-marquee">
           {/* First set */}
           {partners.map((partner, idx) => (
             <div
               key={`first-${idx}`}
-              className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+              className="shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
             >
               <Image
                 src={partner.logo}
@@ -40,7 +42,7 @@ export default function PartnersMarquee() {
           {partners.map((partner, idx) => (
             <div
               key={`second-${idx}`}
-              className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+              className="shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
             >
               <Image
                 src={partner.logo}

@@ -5,6 +5,7 @@ import Card from "@/components/ui/Card";
 import SectionHeading from "@/components/sections/SectionHeading";
 import CTA from "@/components/sections/CTA";
 import PartnersMarquee from "@/components/sections/PartnersMarquee";
+import Testimonials from "@/components/sections/Testimonials";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
@@ -112,8 +113,9 @@ export default function HomePage() {
                 Our work blends science, conservation, and practical implementation—tailored for farms,
                 estates, homes, and businesses across South Africa.
               </p>
-              <div className="mt-8">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="/about">Learn more about us</Button>
+                <Button href="/dashboard" variant="ghost">View Analytics Dashboard</Button>
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -221,7 +223,7 @@ export default function HomePage() {
               {/* Product 1 - Spotted Eagle Owl Box */}
               <div className="flex-none w-80 snap-start">
                 <div className="group relative bg-white rounded-xl border border-neutral-200 hover:border-emerald-300 transition-all duration-300 overflow-hidden h-full">
-                  <div className="aspect-[4/3] bg-neutral-100 relative overflow-hidden">
+                  <div className="aspect-4/3 bg-neutral-100 relative overflow-hidden">
                     <Image
                       src="/products/SpottedEagleOwlbox_11426bb5-25a7-4d02-a4f5-4fd8119a9d07_590x.jpg.webp"
                       alt="Spotted Eagle Owl Box"
@@ -242,7 +244,7 @@ export default function HomePage() {
               {/* Product 2 - Rocket Bat Hotel */}
               <div className="flex-none w-80 snap-start">
                 <div className="group relative bg-white rounded-xl border border-neutral-200 hover:border-emerald-300 transition-all duration-300 overflow-hidden h-full">
-                  <div className="aspect-[4/3] bg-neutral-100 relative overflow-hidden">
+                  <div className="aspect-4/3 bg-neutral-100 relative overflow-hidden">
                     <Image
                       src="/products/Rocketbathotel_590x.jpg.webp"
                       alt="Rocket Bat Hotel"
@@ -263,7 +265,7 @@ export default function HomePage() {
               {/* Product 3 - Slimline Bat Box */}
               <div className="flex-none w-80 snap-start">
                 <div className="group relative bg-white rounded-xl border border-neutral-200 hover:border-emerald-300 transition-all duration-300 overflow-hidden h-full">
-                  <div className="aspect-[4/3] bg-neutral-100 relative overflow-hidden">
+                  <div className="aspect-4/3 bg-neutral-100 relative overflow-hidden">
                     <Image
                       src="/products/Slimlinebatbox_b6db9f39-634c-467d-90e5-8b7ae6fe32ed_590x.jpg.webp"
                       alt="Slimline Bat Box"
@@ -284,7 +286,7 @@ export default function HomePage() {
               {/* Product 4 - Bush Baby Box */}
               <div className="flex-none w-80 snap-start">
                 <div className="group relative bg-white rounded-xl border border-neutral-200 hover:border-emerald-300 transition-all duration-300 overflow-hidden h-full">
-                  <div className="aspect-[4/3] bg-neutral-100 relative overflow-hidden">
+                  <div className="aspect-4/3 bg-neutral-100 relative overflow-hidden">
                     <Image
                       src="/products/Bush_baby_box_590x.png.webp"
                       alt="Bush Baby Box"
@@ -305,7 +307,7 @@ export default function HomePage() {
               {/* Product 5 - Barbet Log */}
               <div className="flex-none w-80 snap-start">
                 <div className="group relative bg-white rounded-xl border border-neutral-200 hover:border-emerald-300 transition-all duration-300 overflow-hidden h-full">
-                  <div className="aspect-[4/3] bg-neutral-100 relative overflow-hidden">
+                  <div className="aspect-4/3 bg-neutral-100 relative overflow-hidden">
                     <Image
                       src="/products/Barbetlog_590x.jpg.webp"
                       alt="Barbet Log"
@@ -331,7 +333,10 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+{/* Testimonials Section */}
+      <Testimonials />
 
+      
       <CTA />
     </>
   );
