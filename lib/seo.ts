@@ -15,11 +15,15 @@ export type PageSeo = {
   /** Marks the page as a bookable service: adds Service schema + booking panel. */
   service?: { name: string; serviceType: string; cta: { label: string; href: string } };
   faqs?: Faq[];
+  /** "At a glance" numbers shown above the long-form article, with sources where the article cites them. */
+  facts?: Fact[];
 };
+
+export type Fact = { figure: string; label: string; source?: string };
 
 /**
  * Per-URL search overrides. URLs are unchanged from the old site; only the
- * on-page targeting is sharpened.
+ * on-page targeting is sharpened. Facts come from EcoSolutions' own published content.
  */
 export const seo: Record<string, PageSeo> = {
   "/non-toxic-pest-control": {
@@ -29,6 +33,12 @@ export const seo: Record<string, PageSeo> = {
     h1: "Pest control without poison",
   },
   "/non-toxic-pest-control/non-toxic-rodent-control-1": {
+    facts: [
+      { figure: "6 mm", label: "gap a house mouse (Mus musculus) can squeeze through", source: "Greenhall & Franz, 1994" },
+      { figure: "13 mm", label: "gap for Norway and roof rats (Rattus norvegicus, R. rattus)", source: "Corrigan, 1997" },
+      { figure: "Steel", label: "or copper wool behind every foam seal. Foam on its own gets chewed through" },
+      { figure: "0", label: "poison used. Proofing and habitat changes are permanent" },
+    ],
     title: "Non-Toxic Rodent Control | Poison-Free Rat Control",
     description:
       "Get rid of rats and mice without poison. EcoSolutions seals entry points, removes harbourage and installs humane traps for homes and businesses in Gauteng.",
@@ -42,6 +52,12 @@ export const seo: Record<string, PageSeo> = {
     ],
   },
   "/bats-and-bat-boxes/bat-exclusions": {
+    facts: [
+      { figure: "GDARD", label: "the only company accredited for permitted bat exclusions in Gauteng" },
+      { figure: "NEMBA", label: "all South African bats are protected under Act 10 of 2004, s56" },
+      { figure: "1-way", label: "valve lets bats leave at dusk but not return; we confirm before sealing" },
+      { figure: "Dusk", label: "survey on the first visit, to watch exactly where they come out" },
+    ],
     title: "Humane Bat Removal Johannesburg | Bats in Your Roof?",
     description:
       "Bats in the roof? EcoSolutions is permitted by GDARD to do humane bat exclusions in Gauteng. One-way valves, sealing and a bat house so they don't return.",
@@ -56,6 +72,12 @@ export const seo: Record<string, PageSeo> = {
     ],
   },
   "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1": {
+    facts: [
+      { figure: "9,000+", label: "rodents a year eaten from 12 boxes on our Irene project" },
+      { figure: "2–3", label: "rodents per owlet per night over a 40–50 day nestling period" },
+      { figure: "8–20", label: "eggs in a Barn Owl “super clutch” when rodent numbers erupt" },
+      { figure: "−62%", label: "rodent damage in Malaysian palm groves, with poison eliminated", source: "275 boxes, 1 per 5 ha" },
+    ],
     title: "Barn Owl Rodent Control for Farms | Owl Box Programmes",
     description:
       "Barn owl boxes as farm rodent control. One EcoSolutions project of 12 occupied boxes eats more than 9,000 rodents a year. Remote planning, nationwide installation.",
@@ -63,6 +85,12 @@ export const seo: Record<string, PageSeo> = {
     service: { name: "Barn owl rodent control programme", serviceType: "Agricultural pest control", cta: { label: "Speak to a consultant", href: "/contact-us?topic=farm" } },
   },
   "/non-toxic-pest-control/bats-and-agricultural-pest-control": {
+    facts: [
+      { figure: "~2,000", label: "mosquitoes a night for one 8 g Cape Serotine (Neoromicia capensis)" },
+      { figure: ">100%", label: "of body weight in insects for a lactating Little Brown Bat on a peak night", source: "Kurta et al., 2010" },
+      { figure: "100", label: "bat houses in macadamia orchards with Univen and Subtrop" },
+      { figure: "Fear", label: "effect: moths dive and change course when they hear echolocation", source: "Roeder, 1964" },
+    ],
     title: "Bats for Agricultural Pest Control | Bat Banks for Farms",
     description:
       "Insect-eating bats cut crop pests and spray cycles. EcoSolutions designs, installs and services bat bank programmes for orchards, vineyards and farms.",
@@ -83,6 +111,11 @@ export const seo: Record<string, PageSeo> = {
     title: "Owl Box Service | Annual Owl Box Maintenance",
     description:
       "An owl box without fresh substrate won't be used. Our annual owl box service cleans, re-gravels, varnishes and bee-proofs your box before breeding season.",
+    facts: [
+      { figure: "1×", label: "a year, before the owl breeding season starts" },
+      { figure: "4", label: "checks: new substrate, secure fixing, fresh varnish, intact bee-proofing" },
+      { figure: "Sticks", label: "left by squirrels, geese and genets stop owls breeding; we remove them" },
+    ],
     service: { name: "Annual owl box service", serviceType: "Owl box maintenance", cta: { label: "Book your service", href: "/shop/annual-owl-box-service-1" } },
   },
   "/owls-and-owl-boxes/join-the-owl-box-project": {
@@ -91,6 +124,12 @@ export const seo: Record<string, PageSeo> = {
       "Join the Owl Box Project and give Spotted Eagle Owls and Barn Owls a safe place to breed. Installation, annual servicing and monitoring in Gauteng.",
     lede: "We install an owl box for Spotted Eagle Owls or Barn Owls, service it every year and keep records on it. You get owls; the owls get a safe place to breed.",
     service: { name: "Owl Box Project package", serviceType: "Owl box installation and servicing", cta: { label: "See the package", href: "/shop/owl-box-project-package-installation-5-year-service-plan" } },
+    facts: [
+      { figure: "150+", label: "occupied EcoSolutions owl boxes on our database" },
+      { figure: "1×", label: "service a year before breeding season. Without it, owls rarely breed" },
+      { figure: "5", label: "things we record for every box: height, orientation, design, placement, maintenance" },
+      { figure: "2", label: "species: Spotted Eagle Owl (Bubo africanus) and Barn Owl (Tyto alba)" },
+    ],
   },
   "/bats-and-bat-boxes": {
     title: "Bats & Bat Houses | Bat Removal and Bat Boxes",
@@ -105,12 +144,22 @@ export const seo: Record<string, PageSeo> = {
     h1: "Products & services",
   },
   "/products-services/owl-boxes": {
+    facts: [
+      { figure: "150+", label: "occupied EcoSolutions owl boxes on our database" },
+      { figure: "2", label: "designs: Barn Owl (Tyto alba) and Spotted Eagle Owl (Bubo africanus)" },
+      { figure: "1×", label: "service a year before breeding season: new substrate, varnish, bee-proofing" },
+    ],
     title: "Owl Boxes for Sale & Installation | Spotted Eagle & Barn Owl",
     description:
       "EcoSolutions makes, installs and services owl boxes for Spotted Eagle Owls and Barn Owls, with more than 150 occupied boxes nationally. Order yours online.",
     service: { name: "Owl box supply and installation", serviceType: "Owl box installation", cta: { label: "Order an owl box", href: "/shop?c=owls" } },
   },
   "/products-services/bat-boxes": {
+    facts: [
+      { figure: "100", label: "bats in a Slimline house, wall-mounted in afternoon sun" },
+      { figure: "300", label: "bats in a Nursery or Rocket bat hotel on a gum pole" },
+      { figure: "60,000", label: "insects a night eaten by one occupied bat house" },
+    ],
     title: "Bat Houses & Bat Boxes | Installed in Gauteng",
     description:
       "Slimline bat houses (up to 100 bats) and Nursery and Rocket bat hotels (up to 300 bats), made and installed by EcoSolutions. Natural mosquito control.",

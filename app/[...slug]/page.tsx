@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import AtAGlance from "@/components/site/AtAGlance";
 import JaneGoodall from "@/components/site/JaneGoodall";
 import { Breadcrumbs, ButtonLink, CtaBand, JsonLd, LinkIndex, Wrap } from "@/components/site/ui";
 import {
@@ -238,9 +239,15 @@ function Article({ page }: { page: LegacyPage }) {
         </Wrap>
       </header>
 
-      {/* Wide reading column; photos float left and right within it (lib/arrange-images.ts) */}
+      {seo.facts && (
+        <Wrap className="pb-4">
+          <AtAGlance facts={seo.facts} />
+        </Wrap>
+      )}
+
+      {/* Full-width reading column; photos float left and right within it (lib/arrange-images.ts) */}
       <Wrap className="pb-16 lg:pb-24">
-        <article className="max-w-[62rem] border-t border-line pt-12 lg:pt-16">
+        <article className={`pt-12 lg:pt-16 ${seo.facts ? "" : "border-t border-line"}`}>
           <div className="prose-eco" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(arrangeImages(withSubheadings(page.html, page.path))) }} />
 
           {kids.length > 0 && (
