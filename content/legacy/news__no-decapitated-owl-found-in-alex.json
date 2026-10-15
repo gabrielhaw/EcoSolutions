@@ -1,0 +1,14 @@
+{
+ "path": "/news/no-decapitated-owl-found-in-alex",
+ "title": "No Decapitated Owl Found In Alex",
+ "description": "Jonathan Haw's interview with ANN7 clarifying the fact that there was NO decapitated owl found in Alexandra in October 2014.",
+ "html": "<p>\n <iframe src=\"http://www.youtube.com/embed/0eteEU1ajF8?rel=0\" loading=\"lazy\" allowfullscreen></iframe></p>",
+ "image": {
+  "src": "/media/news__no-decapitated-owl-found-in-alex/bddd5e7406.png",
+  "w": 400,
+  "h": 400
+ },
+ "created": "2014-10-23T13:49:15+02:00",
+ "modified": "2018-02-28T12:31:21+02:00",
+ "type": "News Item"
+}

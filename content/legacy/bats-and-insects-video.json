@@ -1,0 +1,10 @@
+{
+ "path": "/bats-and-insects-video",
+ "title": "Bats and Insects",
+ "description": "",
+ "html": "<p><video controls preload=\"none\">\n <source src=\"/media/video/bats-and-insects.mp4\"></video></p>\n<h3>Interested? <a href=\"/contact-us?topic=farm\">Get in touch</a> and we'll contact you.</h3>",
+ "image": null,
+ "created": "2022-09-23T14:14:04+02:00",
+ "modified": "2022-10-05T15:45:05+02:00",
+ "type": "Page"
+}

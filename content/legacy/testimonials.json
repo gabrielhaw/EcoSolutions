@@ -1,0 +1,14 @@
+{
+ "path": "/testimonials",
+ "title": "Testimonials",
+ "description": "",
+ "html": "<a href=\"/testimonials/kiran-reddy\">Kiran Reddy, Noordhoek</a>\n <a href=\"/testimonials/karen-stander-krugersdorp\">Dame Jane Goodall</a>\n <a href=\"/testimonials/beryl-scott-payet-steyn-city\">Beryl Scott-Payet, Steyn City</a>\n <a href=\"/testimonials/cheryl-siewierski-hartebeespoort\">Cheryl Siewierski, Hartebeespoort</a>\n <img src=\"/media/testimonials/3c790926d7.jpg\" alt=\"\" width=\"1024\" height=\"913\" loading=\"lazy\" decoding=\"async\">\n WhatsApp Image 2021-01-19 at 12.52.49.jpeg\n <a href=\"/testimonials/ian-hall-in-emmarentia\">Ian Hall in Emmarentia</a>\n <a href=\"/testimonials/jaxon-rice-in-westdene\">Jaxon Rice in Westdene</a>",
+ "image": {
+  "src": "/media/testimonials/3c790926d7.jpg",
+  "w": 1024,
+  "h": 913
+ },
+ "created": "2020-11-17T08:42:26+02:00",
+ "modified": "2025-12-11T10:11:08+02:00",
+ "type": "Folder"
+}

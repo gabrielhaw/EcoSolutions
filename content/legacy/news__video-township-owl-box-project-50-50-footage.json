@@ -1,0 +1,14 @@
+{
+ "path": "/news/video-township-owl-box-project-50-50-footage",
+ "title": "Video: Township Owl Box Project - 50/50 Footage",
+ "description": "The EcoSolutions Township Owl Project has been running since 1998 and to date 83000 children have been directly involved. The aim of the project is simple.. to create owl friendly children and owl friendly environments.",
+ "html": "<h2>\n Part 1<br>\n <iframe src=\"https://www.youtube.com/embed/14aiTmkrpic?rel=0\" loading=\"lazy\" allowfullscreen></iframe><br>\n </h2>\n<h2>\n Part 2<br>\n <iframe src=\"https://www.youtube.com/embed/dglWgtDSYyI?rel=0\" loading=\"lazy\" allowfullscreen></iframe></h2>",
+ "image": {
+  "src": "/media/news__video-township-owl-box-project-50-50-footage/202bd46a96.jpg",
+  "w": 370,
+  "h": 370
+ },
+ "created": "2014-07-08T12:00:20+02:00",
+ "modified": "2018-02-28T12:35:05+02:00",
+ "type": "News Item"
+}

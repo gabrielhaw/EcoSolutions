@@ -1,0 +1,14 @@
+{
+ "path": "/owl-webcam",
+ "title": "Owl Cams",
+ "description": "",
+ "html": "<a href=\"/owl-webcam/linden\">\n <img src=\"/media/owl-webcam/5edf7fbdd9.jpg\" alt=\"\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\">\n </a>\n <a href=\"/owl-webcam/linden\">Linden Owl Cam</a>\n Karel\n |\n 28 Jul, 2020\n <p>We had massive success with the owl cam in Linden! Unfortunately, the breeding season will only begin again in June/July. We will put this camera up again when the owls are preparing to breed. You can view all the footage from this camera on our YouTube channel!</p>\n <a href=\"/owl-webcam/mziki\">\n <img src=\"/media/owl-webcam/99d5e125ca.jpg\" alt=\"\" width=\"846\" height=\"477\" loading=\"lazy\" decoding=\"async\">\n </a>\n <a href=\"/owl-webcam/mziki\">Mziki Owl Cam</a>\n Karel\n |\n 28 Jul, 2020\n <p>Verreaux's Eagle Owl breeding will begin between March and September. Currently this camera is down as there is no activity. We'll keep you updated closer to the Verreaux's breeding season!</p>",
+ "image": {
+  "src": "/media/owl-webcam/5edf7fbdd9.jpg",
+  "w": 1280,
+  "h": 720
+ },
+ "created": "2021-07-20T12:59:51+02:00",
+ "modified": "2021-07-20T13:00:27+02:00",
+ "type": "Collection"
+}

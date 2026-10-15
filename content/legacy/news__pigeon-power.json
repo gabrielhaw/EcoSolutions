@@ -1,0 +1,14 @@
+{
+ "path": "/news/pigeon-power",
+ "title": "Pigeon Power",
+ "description": "",
+ "html": "<h4>\n Download the Pigeon Power article <a href=\"/siteworkspace/winging-it-pigeon-power.pdf\">here</a>.</h4>",
+ "image": {
+  "src": "/media/news__pigeon-power/88a83eedc8.jpg",
+  "w": 691,
+  "h": 622
+ },
+ "created": "2018-08-14T14:39:40+02:00",
+ "modified": "2018-08-14T14:58:27+02:00",
+ "type": "News Item"
+}

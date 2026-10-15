@@ -1,0 +1,14 @@
+{
+ "path": "/more",
+ "title": "More",
+ "description": "",
+ "html": "<a href=\"/more/podcasts-and-interviews\">\n <img src=\"/media/more/44c27b651e.jpg\" alt=\"\" width=\"1349\" height=\"791\" loading=\"lazy\" decoding=\"async\">\n </a>\n <a href=\"/more/podcasts-and-interviews\">Podcasts &amp; Interviews</a>\n <p>Over the years our Director Jonathan Haw has been invited on various shows, podcasts and interviews on a variety of ecological topics. You can find the collection of these talks below.</p>\n <a href=\"/more/occupied-owl-box-map\">Occupied Owl Box Map</a>\n <p>EcoSolutions has over 160 occupied owl boxes in Gauteng. You can find the map below which displays all of the currently occupied boxes.</p>\n <a href=\"/more/bats-as-integrated-pest-management\">Bats as Integrated Pest Management Video</a>",
+ "image": {
+  "src": "/media/more/44c27b651e.jpg",
+  "w": 1349,
+  "h": 791
+ },
+ "created": "2021-12-09T14:46:40+02:00",
+ "modified": "2022-09-20T16:10:41+02:00",
+ "type": "Folder"
+}

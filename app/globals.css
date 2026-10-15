@@ -1,67 +1,391 @@
 @import "tailwindcss";
 
-:root {
+/*
+ * EcoSolutions — night field system.
+ * Near-black with a hint of green (dusk, when owls and bats work), cool greys,
+ * white type and a single leaf-green accent.
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Colours are variables so the whole site (or one section, via data-theme)
+ * can switch between light and dark. Light by day, dark after sunset.
+ */
+:root,
+[data-theme="light"] {
+  --canvas: #f8f9f8;
+  --canvas-2: #eef1ef;
+  --canvas-3: #e2e7e3;
+  --fg: #111713;
+  --fg-2: #47524b;
+  --fg-3: #6f7a72;
+  --deep: #e6efe1;
+  --accent: #3f7d2c;
+  --accent-2: #336a22;
+  --accent-soft: rgb(63 125 44 / 0.12);
+  --line: rgb(17 23 19 / 0.1);
+  --line-strong: rgb(17 23 19 / 0.22);
   color-scheme: light;
 }
+[data-theme="dark"] {
+  --canvas: #141a17;
+  --canvas-2: #1c2320;
+  --canvas-3: #262e2a;
+  --fg: #f2f5f2;
+  --fg-2: #b9c2bc;
+  --fg-3: #85908a;
+  --deep: #1a2b21;
+  --accent: #a6d86f;
+  --accent-2: #c3e79a;
+  --accent-soft: rgb(166 216 111 / 0.14);
+  --line: rgb(242 245 242 / 0.1);
+  --line-strong: rgb(242 245 242 / 0.22);
+  color-scheme: dark;
+}
+[data-theme] {
+  color: var(--fg);
+}
 
-* {
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-2: var(--canvas-2);
+  --color-canvas-3: var(--canvas-3);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-deep: var(--deep);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+}
+
+@theme {
+  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-display-xl: clamp(2.9rem, 1.4rem + 5.4vw, 6.75rem);
+  --text-display-xl--line-height: 0.95;
+  --text-display-l: clamp(2.2rem, 1.4rem + 3vw, 4.25rem);
+  --text-display-l--line-height: 1;
+  --text-display-m: clamp(1.7rem, 1.3rem + 1.6vw, 2.6rem);
+  --text-display-m--line-height: 1.08;
+
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+  --animate-fade: fade 1.4s ease both;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: white;
-  color: rgb(23 23 23);
+  background: var(--canvas);
+  transition: background-color 0.4s ease;
+  color: var(--fg);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Global text justification */
-p {
-  text-align: justify;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background-color: rgb(209 250 229);
+  background: var(--accent);
+  color: var(--canvas);
 }
 
-/* Marquee animation */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Small field labels */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.link-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 150ms;
+}
+.link-underline:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Never show the native play button over background videos (iOS shows one until playback starts). */
+.bg-video::-webkit-media-controls,
+.bg-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+/* Soft edge fade for the partner marquee */
+.mask-x {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ---------- Motion ---------- */
+
+/* Layered photo stack drifts at different speeds while scrolling (where supported). */
+@supports (animation-timeline: view()) {
+  .drift-slow,
+  .drift-fast {
+    animation: drift linear both;
+    animation-timeline: view();
   }
-  to {
-    transform: translateX(-50%);
+  .drift-slow {
+    --drift: -40px;
+  }
+  .drift-fast {
+    --drift: -110px;
+  }
+  @keyframes drift {
+    from {
+      transform: translateY(calc(var(--drift) * -1));
+    }
+    to {
+      transform: translateY(var(--drift));
+    }
   }
 }
 
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-/* Testimonial slider animation */
-@keyframes scroll-slow {
-  0% {
-    transform: translateX(0);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  100% {
-    transform: translateX(-80%);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .drift-slow,
+  .drift-fast {
+    animation: none;
   }
 }
 
-.animate-scroll-slow {
-  animation: scroll-slow 25s linear infinite;
+/* ---------- Migrated long-form content ---------- */
+.prose-eco {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--fg-2);
+  max-width: 68ch;
 }
-
-.animate-scroll-slow:hover {
-  animation-play-state: paused;
+.prose-eco::after {
+  content: "";
+  display: table;
+  clear: both;
 }
-
-/* Hide scrollbar for horizontal slider */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.prose-eco > * + * {
+  margin-top: 1.1em;
 }
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+.prose-eco h2,
+.prose-eco h3,
+.prose-eco h4,
+.prose-eco h5 {
+  font-family: var(--font-display);
+  color: var(--fg);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  font-weight: 500;
+  margin-top: 2em;
+  clear: both;
+}
+.prose-eco h2 {
+  font-size: 1.75rem;
+}
+.prose-eco h3 {
+  font-size: 1.4rem;
+}
+.prose-eco h4 {
+  font-size: 1.2rem;
+}
+.prose-eco h5 {
+  font-size: 1.05rem;
+}
+.prose-eco h2 strong,
+.prose-eco h3 strong,
+.prose-eco h4 strong {
+  font-weight: inherit;
+}
+.prose-eco strong,
+.prose-eco b {
+  color: var(--fg);
+  font-weight: 600;
+}
+.prose-eco a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.prose-eco a:hover {
+  color: var(--accent-2);
+  text-decoration-color: currentColor;
+}
+.prose-eco ul,
+.prose-eco ol {
+  padding-left: 1.25rem;
+}
+.prose-eco ul {
+  list-style: none;
+}
+.prose-eco ul > li {
+  position: relative;
+}
+.prose-eco ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.72em;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.prose-eco ol {
+  list-style: decimal;
+}
+.prose-eco ol > li::marker {
+  color: var(--fg-3);
+}
+.prose-eco li + li {
+  margin-top: 0.5em;
+}
+/* Photos: one standard frame everywhere (full column width, 3:2), so pages
+   don't jump between tiny thumbnails and huge images. Newsletter tables keep
+   their own layout. */
+.prose-eco img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 2rem 0;
+  background: var(--canvas-2);
+  float: none;
+}
+/* Two or more photos together sit side by side in a neat grid. */
+.prose-eco p:has(> img + img),
+.prose-eco p:has(> a + a > img) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+.prose-eco p:has(> img + img) img,
+.prose-eco p:has(> a + a > img) img {
+  margin: 0;
+  aspect-ratio: 1;
+}
+/* Three photos: one row of three rather than two plus an orphan. */
+.prose-eco p:has(> img:nth-of-type(3):last-of-type),
+.prose-eco p:has(> a:nth-of-type(3):last-of-type > img) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.prose-eco td img {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  margin: 0.25rem;
+  border-radius: 8px;
+  background: none;
+}
+/* Paragraphs read as tidy, justified blocks on wider screens. */
+@media (min-width: 640px) {
+  .prose-eco > p,
+  .prose-eco > ul > li {
+    text-align: justify;
+  }
+}
+.prose-eco h3 + p {
+  margin-top: 0.6em;
+}
+.prose-eco blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.25rem;
+  font-size: 1.2rem;
+  color: var(--fg);
+}
+.prose-eco iframe,
+.prose-eco video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  border-radius: 12px;
+  background: var(--canvas-2);
+}
+.prose-eco iframe[src*="spotify"],
+.prose-eco iframe[src*="soundcloud"] {
+  aspect-ratio: auto;
+  height: 166px;
+}
+.prose-eco table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose-eco td,
+.prose-eco th {
+  border-bottom: 1px solid var(--line);
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  vertical-align: top;
+  text-align: left;
+}
+.prose-eco hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 2.5rem 0;
+}
+.prose-eco em {
+  font-style: italic;
 }

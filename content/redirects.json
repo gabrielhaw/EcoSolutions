@@ -1,0 +1,1427 @@
+[
+ {
+  "source": "/news/aggregator",
+  "destination": "/news",
+  "permanent": true
+ },
+ {
+  "source": "/home-links",
+  "destination": "/",
+  "permanent": true
+ },
+ {
+  "source": "/home-links/annual-service",
+  "destination": "/products-services/annual-services",
+  "permanent": true
+ },
+ {
+  "source": "/home-links/bats-as-pest-control",
+  "destination": "/non-toxic-pest-control/bats-and-agricultural-pest-control",
+  "permanent": true
+ },
+ {
+  "source": "/home-links/bats-out-of-your-roof",
+  "destination": "/bats-and-bat-boxes/bat-exclusions",
+  "permanent": true
+ },
+ {
+  "source": "/home-links/non-toxic-rodent-control",
+  "destination": "/non-toxic-pest-control/non-toxic-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/home-links/order-online",
+  "destination": "/online-order-form",
+  "permanent": true
+ },
+ {
+  "source": "/home-links/owls-as-pest-control",
+  "destination": "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/owls-and-owl-boxes/owl-cams",
+  "destination": "/owl-webcam",
+  "permanent": true
+ },
+ {
+  "source": "/township-owl-box-project",
+  "destination": "/owlproject",
+  "permanent": true
+ },
+ {
+  "source": "/owl-box-project/owl-box-faq",
+  "destination": "/faqs/owl-box-faq",
+  "permanent": true
+ },
+ {
+  "source": "/owl-box-project",
+  "destination": "/owls-and-owl-boxes/join-the-owl-box-project",
+  "permanent": true
+ },
+ {
+  "source": "/owl-box-project/owl-ring-recoveries/owl-ring-recoveries",
+  "destination": "/owls-and-owl-boxes/owl-ring-recoveries",
+  "permanent": true
+ },
+ {
+  "source": "/owl-box-project/:path*",
+  "destination": "/owls-and-owl-boxes/:path*",
+  "permanent": true
+ },
+ {
+  "source": "/bat-boxes",
+  "destination": "/bats-and-bat-boxes",
+  "permanent": true
+ },
+ {
+  "source": "/bat-boxes/:path*",
+  "destination": "/bats-and-bat-boxes/:path*",
+  "permanent": true
+ },
+ {
+  "source": "/pest-control/owls-and-integrated-pest-management",
+  "destination": "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/pest-control",
+  "destination": "/non-toxic-pest-control",
+  "permanent": true
+ },
+ {
+  "source": "/national-owl-box-database",
+  "destination": "/more/occupied-owl-box-map",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/parkhurst-2013-the-owl-box-programme-aims-to-make-parkhurst-the-first-poison-free-suburb",
+  "destination": "/non-toxic-pest-control/poison-free-suburbs",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/owls-as-a-valuable-component-in-natural-and-poison-free-rodent-control",
+  "destination": "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/rodent-control",
+  "destination": "/non-toxic-pest-control/non-toxic-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/rodent-page",
+  "destination": "/non-toxic-pest-control/non-toxic-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/bat-exclusion",
+  "destination": "/bats-and-bat-boxes/bat-exclusions",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/barn-owl-webpage",
+  "destination": "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/5-tips",
+  "destination": "/news/5-tips-for-a-rodent-free-winter",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/spotted-eagle-owls-bubo-africanus-new-start",
+  "destination": "/owls-and-owl-boxes/about-owls",
+  "permanent": true
+ },
+ {
+  "source": "/siteworkspace/owl-boxes-tab",
+  "destination": "/products-services/owl-boxes",
+  "permanent": true
+ },
+ {
+  "source": "/contact",
+  "destination": "/contact-us",
+  "permanent": true
+ },
+ {
+  "source": "/services",
+  "destination": "/products-services",
+  "permanent": true
+ },
+ {
+  "source": "/products",
+  "destination": "/products-services",
+  "permanent": true
+ },
+ {
+  "source": "/projects",
+  "destination": "/about",
+  "permanent": true
+ },
+ {
+  "source": "/conservation",
+  "destination": "/about",
+  "permanent": true
+ },
+ {
+  "source": "/testimonials/beryl-scott-payet-steyn-city",
+  "destination": "/testimonials#beryl-scott-payet-steyn-city",
+  "permanent": true
+ },
+ {
+  "source": "/testimonials/cheryl-siewierski-hartebeespoort",
+  "destination": "/testimonials#cheryl-siewierski-hartebeespoort",
+  "permanent": true
+ },
+ {
+  "source": "/testimonials/ian-hall-in-emmarentia",
+  "destination": "/testimonials#ian-hall-in-emmarentia",
+  "permanent": true
+ },
+ {
+  "source": "/testimonials/jaxon-rice-in-westdene",
+  "destination": "/testimonials#jaxon-rice-in-westdene",
+  "permanent": true
+ },
+ {
+  "source": "/testimonials/karen-stander-krugersdorp",
+  "destination": "/testimonials#karen-stander-krugersdorp",
+  "permanent": true
+ },
+ {
+  "source": "/testimonials/kiran-reddy",
+  "destination": "/testimonials#kiran-reddy",
+  "permanent": true
+ },
+ {
+  "source": "/birds-and-bats-reduce-vineyard-pests-boost-yields-naturally",
+  "destination": "https://www.vinetur.com/en/2025082290523/birds-and-bats-found-to-significantly-reduce-vineyard-pests-and-crop-losses-in-hungary.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/cresta-owlets-ringed-for-conservation",
+  "destination": "https://www.citizen.co.za/randburg-sun/news-headlines/local-news/2026/10/08/ecosolutions-rings-cresta-owlets/",
+  "permanent": false
+ },
+ {
+  "source": "/news/test",
+  "destination": "https://zc.vg/ys8DQ?m=0",
+  "permanent": false
+ },
+ {
+  "source": "/news/owlproject-org-turns-fear-into-fascination",
+  "destination": "https://www.citizen.co.za/sedibeng-ster/news/news-news/2026/03/12/a-hoot-for-hope-owlproject-org-turns-fear-to-fascination-at-kopanelang-thuto-primary-school/",
+  "permanent": false
+ },
+ {
+  "source": "/news/restoring-land-farming-that-works-with-nature",
+  "destination": "https://news.mongabay.com/2026/03/in-brazil-regenerative-farming-advances-but-deforestation-still-pressures-ecosystems/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-and-wildlife-win-as-rat-poisons-become-restricted",
+  "destination": "https://www.abc.net.au/news/2026-03-11/rat-bait-rodenticides-restricted-under-new-regulation/106437604",
+  "permanent": false
+ },
+ {
+  "source": "/news/the-truth-about-bats-myths-and-facts",
+  "destination": "https://www.batcon.org/more-bat-myths-that-just-cant-hang/",
+  "permanent": false
+ },
+ {
+  "source": "/news/silent-flight-deadly-accuracy-how-owls-outsmart-rats-and-mice",
+  "destination": "https://www.audubon.org/magazine/silent-flight-of-owls-explained",
+  "permanent": false
+ },
+ {
+  "source": "/news/lazy-not-at-all-2014-these-bats-are-precision-hunters",
+  "destination": "https://www.smithsonianmag.com/science-nature/these-lazy-bats-are-super-efficient-killers-that-carefully-conserve-energy-to-attack-at-a-moments-notice-180988152/",
+  "permanent": false
+ },
+ {
+  "source": "/news/sold-as-decor-now-protected-how-scientists-saved-a-bat-species",
+  "destination": "https://chatgpt.com/c/6979e9ac-8a5c-8326-abaf-6f38323b687a",
+  "permanent": false
+ },
+ {
+  "source": "/news/there-is-no-such-thing-as-a-201csafe201d-rat-poison",
+  "destination": "https://news.clemson.edu/rat-poison-is-moving-up-through-food-chains-threatening-carnivores-around-the-world/",
+  "permanent": false
+ },
+ {
+  "source": "/news/barn-owls-nature2019s-pest-controllers-in-lodi-vineyards",
+  "destination": "https://www.lodinews.com/news/article_4172d936-ef01-42b5-aeeb-cb296b4a1bd4.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-are-even-more-amazing-than-we-thought",
+  "destination": "https://twistedsifter.com/2026/01/new-research-proves-that-some-bat-species-actually-glow-in-the-dark/#google_vignette",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-in-the-spotlight-success-in-massachusett",
+  "destination": "https://www.mass.gov/news/volunteer-spotlight-5-years-of-bat-house-monitoring",
+  "permanent": false
+ },
+ {
+  "source": "/news/barn-owls-take-on-rodents-across-australian-farms",
+  "destination": "https://www.abc.net.au/news/rural/2025-07-06/rodenticide-barn-owls-pest-control-natural-alternative/105477976",
+  "permanent": false
+ },
+ {
+  "source": "/news/celebrating-nature2019s-night-time-heroes",
+  "destination": "https://timesofindia.indiatimes.com/etimes/trending/why-these-7-unique-bat-species-are-some-of-natures-most-important-creatures/articleshow/125381328.cms",
+  "permanent": false
+ },
+ {
+  "source": "/news/hoo2019s-in-the-nest-owlets-get-their-rings",
+  "destination": "https://www.citizen.co.za/roodepoort-record/news-headlines/local-news/2025/11/10/conservation-in-action-little-owls-ringed/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ecosolutions-honoured-by-birdlife-sa",
+  "destination": "/about#awards",
+  "permanent": true
+ },
+ {
+  "source": "/news/201cview-our-latest-newsletter201d-1",
+  "destination": "https://zc.vg/lwCzs?m=0",
+  "permanent": false
+ },
+ {
+  "source": "/news/emira-champions-biodiversity-with-eco-pest-control",
+  "destination": "https://www.bizcommunity.com/article/emira-champions-biodiversity-with-non-toxic-eco-pest-control-initiative-393278a",
+  "permanent": false
+ },
+ {
+  "source": "/news/psa-protecting-crops-and-trade",
+  "destination": "https://farm.co.za/edition/sep-oct-2025/view-edition?utm_campaign=sep-oct-2025-issue-single-image&utm_source=facebook&utm_medium=paid",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-on-the-job-nature2019s-rodent-control",
+  "destination": "https://www.ewn.co.za/2025/10/07/nature-s-pest-control-how-neighbourhoods-are-using-owls-to-take-on-their-rodent-problem",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-at-risk-the-keurboom-park-story",
+  "destination": "https://www.thesouthafrican.com/news/what-is-killing-keurboom-parks-famous-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/river-square-installs-owl-boxes-to-help-wildlife-and-control-rodents",
+  "destination": "https://www.citizen.co.za/vaalweekblad/news/news-news/2025/08/18/river-square-installs-owl-boxes-to-help-wildlife-and-control-rodents/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-inspire-young-minds-in-thembisa",
+  "destination": "https://www.citizen.co.za/kempton-express/news-headlines/local-news/2025/08/12/thembisa-learners-soar-in-owl-day-celebration/",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-bordeaux-nature2019s-ultimate-vineyard-bodyguards",
+  "destination": "https://www.une.edu.au/about-une/news-and-events/news/2023/04/bats-and-wine-the-perfect-pairing",
+  "permanent": false
+ },
+ {
+  "source": "/news/stables-provide-the-perfect-place-for-growing-owlets",
+  "destination": "https://www.citizen.co.za/krugersdorp-news/news-headlines/local-news/2025/07/04/long-term-conservation-bears-fruit-as-cradle-barn-owls-are-ringed/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-are-inspiring-cutting-edge-technology",
+  "destination": "https://www.fairfieldsuntimes.com/news/national/owls-inspire-new-revolutionary-noise-reduction-technology/article_e1f27f61-7adc-5f58-a1db-80c814e38c7e.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/from-alexandra-to-the-world",
+  "destination": "https://www.citizen.co.za/alex-news/news-headlines/2025/06/23/marlbaoro-gardens-secondary-school-turn-to-owls-to-tackle-alexandras-rodent-problem/",
+  "permanent": false
+ },
+ {
+  "source": "/news/zandspruit-barn-owl-flies-free-again",
+  "destination": "https://www.citizen.co.za/randburg-sun/news-headlines/2025/06/12/owl-returns-home-thanks-to-joint-effort/",
+  "permanent": false
+ },
+ {
+  "source": "/news/kind-man-protects-injured-owl-near-taxi-rank",
+  "destination": "https://www.goodthingsguy.com/environment/kind-man-protects-injured-owl-near-taxi-rank-wins-over-a-nation/",
+  "permanent": false
+ },
+ {
+  "source": "/news/cal-poly-humboldt-students-study-how-barn-owls-are-used-in-lodi-vineyards",
+  "destination": "https://www.cbsnews.com/sacramento/news/cal-poly-humboldt-studies-barn-owl-activity-in-lodi/",
+  "permanent": false
+ },
+ {
+  "source": "/news/protecting-ecosystems-preventing-pandemics-the-urgent-case-for-bat-conservation",
+  "destination": "https://www.environewsnigeria.com/protecting-ecosystems-preventing-pandemics-the-urgent-case-for-bat-conservation/",
+  "permanent": false
+ },
+ {
+  "source": "/news/the-social-language-of-bats",
+  "destination": "https://www.merlintuttle.org/the-social-language-of-bats/",
+  "permanent": false
+ },
+ {
+  "source": "/news/cawg-distributes-168-owl-boxes-to-winegrape-growers-across-california",
+  "destination": "https://www.winebusiness.com/news/article/298237",
+  "permanent": false
+ },
+ {
+  "source": "/news/why-bats-are-one-of-evolution2019s-greatest-puzzles",
+  "destination": "https://www.smithsonianmag.com/science-nature/bats-evolution-history-180974610/",
+  "permanent": false
+ },
+ {
+  "source": "/news/chatty-bats-are-more-likely-to-take-risks",
+  "destination": "https://www.sciencenews.org/article/bat-vocalization-personalities-risks",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-hitch-a-ride-on-storm-fronts-when-migrating-saving-energy-by-2018surfing2019-through-the-sky-study-finds",
+  "destination": "https://www.smithsonianmag.com/smart-news/bats-hitch-a-ride-on-storm-fronts-when-migrating-saving-energy-by-surfing-through-the-sky-study-finds-180985823/",
+  "permanent": false
+ },
+ {
+  "source": "/news/getting-rid-of-pests-the-natural-way",
+  "destination": "https://witness.co.za/news/kzn/2024/12/20/getting-rid-of-pests-the-natural-way/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ecosolutions-working-with-johannesburg-wildlife-vet-and-owlproject.org",
+  "destination": "https://www.citizen.co.za/fourways-review/news-headlines/local-news/2024/12/06/wildlife-conservation-in-action/",
+  "permanent": false
+ },
+ {
+  "source": "/news/the-world2019s-largest-mammal-migration-is-taking-place-in-zambia-right-now",
+  "destination": "https://www.smithsonianmag.com/travel/the-worlds-largest-mammal-migration-is-taking-place-in-zambia-right-now-180985530/",
+  "permanent": false
+ },
+ {
+  "source": "/news/hooting-for-change",
+  "destination": "https://www.citizen.co.za/roodepoort-record/news-headlines/local-news/2024/11/07/hooting-for-change/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ecosolutions-rings-owlet-in-bryanston-1",
+  "destination": "https://www.citizen.co.za/sandton-chronicle/news-headlines/local-news/2024/11/18/hoo-hoot-your-neighbour-young-owlet-ringed-with-identifier-metal-band-in-bryanston/",
+  "permanent": false
+ },
+ {
+  "source": "/news/st-benedict2019s-college-schoolboy-fights-rodent-infestation-with-barn-owl-boxes",
+  "destination": "https://www.citizen.co.za/alex-news/news-headlines/2024/11/12/schoolboy-fights-rodent-infestation-with-barn-owl-boxes-2/",
+  "permanent": false
+ },
+ {
+  "source": "/news/community-drives-owl-conservation-in-morningside",
+  "destination": "https://www.citizen.co.za/sandton-chronicle/news-headlines/local-news/2024/10/27/owlets-ringed-in-morningside-for-conservation/",
+  "permanent": false
+ },
+ {
+  "source": "/news/defenders-of-wildlife-de-horrifying-bats",
+  "destination": "https://defenders.org/blog/2024/10/de-horrifying-bats",
+  "permanent": false
+ },
+ {
+  "source": "/news/41-children-hospitalised-after-rat-poison-consumption",
+  "destination": "https://www.citizen.co.za/news/south-africa/41-children-hospitalised-after-rat-poison-consumption/",
+  "permanent": false
+ },
+ {
+  "source": "/news/long-stems-on-flowers-are-an-adaptation-that-encourages-bat-pollination-research-suggests",
+  "destination": "https://phys.org/news/2024-09-stems-pollination.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/our-spring-newsletter-2024",
+  "destination": "https://rgkory-zgpvh.campaign-view.com/ua/viewinbrowser?od=3z50276f620890843bfea7bac7e3d6124ea03d4ad21291d7b9cbedf612f4e69a4c&rd=1d0e3bb02c14e77f&sd=1d0e3bb02c14e4e9&n=11699e4c2dbe69a&mrd=1d0e3bb02c14e4b7&m=1",
+  "permanent": false
+ },
+ {
+  "source": "/news/2018my-jaw-dropped2019-bat-loss-linked-to-death-of-human-infants",
+  "destination": "https://www.science.org/content/article/my-jaw-dropped-bat-loss-linked-death-human-infants",
+  "permanent": false
+ },
+ {
+  "source": "/news/reintroducing-beavers-to-wetlands-benefits-bats-research-suggests",
+  "destination": "https://geographical.co.uk/news/reintroducing-beavers-to-wetlands-benefits-bats-research-suggests",
+  "permanent": false
+ },
+ {
+  "source": "/news/spotted-eagle-owl-finds-new-home-at-dainfern-estate",
+  "destination": "https://www.citizen.co.za/fourways-review/?p=418026",
+  "permanent": false
+ },
+ {
+  "source": "/news/the-dove-of-peace-is-ailing-meet-israels-barn-owl-of-bonhomie",
+  "destination": "https://www.haaretz.com/science-and-health/2024-04-08/ty-article-magazine/the-dove-of-peace-is-ailing-meet-israels-barn-owl-of-bonhomie/0000018e-bdb0-d92b-adaf-fff46d2a0000",
+  "permanent": false
+ },
+ {
+  "source": "/news/heartfelt-get-together-for-owlet-feeding-volunteers",
+  "destination": "https://www.citizen.co.za/sandton-chronicle/?p=338200",
+  "permanent": false
+ },
+ {
+  "source": "/news/cut-insect-damage-by-installing-bat-and-owl-boxes",
+  "destination": "https://www.farmersweekly.co.za/farming-basics/how-to-crop/cut-insect-damage-by-installing-bat-and-owl-boxes/",
+  "permanent": false
+ },
+ {
+  "source": "/news/how-bats-2018leapfrog2019-their-way-home-at-night-2013-new-research",
+  "destination": "https://theconversation.com/how-bats-leapfrog-their-way-home-at-night-new-research-221352",
+  "permanent": false
+ },
+ {
+  "source": "/news/meet-the-yellow-winged-bat",
+  "destination": "https://www.iflscience.com/meet-the-yellow-winged-bat-the-false-vampire-with-fake-nipples-72557",
+  "permanent": false
+ },
+ {
+  "source": "/news/how-regenerative-farming-could-impact-the-food-we-buy-in-years-to-come-read-more-https-www-tastingtable-com-1469698-regenerative-farming-future-food-impact-explained",
+  "destination": "https://www.tastingtable.com/1469698/regenerative-farming-future-food-impact-explained/",
+  "permanent": false
+ },
+ {
+  "source": "/news/barn-owls-are-back-in-cyprus",
+  "destination": "https://cyprus-mail.com/2023/12/18/barn-owls-are-back-in-cyprus/",
+  "permanent": false
+ },
+ {
+  "source": "/news/turning-the-tide-prioritising-regenerative-agriculture-to-secure-a-sustainable-future-in-the-eu",
+  "destination": "https://www.politico.eu/sponsored-content/turning-the-tide-prioritising-regenerative-agriculture-to-secure-a-sustainable-future-in-the-eu/",
+  "permanent": false
+ },
+ {
+  "source": "/news/might-we-see-the-barn-owl-on-the-mountain",
+  "destination": "https://belfastmedia.com/dulra-might-we-see-the-barn-owl-on-the-mountain",
+  "permanent": false
+ },
+ {
+  "source": "/news/fusion-of-culture-conservation-and-entertainment",
+  "destination": "https://steunactie.be/fundraiser/nepal-owl-festival-innovative-approach-for-owl-conservation-in-nepal/-28452",
+  "permanent": false
+ },
+ {
+  "source": "/news/award-recognises2019s-work-on-the-value-of-bats-on-apple-farms",
+  "destination": "https://farmersreviewafrica.com/award-recognisess-work-on-the-value-of-bats-on-apple-farms/",
+  "permanent": false
+ },
+ {
+  "source": "/news/wildlife-biologist-explains-bat-myths",
+  "destination": "https://phys.org/news/2023-10-wildlife-biologist-myths.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/st-andrews-school-for-girls-releases-spotted-eagle-owlets",
+  "destination": "https://www.citizen.co.za/bedfordview-edenvale-news/news-headlines/local-news/2023/10/30/owls-find-temporary-home-at-school/",
+  "permanent": false
+ },
+ {
+  "source": "/news/sad-sight-owl-dies-after-getting-caught-in-glue-trap",
+  "destination": "https://www.ynetnews.com/environment/article/hjm9me0i2#autoplay",
+  "permanent": false
+ },
+ {
+  "source": "/news/students-relate-all-things-beneficial-about-owls",
+  "destination": "https://alexnews.co.za/217205/creating-owl-friendly-children/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ghosts-are-white-for-a-reason-and-so-are-barn-owls",
+  "destination": "https://www.psychologytoday.com/us/blog/color-psychology/202304/ghosts-are-white-for-a-reason-and-so-are-barn-owls",
+  "permanent": false
+ },
+ {
+  "source": "/news/rrva-sets-out-to-beautify-randpark-ridge",
+  "destination": "https://randburgsun.co.za/465144/rrva-sets-out-to-beautify-suburb/",
+  "permanent": false
+ },
+ {
+  "source": "/news/willows-estate-residents-learn-about-the-importance-of-owls",
+  "destination": "https://randburgsun.co.za/464052/owlproject-org-gives-owl-education-to-residents/",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-live-with-dozens-of-nasty-viruses-2014-can-studying-them-help-stop-pandemics",
+  "destination": "https://www.nature.com/articles/d41586-023-00791-x",
+  "permanent": false
+ },
+ {
+  "source": "/news/regenerative-agriculture-key-to-solving-the-climate-crisis",
+  "destination": "https://www.climateandcapitalmedia.com/regenerative-agriculture-the-business-that-could-offset-all-human-emissions/",
+  "permanent": false
+ },
+ {
+  "source": "/news/perennial-crops-boost-biodiversity-both-on-and-off-farms-researchers-explain-how",
+  "destination": "https://civileats.com/2023/02/16/perennial-crops-boost-biodiversity-farms-habitat-science-kernza/",
+  "permanent": false
+ },
+ {
+  "source": "/news/cedar-lakes-owls-of-the-lake-weekly-wrap-up",
+  "destination": "https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1gD0bxn9lSdg3yxZUFg-qjbbC63NTPBA-%2Fview%3Fusp%3Dsharing%26fbclid%3DIwAR1EExOKOKEZYFpf_O6fQz3Nzmx44aRe_Vh-CxtPjw_JoP5c2ifvBKpGv1o&h=AT371Y4cThIw6eC9CY3YgK6fT0YGpoUcUoTShNrrdwbYK4sBHi7N2ytYNSehDHPWBiWBwgdwYQoentm7-N-U5JYP1Y2jnRPVpwOm1lFXrmU6FYZjzoPtW_NS78l9Pxj1F-j-v998Aw&__tn__=-UK-y-R&c[0]=AT0KFAlCy_K6QWdPj4Kxcj3VGZGOrn0P4L-oTzk57j42IBcQrTRZ4Gw3pzneYI4LEgxGdD4cedwWJHUqnijC3Iy6WXhZulGfE8j_aTmwfeiiQqKnO-FBgGe5JfGeb6pV2jieo1x_yjOD7pr6CJavFQdZobNAwM2_I_JJs4opMe6JIRzeqRW4VYg3O0kzLUSbF0qd3Z2wxQ",
+  "permanent": false
+ },
+ {
+  "source": "/news/flaco-the-escaped-central-park-zoo-owl-proving-he-can-survive-outside-enclosure",
+  "destination": "https://abcnews.go.com/US/flaco-escaped-central-park-zoo-owl-proving-survive/story?utm_campaign=likeshopme&utm_medium=instagram&id=97091392&utm_source=dash%20hudson&utm_content=www.instagram.com/p/CoqwTqiyCGo/",
+  "permanent": false
+ },
+ {
+  "source": "/news/fourways-school-gets-visit-from-two-feathery-friends-from-eco-solutions2019-owl-project",
+  "destination": "https://fourwaysreview.co.za/403007/white-faced-owls-placed-in-heronbridge-colleges-newly-built-pen/",
+  "permanent": false
+ },
+ {
+  "source": "/news/don2019t-be-afraid-of-bats-their-survival-is-key-to-pest-control",
+  "destination": "https://www.nationalobserver.com/2023/02/02/opinion/dont-be-afraid-bats-their-survival-key-pest-control",
+  "permanent": false
+ },
+ {
+  "source": "/news/preschoolers-taught-that-owls-are-a-hoot",
+  "destination": "https://sandtonchronicle.co.za/326325/preschoolers-taught-that-owls-are-a-hoot/",
+  "permanent": false
+ },
+ {
+  "source": "/news/karens-chats-to-jonathan-haw-ecosolutions-the-owl-project",
+  "destination": "https://www.youtube.com/watch?v=0f2ouCoya-s",
+  "permanent": false
+ },
+ {
+  "source": "/news/dorset-gamekeeper-pleads-guilty-to-multiple-bird-of-prey-killings",
+  "destination": "https://www.birdguides.com/news/dorset-gamekeeper-pleads-guilty-to-multiple-bird-of-prey-killings/",
+  "permanent": false
+ },
+ {
+  "source": "/news/a-new-breed-of-2018super-rodents2019-resistant-to-poison-could-be-dangerous-to-humans",
+  "destination": "https://www.thesun.co.uk/news/20975231/new-super-rodents-could-be-dangerous-to-humans/",
+  "permanent": false
+ },
+ {
+  "source": "/news/the-use-of-drones-for-mosquito-surveillance-and-control",
+  "destination": "https://parasitesandvectors.biomedcentral.com/articles/10.1186/s13071-022-05580-5",
+  "permanent": false
+ },
+ {
+  "source": "/news/everyone-sometimes-needs-a-hug",
+  "destination": "https://rgkory-zgpvh.campaign-view.com/ua/viewinbrowser?od=3z50276f620890843bfea7bac7e3d6124ea03d4ad21291d7b9cbedf612f4e69a4c&rd=1d0e3bb02bd455b5&sd=1d0e3bb02bd47121&n=11699e4c33d226b&mrd=1d0e3bb02bd4710b&m=1",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-growl-like-death-metal-singers-scientists-discover",
+  "destination": "https://studyfinds.org/bats-growl-like-death-metal-singers/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owlproject-org-help-charterhouse-preparatory-create-sustainable-environment-for-owls",
+  "destination": "https://roodepoortrecord.co.za/2022/11/30/owlproject-org-help-charterhouse-preparatory-create-sustainable-environment-of-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/new-species-of-scops-owl-discovered-on-principe-island",
+  "destination": "https://www.iflscience.com/new-species-of-scops-owl-discovered-on-pr-ncipe-island-66038",
+  "permanent": false
+ },
+ {
+  "source": "/news/hanging-out-with-bats-under-bridges",
+  "destination": "https://www.pbs.org/wnet/nature/blog/bats-under-bridges/",
+  "permanent": false
+ },
+ {
+  "source": "/news/insects-need-urgent-help-to-survive-climate-change",
+  "destination": "https://www.earth.com/news/insects-need-urgent-help-to-survive-climate-change/",
+  "permanent": false
+ },
+ {
+  "source": "/news/now-is-the-time-to-exclude-bats-from-your-structures",
+  "destination": "https://myfwc.com/news/all-news/bat-exclusion-1022/",
+  "permanent": false
+ },
+ {
+  "source": "/news/over-a-decade-and-countless-children-poisoned-epa-bans-hazardous-flea-collar-products",
+  "destination": "https://beyondpesticides.org/dailynewsblog/2022/10/over-a-decade-and-countless-children-poisoned-epa-bans-hazardous-flea-collar-products/",
+  "permanent": false
+ },
+ {
+  "source": "/news/for-the-love-of-the-owls",
+  "destination": "https://sandtonchronicle.co.za/321512/communication-manager-of-ecosolutions-hoots-for-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/maryland2019s-smallest-bat-more-than-pulls-its-6-gram-weight-in-helping-to-control-pests-now-it-has-a-big-problem-survival",
+  "destination": "https://www.baltimoresun.com/news/environment/bs-md-maryland-smallest-bats-tricolored-20221004-rztpmyv6xbhe5nr36eo23be5ge-story.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/conservation-scheme-sees-highest-number-of-barn-owls-chicks-recorded",
+  "destination": "https://www.itv.com/news/meridian/2022-09-23/highest-number-of-barn-owl-chicks-recorded-in-dorset",
+  "permanent": false
+ },
+ {
+  "source": "/news/new-nest-box-scheme-barn-owls-pay-their-keep-by-eating-rodents",
+  "destination": "https://www.irishexaminer.com/lifestyle/outdoors/arid-40959734.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/a-new-study-has-concluded-that-there-is-no-clear-evidence-that-covid-19-was-transmitted-from-bats",
+  "destination": "https://phys.org/news/2022-09-evidence-covid-transmitted.htmlˇ",
+  "permanent": false
+ },
+ {
+  "source": "/news/bat-boxes-installed-near-oregon-to-protect-species",
+  "destination": "https://oglecountylife.com/article/bat-boxes-installed-near-oregon-to-protect-species",
+  "permanent": false
+ },
+ {
+  "source": "/news/new-long-fingered-bat-species-discovered-in-india-sri-lanka-says-research-team",
+  "destination": "https://economictimes.indiatimes.com/news/science/new-long-fingered-bat-species-discovered-in-india-sri-lanka-team-members/articleshow/93693095.cms?from=mdr",
+  "permanent": false
+ },
+ {
+  "source": "/news/bat-poop-research-gets-to-the-bottom-of-pesticide-residue",
+  "destination": "https://www.producer.com/news/bat-poop-research-gets-to-the-bottom-of-pesticide-residue/",
+  "permanent": false
+ },
+ {
+  "source": "/news/artificial-nests-a-hit-with-owls",
+  "destination": "https://cyprus-mail.com/2022/07/23/artificial-nests-a-hit-with-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/zoo-hopes-to-debunk-myths-about-owls-show-their-benefits",
+  "destination": "https://www.citizen.co.za/news/south-africa/3143864/zoo-hopes-to-debunk-myths-about-owls-show-their-benefits/",
+  "permanent": false
+ },
+ {
+  "source": "/news/a-new-home-at-marlboro-gardens-school-for-owls",
+  "destination": "https://sandtonchronicle.co.za/316640/barn-owls-find-new-home-at-marlboro-gardens/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ozzy-osbourne-to-install-bat-boxes-at-buckinghamshire-mansion-40-years-after-biting-head-off-one",
+  "destination": "https://www.buckinghamshirelive.com/news/buckinghamshire-news/ozzy-osbourne-install-bat-boxes-7259356",
+  "permanent": false
+ },
+ {
+  "source": "/news/local-help-needed-to-keep-watch-on-limerick-barn-owls",
+  "destination": "https://www.limerickpost.ie/2022/06/14/local-help-needed-to-keep-watch-on-limerick-barn-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/bat-deaths-caused-by-wind-turbines-disrupt-natural-food-chains",
+  "destination": "https://www.earth.com/news/bat-deaths-caused-by-wind-turbines-disrupt-natural-food-chains/",
+  "permanent": false
+ },
+ {
+  "source": "/news/experts-why-owls-are-valuable-in-agriculture",
+  "destination": "https://www.thecitizen.co.tz/tanzania/news/national/experts-why-owls-are-valuable-in-agriculture-3833104",
+  "permanent": false
+ },
+ {
+  "source": "/news/climate-change-and-the-emergence-of-bat-borne-viruses",
+  "destination": "https://www.news-medical.net/news/20220524/Climate-change-and-the-emergence-of-bat-borne-viruses.aspx",
+  "permanent": false
+ },
+ {
+  "source": "/news/bat-deaths-are-causing-farmers-a-huge-financial-loss",
+  "destination": "https://beyondpesticides.org/dailynewsblog/2022/05/bat-losses-costing-american-farmers-half-a-billion-dollars-annually/",
+  "permanent": false
+ },
+ {
+  "source": "/news/local-school-receives-an-owl-box-for-newest-member",
+  "destination": "https://rekord.co.za/416823/local-school-receives-an-owl-box-for-newest-member/",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-imitate-the-buzzing-sound-of-hornets-to-discourage-predatory-owls",
+  "destination": "https://www.dailymail.co.uk/sciencetech/article-10797195/Bats-imitate-buzzing-sound-hornets-discourage-predatory-owls-eating-study-finds.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/5-non-toxic-ways-to-get-rid-of-rats-according-to-pest-control-experts",
+  "destination": "https://nypost.com/2022/05/04/5-non-toxic-ways-to-get-rid-of-rats-according-to-pest-control-experts/",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-blooms",
+  "destination": "https://www.pbs.org/video/bats-blooms-wzrfkm/",
+  "permanent": false
+ },
+ {
+  "source": "/news/california-vineyards-that-once-used-only-toxic-chemicals-to-protect-vines-now-use-nesting-owls",
+  "destination": "https://www.goodnewsnetwork.org/california-wine-makers-use-owls-to-control-rodent-populations/#.YlIr0D946SM.twitter",
+  "permanent": false
+ },
+ {
+  "source": "/news/three-dead-squirrels-and-a-packet-of-rat-poison-found-nearby-to-a-barn-owl-nestbox",
+  "destination": "https://www.barnowltrust.org.uk/hazards-solutions/rodenticides/",
+  "permanent": false
+ },
+ {
+  "source": "/news/chinese-fossil-shows-owls-2018rejected-night-for-fun-in-the-sun2019",
+  "destination": "https://www.scmp.com/news/china/science/article/3172182/beaking-news-chinese-fossil-shows-owls-rejected-night-fun-sun?utm_term=Autofeed&utm_medium=Social&utm_content=article&utm_source=Twitter#Echobox=1648487898",
+  "permanent": false
+ },
+ {
+  "source": "/news/powerful-owls-are-gentle-giants-stalking-our-suburbs-but-they-are-also-on-the-edge",
+  "destination": "https://focusingonwildlife.com/news/powerful-owls-are-gentle-giants-stalking-our-suburbs-but-they-are-also-on-the-edge/?feed_id=67135&_unique_id=623ab604cbff7",
+  "permanent": false
+ },
+ {
+  "source": "/news/2018it2019s-astonishing2019-endangered-bat-not-seen-in-40-years-found-in-rwanda",
+  "destination": "https://www.theguardian.com/world/2022/mar/09/bats-endangered-hills-horseshoe-bat-rwanda?utm_term=Autofeed&CMP=twt_gu&utm_medium&utm_source=Twitter",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-are-helping-winemakers-stay-away-from-pesticides",
+  "destination": "https://www.optimistdaily.com/2022/03/owls-are-helping-winemakers-stay-away-from-pesticides/",
+  "permanent": false
+ },
+ {
+  "source": "/news/venomous-spider-noble-false-widow-found-feeding-on-bats-in-uk-attic",
+  "destination": "https://nypost.com/2022/03/02/brit-found-venomous-spider-feeding-on-bats-in-his-attic/",
+  "permanent": false
+ },
+ {
+  "source": "/news/thousands-of-owls-are-killed-on-diwali-annually",
+  "destination": "https://www.siasat.com/thousands-of-owls-are-killed-on-diwali-annually-2280175/",
+  "permanent": false
+ },
+ {
+  "source": "/news/feed-the-birds-to-help-with-pest-control",
+  "destination": "https://www.limerickpost.ie/2022/02/12/feed-the-birds-to-help-with-pest-control/",
+  "permanent": false
+ },
+ {
+  "source": "/news/koalas-are-now-officially-endangered-in-australia",
+  "destination": "https://www.theguardian.com/environment/2022/feb/11/koala-listed-as-endangered-after-australian-governments-fail-to-halt-its-decline",
+  "permanent": false
+ },
+ {
+  "source": "/news/a-tiny-partially-missing-bone-structure-in-bat-ears-may-have-cleared-the-way-for-echolocation-to-evolve",
+  "destination": "https://www.smithsonianmag.com/smart-news/two-major-groups-of-bats-evolved-specialized-inner-ear-structures-to-forage-and-navigate-the-night-skies-180979477/",
+  "permanent": false
+ },
+ {
+  "source": "/news/great-horned-owl-bubo-virginianus-rescued-from-nylon-netting-in-canada",
+  "destination": "https://www.youtube.com/watch?v=hSbXaqNEQzk",
+  "permanent": false
+ },
+ {
+  "source": "/news/artificial-nests-for-barn-owls-tyto-alba-help-farmers-befriend-these-natural-rodent-hunters",
+  "destination": "https://india.mongabay.com/2022/01/artificial-nests-for-barn-owls-help-farmers-befriend-these-natural-rodent-killers/",
+  "permanent": false
+ },
+ {
+  "source": "/news/the-vulnerable-bats-of-biak-na-bato",
+  "destination": "https://businessmirror.com.ph/2021/12/12/the-vulnerable-bats-of-biak-na-bato/",
+  "permanent": false
+ },
+ {
+  "source": "/news/sightings-of-snowy-owls-bubo-scandiacus-further-south-this-time-of-year",
+  "destination": "https://www.ack.net/stories/tis-the-season-for-snowy-owl-sightings,26946",
+  "permanent": false
+ },
+ {
+  "source": "/news/alberta-adds-two-bat-species-to-provinces-list-of-endangered-animals",
+  "destination": "https://www.cbc.ca/news/canada/calgary/bat-white-nose-endangered-alberta-1.6265486",
+  "permanent": false
+ },
+ {
+  "source": "/news/barn-owl-population-on-the-rise-in-wisconsin",
+  "destination": "https://www.jsonline.com/story/news/local/wisconsin/2021/11/19/rare-barn-owls-found-western-wisconsin-after-two-decade-hiatus/8672868002/",
+  "permanent": false
+ },
+ {
+  "source": "/news/dnr-research-reveals-bats2019-nighttime-secrets-1",
+  "destination": "http://www.tomahawkleader.com/2021/11/09/dnr-research-reveals-bats-nighttime-secrets/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-prey-to-be-rescued-from-trafficking",
+  "destination": "https://www.newindianexpress.com/education/2021/nov/03/owls-prey-to-be-rescued-from-trafficking-2379117.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/owl-unseen-for-150-years-has-been-photographed-in-the-wild-for-the-first-time",
+  "destination": "https://phys.org/news/2021-10-owl-unseen-years-wild.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/seasonal-variation-in-home-range-size-of-evening-bats-nycticeius-humeralis-in-an-urban-environment",
+  "destination": "https://academic.oup.com/jmammal/advance-article-abstract/doi/10.1093/jmammal/gyab106/6395050",
+  "permanent": false
+ },
+ {
+  "source": "/news/happy-hatch-day",
+  "destination": "https://youtu.be/W3m0M86NnDc",
+  "permanent": false
+ },
+ {
+  "source": "/news/organic-pest-control-bats-show-us-how",
+  "destination": "https://youtu.be/IlL-q7GIKPo",
+  "permanent": false
+ },
+ {
+  "source": "/news/bat-aggregational-response-to-pest-caterpillar-emergence",
+  "destination": "https://www.nature.com/articles/s41598-021-93104-z",
+  "permanent": false
+ },
+ {
+  "source": "/news/russia2019s-bats-are-free-of-the-virus-that-causes-201ccovid-19201d",
+  "destination": "https://middleeast.in-24.com/News/279708.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/has-the-pandemic-unleashed-a-plague-of-rats-on-our-cities",
+  "destination": "https://www.sciencefocus.com/news/has-the-pandemic-unleashed-a-plague-of-rats-on-our-cities/",
+  "permanent": false
+ },
+ {
+  "source": "/news/grade-8-hostel-boys-to-become-surrogate-parents-to-owls",
+  "destination": "https://rosebankkillarneygazette.co.za/360799/breaking-the-stigma-around-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/fledgling-given-hope-in-kelland-1",
+  "destination": "https://randburgsun.co.za/427139/residents-cut-crestas-overgrown-grass/",
+  "permanent": false
+ },
+ {
+  "source": "/news/and-the-owl-cam-continues..",
+  "destination": "https://ecosolutions.co.za/owl-webcam",
+  "permanent": false
+ },
+ {
+  "source": "/news/verreauxs-eagle-owlet-ringing-day",
+  "destination": "https://www.youtube.com/watch?v=qaqF6AVDL1w&ab_channel=EcoSolutions",
+  "permanent": false
+ },
+ {
+  "source": "/news/lonehill-owlets-get-their-new-rings",
+  "destination": "https://fourwaysreview.co.za/358870/lonehill-owlets-get-their-new-rings/",
+  "permanent": false
+ },
+ {
+  "source": "/news/starke-ayres-creating-a-safe-haven-for-owls-1",
+  "destination": "https://www.starkeayres.com/news/creating-a-safe-haven-for-owls",
+  "permanent": false
+ },
+ {
+  "source": "/news/placing-safrings-on-barn-owls-tyto-alba-at-aspen-hills-estate",
+  "destination": "https://comarochronicle.co.za/225218/a-secure-home-for-owlets/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owl-cam-is-live",
+  "destination": "https://kormorant.co.za/2020/07/31/theres-a-camera-watching-me-for-all-the-world-to-see/",
+  "permanent": false
+ },
+ {
+  "source": "/news/rats-come-out-of-hiding-as-lockdowns-eliminate-urban-trash",
+  "destination": "https://www.nationalgeographic.com/animals/2020/03/urban-rats-search-for-food-coronavirus/",
+  "permanent": false
+ },
+ {
+  "source": "/news/why-lockdown-is-driving-rats-into-our-homes",
+  "destination": "https://www.walesonline.co.uk/news/uk-news/lockdown-driving-rats-homes-18112324",
+  "permanent": false
+ },
+ {
+  "source": "/news/rehab-release-educate",
+  "destination": "https://rosebankkillarneygazette.co.za/267788/owl-ringed-and-released/",
+  "permanent": false
+ },
+ {
+  "source": "/news/greymont-residents-please-welcome-3-spotted-eagle-owlets",
+  "destination": "https://northcliffmelvilletimes.co.za/299926/hoot-hoot-hoooray/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owlproject.org-creating-owl-friendly-children",
+  "destination": "https://alexnews.co.za/143131/alexandra-will-be-a-rat-free-zone-one-day/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owl-boxes-demystified",
+  "destination": "https://randburgsun.co.za/377677/owl-boxes-demystified/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ecosolutions-rings-in-new-furry-friend",
+  "destination": "https://randburgsun.co.za/377612/eco-solutions-rings-in-new-furry-friend/",
+  "permanent": false
+ },
+ {
+  "source": "/news/sandhurst-residents...-please-welcome-4-barn-owlets",
+  "destination": "https://sandtonchronicle.co.za/238651/sandhurst-owls-successfully-ringed/",
+  "permanent": false
+ },
+ {
+  "source": "/news/cedar-lakes-supports-npo-owlproject.org",
+  "destination": "https://fourwaysreview.co.za/308945/a-hand-for-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/time-to-give-a-hoot-about-owls",
+  "destination": "https://germistoncitynews.co.za/208437/time-to-give-a-hoot-about-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/hoo-hoo-goes-there",
+  "destination": "https://kemptonexpress.co.za/200891/hoo-hoo-goes-there-new-feathered-friends-welcomed-at-eastlands/",
+  "permanent": false
+ },
+ {
+  "source": "/news/project-sets-up-home-for-owls-in-hamilton-park",
+  "destination": "https://rosebankkillarneygazette.co.za/253290/project-sets-up-home-for-owls-in-hamilton-park/",
+  "permanent": false
+ },
+ {
+  "source": "/news/midge-munching-common-pipistrelle-bat-on-the-rise",
+  "destination": "https://www.bbc.com/news/uk-scotland-highlands-islands-34474991",
+  "permanent": false
+ },
+ {
+  "source": "/news/eco-friendly-diy-pest-control",
+  "destination": "https://emagazine.com/eco-friendly-diy-pest-control/",
+  "permanent": false
+ },
+ {
+  "source": "/news/ecosolutions-sets-up-owl-boxes-in-lonehill",
+  "destination": "https://fourwaysreview.co.za/292156/ecosolutions-sets-up-boxes-in-lonehill/",
+  "permanent": false
+ },
+ {
+  "source": "/news/junior-scientist-kit",
+  "destination": "https://ecosolutions.myshopify.com/collections/frontpage/products/junior-scientist-kit",
+  "permanent": false
+ },
+ {
+  "source": "/news/three-baby-owls-make-robin-hills-their-home",
+  "destination": "https://randburgsun.co.za/354087/robin-hills-welcomes-three-newborn-baby-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owl-box-installed-at-fearnhead-park-in-parkwood",
+  "destination": "https://rosebankkillarneygazette.co.za/239348/owl-box-installed-in-fearnhead-park/",
+  "permanent": false
+ },
+ {
+  "source": "/news/three-baby-owls-discovered-in-box",
+  "destination": "https://comarochronicle.co.za/164747/three-baby-owls-discovered-in-box/",
+  "permanent": false
+ },
+ {
+  "source": "/news/kids-from-alex-showoff-their-art-at-the-birdlife-sa2019s-african-bird-fair",
+  "destination": "https://rosebankkillarneygazette.co.za/238276/owls-show-their-flair/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owl-education-is-key",
+  "destination": "https://rosebankkillarneygazette.co.za/236773/owl-education-is-key/",
+  "permanent": false
+ },
+ {
+  "source": "/news/barn-owls-tyto-alba-are-released-at-steyn-city-school",
+  "destination": "https://rosebankkillarneygazette.co.za/236326/flight-of-freedom/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owl-family-finds-home-in-birchleigh",
+  "destination": "https://kemptonexpress.co.za/176237/uil-familie-vind-tuiste-in-birchleigh/",
+  "permanent": false
+ },
+ {
+  "source": "/news/rehabilitate-ring-release",
+  "destination": "https://www.facebook.com/jackalcreekofficial/posts/2171425769755121",
+  "permanent": false
+ },
+ {
+  "source": "/news/owlets-released-at-klipriviersberg-nature-reserve",
+  "destination": "https://comarochronicle.co.za/159608/owlets-released-at-nature-reserve/",
+  "permanent": false
+ },
+ {
+  "source": "/news/record-brood-of-barn-owl-chicks-celebrated-in-antrim",
+  "destination": "https://www.breakingnews.ie/discover/record-brood-of-barn-owl-chicks-celebrated-in-antrim-858339.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/i2019m-owl-ears",
+  "destination": "https://rosebankkillarneygazette.co.za/234345/im-owl-ears/",
+  "permanent": false
+ },
+ {
+  "source": "/news/barn-owl2019s-silent-flight",
+  "destination": "https://rosebankkillarneygazette.co.za/233615/silent-flight/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owlets-are-ringed-after-nesting-in-a-sandhurst-owl-box",
+  "destination": "https://sandtonchronicle.co.za/204578/owl-box-residents-ringed/",
+  "permanent": false
+ },
+ {
+  "source": "/news/spotted-eagle-owls-2013-they-grow-up-so-fast-1",
+  "destination": "https://rosebankkillarneygazette.co.za/231124/spotted-eagle-owls-grow-fast/",
+  "permanent": false
+ },
+ {
+  "source": "/news/babies-in-the-neighbourhoot",
+  "destination": "https://rosebankkillarneygazette.co.za/230347/babies-in-the-neighbourhoot/",
+  "permanent": false
+ },
+ {
+  "source": "/news/spotted-eagle-owls-keep-the-romance-alive",
+  "destination": "https://rosebankkillarneygazette.co.za/231620/keep-the-romance-alive/",
+  "permanent": false
+ },
+ {
+  "source": "/news/spotted-eagle-owls-new-start",
+  "destination": "https://rosebankkillarneygazette.co.za/230009/spotted-eagle-owls-new-start/",
+  "permanent": false
+ },
+ {
+  "source": "/news/stop-publishing-fake-news-about-bats",
+  "destination": "http://www.zeit.de/wissen/umwelt/2018-03/bats-fear-virus-disease-species-extinction",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-in-the-belfry-time-to-shoo-them-is-now",
+  "destination": "http://www.gainesville.com/news/20180409/bats-in-belfry-time-to-shoo-them-is-now",
+  "permanent": false
+ },
+ {
+  "source": "/news/on-raptors-and-rodents-research-seeks-symbiosis-for-farmers-and-owls",
+  "destination": "http://kiem-tv.com/2018/04/03/on-raptors-and-rodents-research-seeks-symbiosis-for-farmers-and-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-are-migrating-earlier-and-it-could-wreak-havoc-on-farming",
+  "destination": "https://www.scientificamerican.com/article/bats-are-migrating-earlier-and-it-could-wreak-havoc-on-farming/",
+  "permanent": false
+ },
+ {
+  "source": "/news/special-achievement-award",
+  "destination": "https://www.festivalofowls.com/2018.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/two-new-species-of-dog-face-bat-discovered",
+  "destination": "http://insider.si.edu/2018/01/sky-puppies-scientists-discover-two-new-species-dog-faced-bat/",
+  "permanent": false
+ },
+ {
+  "source": "/news/saving-urban-owls-through-the-owl-box-project",
+  "destination": "https://fourwaysreview.co.za/269681/saving-urban-owls-through-the-owl-box-project/",
+  "permanent": false
+ },
+ {
+  "source": "/news/parkhurst-residents-aim-to-make-the-suburb-an-ideal-site-for-owls",
+  "destination": "https://rosebankkillarneygazette.co.za/221323/parkhurst-residents-aim-to-make-the-suburb-an-ideal-site-for-owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/rat-crisis-in-diepsloot",
+  "destination": "https://fourwaysreview.co.za/267894/rat-crisis-in-diepsloot/",
+  "permanent": false
+ },
+ {
+  "source": "/news/resident-owl-and-her-baby-are-ringed-1",
+  "destination": "http://rosebankkillarneygazette.co.za/217162/resident-owl-her-baby-ringed/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-can-continue-to-enjoy-the-safe-haven-on-gleneagles-road",
+  "destination": "http://rosebankkillarneygazette.co.za/215411/owls-on-gleneagles/",
+  "permanent": false
+ },
+ {
+  "source": "/news/vehicles-lack-of-hunting-and-nesting-sites-threaten-urban-barn-owls-report",
+  "destination": "http://www.timescolonist.com/vehicles-lack-of-hunting-and-nesting-sites-threaten-urban-barn-owls-report-1.19945943",
+  "permanent": false
+ },
+ {
+  "source": "/news/winter-bird-feeding-good-or-bad-for-birds",
+  "destination": "http://blog.nature.org/science/2015/01/05/winter-bird-feeding-good-or-bad-for-birds/#sthash.t5262rDI",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-are-a-valuable-component-in-natural-and-poison-free-rodent-control",
+  "destination": "http://sandtonchronicle.co.za/175274/pascale4owls/",
+  "permanent": false
+ },
+ {
+  "source": "/news/thousands-of-bats-drop-dead-from-trees-in-nsw-heatwave",
+  "destination": "http://www.smh.com.au/environment/animals/thousands-of-bats-drop-dead-from-trees-in-nsw-heatwave-20170213-guc8la.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/occupied-owl-boxes",
+  "destination": "https://www.facebook.com/Ecosolutionsurbanecology/photos/a.454412171336940.1073741828.454408851337272/1014147045363447/?type=3&theater",
+  "permanent": false
+ },
+ {
+  "source": "/news/gleneagle-road-owlet-sees-another-day",
+  "destination": "http://rosebankkillarneygazette.co.za/202485/gleneagle-road-owlet-sees-another-day-3/",
+  "permanent": false
+ },
+ {
+  "source": "/news/nature-calls-barnstormers",
+  "destination": "http://www.timeslive.co.za/thetimes/2016/10/17/Nature-Calls-Barnstormers",
+  "permanent": false
+ },
+ {
+  "source": "/news/are-barn-owls-natures-best-pest-control-1",
+  "destination": "http://www.sierraclub.org/sierra/2016-4-july-august/green-life/are-barn-owls-nature-s-best-pest-control",
+  "permanent": false
+ },
+ {
+  "source": "/news/life-joburgs-wise-residents-owls-we-do-give-a-hoot",
+  "destination": "http://www.financialmail.co.za/life/2016/06/30/owls-we-do-give-a-hoot",
+  "permanent": false
+ },
+ {
+  "source": "/news/rat-poison-sales-soar-in-nigeria",
+  "destination": "http://www.manilatimes.net/lassa-fuels-rat-poison-boom-in-nigeria/241332/",
+  "permanent": false
+ },
+ {
+  "source": "/news/wildlife-advocacy-group-working-to-rid-state-of-rat-poisons",
+  "destination": "http://www.mercurynews.com/animal-life/ci_29134345/wildlife-advocacy-group-working-rid-state-rat-poisons",
+  "permanent": false
+ },
+ {
+  "source": "/news/watchoout-2014-there2019s-owls-about",
+  "destination": "http://www.japantimes.co.jp/life/2015/06/06/environment/watch-theres-owls/#.VXmNAjCqqkp",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-well-that-ends-well-for-lost-bird",
+  "destination": "http://www.belfasttelegraph.co.uk/news/northern-ireland/owls-well-that-ends-well-for-lost-bird-31237136.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/think-fast-bats-make-decisions-in-mere-milliseconds",
+  "destination": "http://www.techtimes.com/articles/40645/20150318/bats-make-decisions-in-mere-milliseconds.htm",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-in-your-attic",
+  "destination": "http://www.seacoastonline.com/article/20150319/NEWS/150319091/101131/NEWS",
+  "permanent": false
+ },
+ {
+  "source": "/news/all-eyes-on-owls",
+  "destination": "http://amestrib.com/sports/all-eyes-owls",
+  "permanent": false
+ },
+ {
+  "source": "/news/rentokil-shares-rise-on-stronger-profits",
+  "destination": "http://www.ft.com/cms/s/0/a752ce2c-bea2-11e4-8d9e-00144feab7de.html#axzz3TsV0yTGU",
+  "permanent": false
+ },
+ {
+  "source": "/news/nyc-rats-carry-bubonic-plague-transmitting-fleas-study",
+  "destination": "http://rt.com/usa/237517-rats-bubonic-plague-ny/",
+  "permanent": false
+ },
+ {
+  "source": "/news/poultry-producers-face-restrictions-on-rat-poisoning",
+  "destination": "http://www.fwi.co.uk/poultry/poultry-producers-face-restrictions-on-rat-poisoning.htm",
+  "permanent": false
+ },
+ {
+  "source": "/news/woo-hoo-barn-owl-stages-a-comeback-species-has-its-best-ever-breeding-season-in-2014-because-of-the-mild-winter",
+  "destination": "http://www.dailymail.co.uk/news/article-2985672/Woo-hoo-Barn-owl-stages-comeback-Species-best-breeding-season-2014-mild-winter.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/codling-moth-mating-disruption-reaches-a-milestone",
+  "destination": "http://www.goodfruit.com/codling-moth-mating-disruption-reaches-a-milestone/",
+  "permanent": false
+ },
+ {
+  "source": "/news/why-bats-in-indiana-face-a-dire-future-1",
+  "destination": "http://indianapublicmedia.org/news/bats-indiana-face-dire-situation-2-78361/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-sing-duets-until-eggs-are-laid",
+  "destination": "http://www.poughkeepsiejournal.com/story/tech/science/environment/2015/02/21/owls-breeders-nature-nests-shanan-smiley/23673871/",
+  "permanent": false
+ },
+ {
+  "source": "/news/south-africa-owls-to-be-used-to-rid-homes-of-rats",
+  "destination": "http://allafrica.com/stories/201502031169.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/baby-boom-brings-barn-owls-back-from-the-brink-1",
+  "destination": "http://www.bbc.com/news/uk-england-31164032",
+  "permanent": false
+ },
+ {
+  "source": "/news/dr.-jane-goodall-supporting-township-owl-project",
+  "destination": "https://www.facebook.com/EcosolutionsurbanecologySa",
+  "permanent": false
+ },
+ {
+  "source": "/news/message-to-villagers-think-of-bats-and-turn-your-outside-lights-off..",
+  "destination": "http://www.bristolpost.co.uk/Message-villagers-Think-bats-turn-outside-lights/story-25963635-detail/story.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/poisoned-rats-infecting-predators",
+  "destination": "http://cphpost.dk/news/poisoned-rats-infecting-predators.12551.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/northside-class-helps-fort-smith-nature-programs",
+  "destination": "http://swtimes.com/features/northside-class-helps-fort-smith-nature-programs",
+  "permanent": false
+ },
+ {
+  "source": "/news/sterilisation-deaths-lab-tests-confirm-rat-poison",
+  "destination": "http://www.samachar.com/Sterilisation-deaths-Lab-tests-confirm-rat-poison-oluvLLhgfji.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/mayor-peak-pushes-for-citywide-rodenticide-ban-1",
+  "destination": "http://www.malibutimes.com/news/article_d551cc62-71ed-11e4-8dd8-f3c57730bde5.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/use-caution-when-using-rodenticides-around-pets-kids-1",
+  "destination": "http://www.perhamfocus.com/content/use-caution-when-using-rodenticides-around-pets-kids",
+  "permanent": false
+ },
+ {
+  "source": "/news/sabc-interview-on-township-owl-project",
+  "destination": "https://www.youtube.com/watch?v=v6fY6BSDYdo",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-batteries-and-bowling-green-how-chevy-might-help-savethebats",
+  "destination": "http://3blmedia.com/News/Bats-Batteries-and-Bowling-Green-How-Chevy-Might-Help-SavetheBats",
+  "permanent": false
+ },
+ {
+  "source": "/news/south-africans-deploy-owls-to-fight-rat-problem-in-townships-1",
+  "destination": "http://www.pressreader.com/kuwait/kuwait-times/20141027/282505771864827/TextView?query=%22ecosolutions%22",
+  "permanent": false
+ },
+ {
+  "source": "/news/south-africans-deploy-owls-to-fight-rat-problem-in-townships",
+  "destination": "http://www.dailymail.co.uk/wires/reuters/article-2807874/South-Africans-deploy-owls-fight-rat-problem-townships.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-are-humans-best-defense-against-mosquitoes",
+  "destination": "http://www.postandcourier.com/article/20141025/PC1207/141029606/1177/bats-are-humans-best-defense-against-mosquitoes",
+  "permanent": false
+ },
+ {
+  "source": "/news/librarys-amazing-bats-program-helps-dispel-myths",
+  "destination": "http://www.courant.com/reminder-news/windsor-edition/rnw-wn-windsor-amazing-bats-at-library-1023-20141014-story.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/lets-talk-about-birds-barn-owl",
+  "destination": "http://www.post-gazette.com/life/bookclub/2014/10/15/Let-s-Talk-About-Birds-barn-owl/stories/201410150010",
+  "permanent": false
+ },
+ {
+  "source": "/news/endangered-barn-owl-may-delay-port-ryerse-wind-farm",
+  "destination": "http://www.portdovermapleleaf.com/endangered-barn-owl-may-delay-port-ryerse-wind-farm101514/",
+  "permanent": false
+ },
+ {
+  "source": "/news/rat-attack-puts-alex-baby-in-hospital",
+  "destination": "http://ewn.co.za/2014/08/27/JHB-to-investigate-Alexandra-rat-problem",
+  "permanent": false
+ },
+ {
+  "source": "/news/ban-on-rat-poisons-in-state-parks-heads-to-governor",
+  "destination": "http://www.kcet.org/news/redefine/rewild/legislation/ban-on-rat-poisons-in-state-parks-heads-to-governor.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/saving-species-barn-owl",
+  "destination": "http://www.fwi.co.uk/articles/04/08/2014/145756/saving-species-barn-owl.htm",
+  "permanent": false
+ },
+ {
+  "source": "/news/rat-poison-kills-girl-by-accident",
+  "destination": "http://www.newindianexpress.com/states/tamil_nadu/Rat-Poison-Kills-Girl-by-Accident/2014/08/03/article2362038.ece",
+  "permanent": false
+ },
+ {
+  "source": "/news/three-children-dead-after-eating-rat-poison",
+  "destination": "http://citizen.co.za/221422/foul-play-suspected-rat-poison-deaths/",
+  "permanent": false
+ },
+ {
+  "source": "/news/rodenticides-market-worth-900-million-by-2019-new-report-by-marketsandmarkets",
+  "destination": "http://www.digitaljournal.com/pr/2033954",
+  "permanent": false
+ },
+ {
+  "source": "/news/lower-gwynedd-townships-gwynedd-green-committee-to-install-bat-houses-to-help-save-the-species",
+  "destination": "http://www.montgomerynews.com/articles/2014/07/02/ambler_gazette/news/doc53b446e1b0f05922342146.txt",
+  "permanent": false
+ },
+ {
+  "source": "/news/malibu-rodenticides-banned-from-stores-as-of-july-1",
+  "destination": "http://www.malibutimes.com/news/article_c867a46e-0225-11e4-aa3c-0019bb2963f4.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/eye-of-newt-and-wool-of-bat-will-be-plentiful-after-london-olympics",
+  "destination": "http://online.wsj.com/article/SB10001424052970203752604576644771544849048.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/cop17-plan-puts-wind-up-wildlife-groups",
+  "destination": "http://www.iol.co.za/mercury/cop17-plan-puts-wind-up-wildlife-groups-1.1167905",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-worth-billions-to-agriculture",
+  "destination": "http://www.care2.com/greenliving/bats-worth-billions-to-agriculture.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/sporting-clay-misunderstood-bats-can-be-pest-control-ally",
+  "destination": "http://members.jacksonville.com/community/clay/2011-03-31/story/sporting-clay-misunderstood-bats-can-be-pest-control-ally",
+  "permanent": false
+ },
+ {
+  "source": "/news/no-belfry-just-a-house-with-20-000-or-so-bats",
+  "destination": "http://www.nytimes.com/2011/03/31/us/31bat.html",
+  "permanent": false
+ },
+ {
+  "source": "/news/syrian-boy-catches-israeli-barn-owl-and-sets-it-free",
+  "destination": "http://www.jpost.com/National-News/Syrian-boy-catches-Israeli-barn-owl-and-sets-it-free",
+  "permanent": false
+ },
+ {
+  "source": "/news/environmentally-safe-rodent-control",
+  "destination": "http://www.rainharvest.co.za/2010/07/environmentally-safe-rodent-control/",
+  "permanent": false
+ },
+ {
+  "source": "/news/owls-replace-pesticides-in-israel",
+  "destination": "http://news.bbc.co.uk/2/hi/science/nature/8004426.stm",
+  "permanent": false
+ },
+ {
+  "source": "/news/bats-natures-agricultural-allies",
+  "destination": "http://www.scienceinafrica.com/old/index.php?q=2003/may/bats.htm",
+  "permanent": false
+ }
+]

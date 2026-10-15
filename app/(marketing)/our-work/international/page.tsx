@@ -4,6 +4,7 @@ export const metadata = {
   title: "Global Impact - International Collaboration",
   description:
     "Over the past 20 years, owlproject.org has made an impact across the world through education, conservation, and international collaboration.",
+  alternates: { canonical: "/our-work/international" },
 };
 
 interface QuoteBlockProps {
@@ -13,11 +14,11 @@ interface QuoteBlockProps {
 
 function QuoteBlock({ quote, author }: QuoteBlockProps) {
   return (
-    <blockquote className="my-12 pl-8 border-l-2 border-emerald-600">
-      <p className="text-xl md:text-2xl italic text-neutral-700 leading-relaxed mb-4">
+    <blockquote className="my-12 pl-8 border-l-2 border-accent">
+      <p className="text-xl md:text-2xl italic text-fg-2 leading-relaxed mb-4">
         "{quote}"
       </p>
-      <footer className="text-sm text-neutral-500 font-medium">
+      <footer className="text-sm text-fg-3 font-medium">
         {author}
       </footer>
     </blockquote>
@@ -32,12 +33,12 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ quote, author, location }: TestimonialCardProps) {
   return (
-    <div className="border border-neutral-200 rounded-lg p-8 hover:border-emerald-300 transition-colors">
-      <p className="text-lg text-neutral-700 leading-relaxed mb-6 italic">
+    <div className="border border-line rounded-lg p-8 hover:border-accent transition-colors">
+      <p className="text-lg text-fg-2 leading-relaxed mb-6 italic">
         "{quote}"
       </p>
-      <div className="text-sm text-neutral-500">
-        <span className="font-medium text-neutral-800">— {author}</span>
+      <div className="text-sm text-fg-3">
+        <span className="font-medium text-fg">— {author}</span>
         {location && `, ${location}`}
       </div>
     </div>
@@ -51,11 +52,11 @@ interface SectionProps {
 
 function Section({ title, children }: SectionProps) {
   return (
-    <section className="py-16 border-b border-neutral-200 last:border-b-0">
-      <h2 className="text-2xl md:text-3xl font-medium text-neutral-900 mb-8">
+    <section className="py-16 border-b border-line last:border-b-0">
+      <h2 className="text-2xl md:text-3xl font-medium text-fg mb-8">
         {title}
       </h2>
-      <div className="prose prose-lg max-w-none text-neutral-800 leading-relaxed space-y-6 text-justify">
+      <div className="prose prose-lg max-w-none text-fg leading-relaxed space-y-6 text-justify">
         {children}
       </div>
     </section>
@@ -66,17 +67,17 @@ export default function InternationalPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-24 bg-white">
+      <section className="pt-32 pb-24 bg-canvas">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <div className="mb-4 h-px w-16 bg-emerald-600" />
-            <h1 className="text-4xl md:text-5xl font-light tracking-tight text-neutral-900 mb-4">
+            <div className="mb-4 h-px w-16 bg-accent" />
+            <h1 className="text-4xl md:text-5xl font-light tracking-tight text-fg mb-4">
               GLOBAL IMPACT
             </h1>
-            <p className="text-xl text-neutral-500 mb-12">
+            <p className="text-xl text-fg-3 mb-12">
               International Collaboration
             </p>
-            <p className="text-lg leading-relaxed text-neutral-700 max-w-3xl">
+            <p className="text-lg leading-relaxed text-fg-2 max-w-3xl">
               Over the past 20 years, owlproject.org has made an impact across the world 
               through education, conservation, and international collaboration.
             </p>
@@ -195,7 +196,7 @@ export default function InternationalPage() {
 
           {/* Testimonials Section */}
           <section className="py-24">
-            <h2 className="text-2xl md:text-3xl font-medium text-neutral-900 mb-12">
+            <h2 className="text-2xl md:text-3xl font-medium text-fg mb-12">
               Testimonials
             </h2>
             <div className="grid md:grid-cols-2 gap-8">

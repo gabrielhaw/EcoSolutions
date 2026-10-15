@@ -1,0 +1,14 @@
+{
+ "path": "/faqs/owl-box-service",
+ "title": "Owl Box Service",
+ "description": "Why does my empty owl box need a service?",
+ "html": "<p><iframe src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/318596168&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false\" loading=\"lazy\" allowfullscreen></iframe></p>\n<p>To book your owl box service, click <strong><a href=\"https://ecosolutions.myshopify.com/collections/owls/products/annual-owl-box-service-1\" rel=\"noopener\" target=\"_blank\">here</a>.</strong></p>",
+ "image": {
+  "src": "/media/faqs__owl-box-service/1070d9b2df.jpg",
+  "w": 2694,
+  "h": 2020
+ },
+ "created": "2017-05-04T16:18:52+02:00",
+ "modified": "2020-12-10T12:49:20+02:00",
+ "type": "Page"
+}

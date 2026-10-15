@@ -1,0 +1,10 @@
+{
+ "path": "/more/occupied-owl-box-map",
+ "title": "Occupied Owl Box Map",
+ "description": "EcoSolutions has over 160 occupied owl boxes in Gauteng. You can find the map below which displays all of the currently occupied boxes.",
+ "html": "<p><iframe src=\"https://www.google.com/maps/d/embed?mid=1u74Wqi1fs2DvSU2wfSU4VYJBsoo&amp;ehbc=2E312F\" loading=\"lazy\" allowfullscreen></iframe></p>",
+ "image": null,
+ "created": "2022-01-18T09:26:49+02:00",
+ "modified": "2025-07-11T12:52:54+02:00",
+ "type": "Page"
+}
