@@ -211,7 +211,6 @@ body {
   font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--fg-2);
-  max-width: 68ch;
 }
 .prose-eco::after {
   content: "";
@@ -295,19 +294,50 @@ body {
 .prose-eco li + li {
   margin-top: 0.5em;
 }
-/* Photos: one standard frame everywhere (full column width, 3:2), so pages
-   don't jump between tiny thumbnails and huge images. Newsletter tables keep
-   their own layout. */
+/* Photos: one standard frame (rounded, cropped to a steady shape) so pages
+   don't jump between tiny thumbnails and huge images. lib/arrange-images.ts
+   sets float-left / float-right on single photos so text wraps round them;
+   big photos run full width. Newsletter tables keep their own layout. */
 .prose-eco img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 16px;
-  margin: 2rem 0;
+  margin: 2.25rem 0;
   background: var(--canvas-2);
   float: none;
+  clear: both;
+}
+.prose-eco img.float-left,
+.prose-eco img.float-right {
+  aspect-ratio: 4 / 3;
+}
+@media (min-width: 768px) {
+  .prose-eco img.float-right,
+  .prose-eco img.float-left {
+    width: 42%;
+    margin-top: 0.35rem;
+    margin-bottom: 1.25rem;
+    clear: none;
+  }
+  .prose-eco img.float-right {
+    float: right;
+    margin-left: 2.25rem;
+    margin-right: 0;
+  }
+  .prose-eco img.float-left {
+    float: left;
+    margin-right: 2.25rem;
+    margin-left: 0;
+  }
+}
+/* Lists and quotes sit beside a floated photo instead of running under it. */
+.prose-eco ul,
+.prose-eco ol,
+.prose-eco blockquote {
+  overflow: hidden;
 }
 /* Two or more photos together sit side by side in a neat grid. */
 .prose-eco p:has(> img + img),
@@ -315,7 +345,8 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
-  margin: 2rem 0;
+  margin: 2.25rem 0;
+  clear: both;
 }
 .prose-eco p:has(> img + img) img,
 .prose-eco p:has(> a + a > img) img {
@@ -336,13 +367,7 @@ body {
   margin: 0.25rem;
   border-radius: 8px;
   background: none;
-}
-/* Paragraphs read as tidy, justified blocks on wider screens. */
-@media (min-width: 640px) {
-  .prose-eco > p,
-  .prose-eco > ul > li {
-    text-align: justify;
-  }
+  float: none;
 }
 .prose-eco h3 + p {
   margin-top: 0.6em;
@@ -361,6 +386,7 @@ body {
   border: 0;
   border-radius: 12px;
   background: var(--canvas-2);
+  clear: both;
 }
 .prose-eco iframe[src*="spotify"],
 .prose-eco iframe[src*="soundcloud"] {
@@ -368,6 +394,7 @@ body {
   height: 166px;
 }
 .prose-eco table {
+  clear: both;
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;

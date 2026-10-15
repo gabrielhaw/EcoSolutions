@@ -18,6 +18,7 @@ import {
   type LegacyPage,
 } from "@/lib/content";
 import { faqJsonLd, seoFor, serviceJsonLd } from "@/lib/seo";
+import { arrangeImages } from "@/lib/arrange-images";
 import { sanitizeContentHtml } from "@/lib/sanitize";
 import { withSubheadings } from "@/lib/subheadings";
 import { extraSections, menu, sections, site, type Section } from "@/lib/site";
@@ -205,7 +206,7 @@ function Article({ page }: { page: LegacyPage }) {
   const siblings = siblingsFor(page.path, 6);
   const kids = childPages(page.path);
   const lede = shortLede(seo.lede ?? page.description);
-  const heroImg = page.image && (page.image.w ?? 0) >= 900 && !page.html.includes(page.image.src) ? page.image : null;
+  const heroImg = page.image && (page.image.w ?? 0) >= 640 && !page.html.includes(page.image.src) ? page.image : null;
   const description = seo.description ?? (page.description || plainText(page.html));
 
   return (
@@ -213,80 +214,64 @@ function Article({ page }: { page: LegacyPage }) {
       {seo.service && <JsonLd data={serviceJsonLd(page.path, seo.service, description)} />}
       {seo.faqs && <JsonLd data={faqJsonLd(seo.faqs)} />}
 
-      {/* Centred title block */}
+      {/* Title on the left, the page's photo beside it */}
       <header>
-        <Wrap className="pb-10 pt-10 text-center lg:pb-14 lg:pt-14">
-          <div className="flex justify-center">
+        <Wrap className={`grid gap-10 pb-12 pt-10 lg:pb-16 lg:pt-14 ${heroImg ? "lg:grid-cols-12 lg:items-center" : ""}`}>
+          <div className={heroImg ? "lg:col-span-7" : "max-w-4xl"}>
             <Breadcrumbs crumbs={crumbs} />
+            <h1 className="display mt-8 text-display-l">{seo.h1 ?? page.title}</h1>
+            {lede && <p className="mt-6 max-w-2xl text-[1.1rem] leading-relaxed text-fg-2">{lede}</p>}
+            {seo.service && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ButtonLink href={seo.service.cta.href}>{seo.service.cta.label}</ButtonLink>
+                <ButtonLink href={`https://wa.me/${site.whatsapp}`} variant="outline">
+                  WhatsApp us
+                </ButtonLink>
+              </div>
+            )}
           </div>
-          <h1 className="display mx-auto mt-8 max-w-4xl text-display-l">{seo.h1 ?? page.title}</h1>
-          {lede && <p className="mx-auto mt-6 max-w-2xl text-[1.1rem] leading-relaxed text-fg-2">{lede}</p>}
-          {seo.service && (
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <ButtonLink href={seo.service.cta.href}>{seo.service.cta.label}</ButtonLink>
-              <ButtonLink href={`https://wa.me/${site.whatsapp}`} variant="outline">
-                WhatsApp us
-              </ButtonLink>
+          {heroImg && (
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-canvas-2 lg:col-span-5">
+              <Image src={heroImg.src} alt={page.title} fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
             </div>
           )}
         </Wrap>
       </header>
 
-      {heroImg && (
-        <Wrap>
-          <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-canvas-2 sm:aspect-[21/9]">
-            <Image src={heroImg.src} alt={page.title} fill priority sizes="(min-width: 1280px) 1232px, 100vw" className="object-cover" />
-          </div>
-        </Wrap>
-      )}
+      {/* Wide reading column; photos float left and right within it (lib/arrange-images.ts) */}
+      <Wrap className="pb-16 lg:pb-24">
+        <article className="max-w-[62rem] border-t border-line pt-12 lg:pt-16">
+          <div className="prose-eco" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(arrangeImages(withSubheadings(page.html, page.path))) }} />
 
-      {/* Single, centred reading column */}
-      <article className="mx-auto w-full max-w-[46rem] px-4 py-14 sm:px-6 lg:py-20">
-        {seo.facts && (
-          <section aria-label="At a glance" className="mb-14">
-            <p className="label text-center text-fg-3">At a glance</p>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-              {seo.facts.map((f, i) => (
-                <li key={f.figure} className="rounded-2xl border border-line bg-canvas-2 p-5" data-reveal style={{ "--d": `${i * 70}ms` } as React.CSSProperties}>
-                  <span className="display block text-[2.1rem] leading-none text-accent">{f.figure}</span>
-                  <span className="mt-3 block text-[15px] leading-snug text-fg-2">{f.label}</span>
-                  {f.source && <span className="label mt-3 block normal-case tracking-normal text-fg-3">{f.source}</span>}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <div className="prose-eco mx-auto" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(withSubheadings(page.html, page.path)) }} />
-
-        {kids.length > 0 && (
-          <div className="mt-16">
-            <h2 className="display text-display-m">In this section</h2>
-            <div className="mt-8">
-              <LinkIndex links={kids.map((k) => ({ label: k.title, href: k.path, blurb: k.description }))} />
+          {kids.length > 0 && (
+            <div className="clear-both pt-16">
+              <h2 className="display text-display-m">In this section</h2>
+              <div className="mt-8">
+                <LinkIndex links={kids.map((k) => ({ label: k.title, href: k.path, blurb: k.description }))} />
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {seo.faqs && (
-          <section className="mt-16" aria-labelledby="faq">
-            <h2 id="faq" className="display text-display-m">
-              Common questions
-            </h2>
-            <div className="mt-8 border-t border-line">
-              {seo.faqs.map((f) => (
-                <details key={f.q} className="group border-b border-line">
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-[1.15rem] font-medium tracking-tight">
-                    {f.q}
-                    <span aria-hidden className="mt-1 text-fg-3 transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="pb-6 text-[16px] leading-relaxed text-fg-2">{f.a}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-        )}
-      </article>
+          {seo.faqs && (
+            <section className="clear-both pt-16" aria-labelledby="faq">
+              <h2 id="faq" className="display text-display-m">
+                Common questions
+              </h2>
+              <div className="mt-8 border-t border-line">
+                {seo.faqs.map((f) => (
+                  <details key={f.q} className="group border-b border-line">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-[1.15rem] font-medium tracking-tight">
+                      {f.q}
+                      <span aria-hidden className="mt-1 text-fg-3 transition-transform group-open:rotate-45">+</span>
+                    </summary>
+                    <p className="pb-6 text-[16px] leading-relaxed text-fg-2">{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+        </article>
+      </Wrap>
 
       {siblings.length > 0 && section && (
         <nav aria-label={`More in ${section.eyebrow}`} className="border-t border-line py-16 sm:py-20">

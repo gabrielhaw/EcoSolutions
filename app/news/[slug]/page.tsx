@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs, CtaBand, JsonLd, Wrap } from "@/components/site/ui";
 import { getNewsArticle, metaDescription, news } from "@/lib/content";
 import { articleJsonLd } from "@/lib/seo";
+import { arrangeImages } from "@/lib/arrange-images";
 import { sanitizeContentHtml } from "@/lib/sanitize";
 import { withSubheadings } from "@/lib/subheadings";
 
@@ -90,7 +91,7 @@ export default async function NewsArticle({ params }: Props) {
       )}
 
       <Wrap className="grid gap-14 py-14 lg:grid-cols-12 lg:py-20">
-        <article className="prose-eco min-w-0 lg:col-span-8" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(withSubheadings(page.html, page.path)) }} />
+        <article className="prose-eco min-w-0 lg:col-span-8" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(arrangeImages(withSubheadings(page.html, page.path))) }} />
         <aside className="lg:col-span-4">
           <p className="label text-fg-3">More from EcoSolutions</p>
           <ul className="mt-4 border-t border-line">
