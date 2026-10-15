@@ -1,4 +1,5 @@
 import snapshot from "@/content/shop-snapshot.json";
+import { sanitizeProductHtml } from "@/lib/sanitize";
 
 /**
  * Products come straight from the EcoSolutions Shopify store's public
@@ -53,16 +54,14 @@ function categorise(p: RawProduct): Category {
   return "owls";
 }
 
-/** Shopify's editor wraps text in nested spans and data attributes; keep only clean markup. */
+/**
+ * Shopify's editor wraps text in nested spans and data attributes; keep only clean markup.
+ * Descriptions can be edited by anyone with Shopify access, so they go through the
+ * shared allowlist sanitizer rather than being trusted.
+ */
 function cleanHtml(html: string) {
-  return html
-    .replace(/<(script|style|iframe)[\s\S]*?<\/\1>/gi, "")
-    .replace(/<\/?span[^>]*>/gi, "")
-    .replace(/<(\w+)(\s[^>]*)?>/g, (_, tag: string, attrs = "") => {
-      const href = tag.toLowerCase() === "a" ? attrs.match(/href="([^"]*)"/i)?.[1] : null;
-      return href ? `<a href="${href}" rel="noopener">` : `<${tag}>`;
-    })
-    .replace(/<p>\s*(&nbsp;)?\s*<\/p>/g, "")
+  return sanitizeProductHtml(html)
+    .replace(/<p>\s*(&nbsp;|\u00a0)?\s*<\/p>/g, "")
     .trim();
 }
 

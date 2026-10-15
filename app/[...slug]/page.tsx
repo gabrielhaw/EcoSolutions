@@ -18,18 +18,21 @@ import {
   type LegacyPage,
 } from "@/lib/content";
 import { faqJsonLd, seoFor, serviceJsonLd } from "@/lib/seo";
+import { sanitizeContentHtml } from "@/lib/sanitize";
 import { withSubheadings } from "@/lib/subheadings";
 import { extraSections, menu, sections, site, type Section } from "@/lib/site";
 
 /** Thin pages that now live inside a parent page (see redirects in next.config.ts). */
 const MERGED = /^\/testimonials\/.+/;
+/** Legacy paths that now have their own route under app/. */
+const OWN_ROUTE = new Set(["/more/occupied-owl-box-map"]);
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
   const paths = new Set<string>();
   for (const p of allPages()) {
-    if (p.path.startsWith("/news/") || MERGED.test(p.path)) continue;
+    if (p.path.startsWith("/news/") || MERGED.test(p.path) || OWN_ROUTE.has(p.path)) continue;
     paths.add(p.path);
   }
   for (const s of [...sections, ...extraSections]) paths.add(s.href);
@@ -254,7 +257,7 @@ function Article({ page }: { page: LegacyPage }) {
           </section>
         )}
 
-        <div className="prose-eco mx-auto" dangerouslySetInnerHTML={{ __html: withSubheadings(page.html, page.path) }} />
+        <div className="prose-eco mx-auto" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(withSubheadings(page.html, page.path)) }} />
 
         {kids.length > 0 && (
           <div className="mt-16">
