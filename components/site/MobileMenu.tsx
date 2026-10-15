@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { menu, site } from "@/lib/site";
 import ThemeToggle from "./ThemeToggle";
 
@@ -40,66 +41,70 @@ export default function MobileMenu() {
         </span>
       </button>
 
-      {open && (
-        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[72px] animate-fade overflow-y-auto bg-canvas">
-          <nav aria-label="Mobile" className="px-4 pb-16 pt-2 sm:px-6">
-            {menu.map((m) =>
-              m.items ? (
-                <details key={m.href} className="group border-b border-line">
-                  <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-2xl font-medium tracking-tight">
-                    {m.label}
-                    <span aria-hidden className="text-fg-3 transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <ul className="pb-5">
-                    {m.items.map((c) => (
-                      <li key={c.href}>
-                        {c.href.startsWith("http") ? (
-                          <a href={c.href} rel="noopener" className="block py-2 text-[16px] text-fg-2">
-                            {c.label}
-                          </a>
-                        ) : (
-                          <Link href={c.href} className="block py-2 text-[16px] text-fg-2">
-                            {c.label}
-                          </Link>
-                        )}
+      {/* Portalled to <body>: once scrolled, the header's backdrop-blur makes it the
+          containing block for fixed children, which squashed the panel to 0px high. */}
+      {open &&
+        createPortal(
+          <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[72px] z-40 animate-fade overflow-y-auto overscroll-contain bg-canvas lg:hidden">
+            <nav aria-label="Mobile" className="px-4 pb-16 pt-2 sm:px-6">
+              {menu.map((m) =>
+                m.items ? (
+                  <details key={m.href} className="group border-b border-line">
+                    <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-2xl font-medium tracking-tight">
+                      {m.label}
+                      <span aria-hidden className="text-fg-3 transition-transform group-open:rotate-45">+</span>
+                    </summary>
+                    <ul className="pb-5">
+                      {m.items.map((c) => (
+                        <li key={c.href}>
+                          {c.href.startsWith("http") ? (
+                            <a href={c.href} rel="noopener" className="block py-2 text-[16px] text-fg-2">
+                              {c.label}
+                            </a>
+                          ) : (
+                            <Link href={c.href} className="block py-2 text-[16px] text-fg-2">
+                              {c.label}
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                      <li>
+                        <Link href={m.href} className="block py-2 text-[16px] font-medium text-accent">
+                          Everything on {m.label.toLowerCase()} →
+                        </Link>
                       </li>
-                    ))}
-                    <li>
-                      <Link href={m.href} className="block py-2 text-[16px] font-medium text-accent">
-                        Everything on {m.label.toLowerCase()} →
-                      </Link>
-                    </li>
-                  </ul>
-                </details>
-              ) : (
-                <Link key={m.href} href={m.href} className="block border-b border-line py-5 text-2xl font-medium tracking-tight">
-                  {m.label}
+                    </ul>
+                  </details>
+                ) : (
+                  <Link key={m.href} href={m.href} className="block border-b border-line py-5 text-2xl font-medium tracking-tight">
+                    {m.label}
+                  </Link>
+                ),
+              )}
+              {[
+                { label: "News", href: "/news" },
+                { label: "Contact", href: "/contact-us" },
+              ].map((l) => (
+                <Link key={l.href} href={l.href} className="block border-b border-line py-5 text-2xl font-medium tracking-tight">
+                  {l.label}
                 </Link>
-              ),
-            )}
-            {[
-              { label: "News", href: "/news" },
-              { label: "Contact", href: "/contact-us" },
-            ].map((l) => (
-              <Link key={l.href} href={l.href} className="block border-b border-line py-5 text-2xl font-medium tracking-tight">
-                {l.label}
-              </Link>
-            ))}
-            <div className="flex items-center justify-between border-b border-line py-5">
-              <span className="text-[16px] text-fg-2">Light / dark</span>
-              <ThemeToggle />
-            </div>
-            <div className="mt-8 grid gap-3">
-              <Link href="/contact-us" className="rounded-full bg-accent px-4 py-3.5 text-center font-medium text-canvas">
-                Book a site visit
-              </Link>
-              <a href={`https://wa.me/${site.whatsapp}`} className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
-                WhatsApp {site.phone.mobile}
-              </a>
-            </div>
-          </nav>
-        </div>
-      )}
+              ))}
+              <div className="flex items-center justify-between border-b border-line py-5">
+                <span className="text-[16px] text-fg-2">Light / dark</span>
+                <ThemeToggle />
+              </div>
+              <div className="mt-8 grid gap-3">
+                <Link href="/contact-us" className="rounded-full bg-accent px-4 py-3.5 text-center font-medium text-canvas">
+                  Book a site visit
+                </Link>
+                <a href={`https://wa.me/${site.whatsapp}`} className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
+                  WhatsApp {site.phone.mobile}
+                </a>
+              </div>
+            </nav>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
