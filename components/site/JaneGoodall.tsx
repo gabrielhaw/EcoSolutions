@@ -7,7 +7,7 @@ export default function JaneGoodall({ as: Heading = "h2" }: { as?: "h1" | "h2" }
       <div className="lg:col-span-5" data-reveal>
         <p className="label text-accent">A note from Dr Jane Goodall</p>
         <Heading className="display mt-5 text-[clamp(1.6rem,1.2rem+1.6vw,2.5rem)] leading-[1.2]">
-          “Together we can make this a better world for all… What you are doing is <span className="text-accent">amazing</span>, and I truly look forward to working with you.”
+          “Together we can make this a better world for all, save some of the amazing animals with whom we share this planet. What you are doing is <span className="text-accent">amazing</span> &amp; I truly look forward to working with you.”
         </Heading>
         <p className="mt-6 text-[15px] text-fg-3">Handwritten to Jonathan Haw, founder of EcoSolutions and Owlproject.org</p>
       </div>

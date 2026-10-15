@@ -30,8 +30,8 @@ export default function AboutPage() {
       <div className="px-2 pt-2 sm:px-3 sm:pt-3">
         <header data-theme="dark" className="relative flex min-h-[78svh] items-end overflow-hidden rounded-[1.75rem]">
           <Image src="/images/barn-owl-portrait.jpg" alt="A Barn Owl looking out into the night" fill priority sizes="100vw" className="animate-fade object-cover object-[60%_40%]" />
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
           <Wrap className="relative pb-12 pt-32 sm:pb-16">
             <Breadcrumbs crumbs={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
             <h1 className="display mt-6 max-w-4xl animate-rise text-display-xl font-semibold">An urban ecology company that does pest control.</h1>

@@ -257,7 +257,7 @@ export default async function HomePage() {
           <Link href="/testimonials" className="group block lg:col-span-7" data-reveal>
             <p className="label text-fg-3">From Dr Jane Goodall</p>
             <blockquote className="display mt-6 text-[clamp(1.6rem,1.2rem+1.6vw,2.5rem)] leading-[1.2]">
-              <span className="text-accent">“</span>Together we can make this a better world for all… What you are doing is amazing, and I truly look forward to working with you.”
+              <span className="text-accent">“</span>Together we can make this a better world for all, save some of the amazing animals with whom we share this planet. What you are doing is amazing &amp; I truly look forward to working with you.”
             </blockquote>
             <p className="mt-6 flex items-center gap-2 text-[15px] text-fg-3">
               Handwritten note to Jonathan Haw
