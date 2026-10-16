@@ -219,7 +219,7 @@ export const menu: MenuItem[] = [
     label: "Owls",
     href: "/owls-and-owl-boxes",
     image: "/images/barn-owl-portrait.jpg",
-    intro: "More than 160 occupied owl boxes across Gauteng, installed and serviced by us.",
+    intro: "Owl boxes made, installed and serviced by us, with a live map of the boxes owls have moved into.",
     items: [
       { label: "Join the Owl Box Project", href: "/owls-and-owl-boxes/join-the-owl-box-project" },
       { label: "Owl box service", href: "/owls-and-owl-boxes/servicing" },
@@ -263,12 +263,36 @@ export const menu: MenuItem[] = [
 export const partners: {
   name: string;
   logo?: { src: string; width: number; height: number };
+  /**
+   * What the relationship actually was, as the site's own pages record it. Only organisations
+   * with one are shown on the home page; the rest need confirming before they're presented.
+   */
+  relation?: string;
 }[] = [
-  { name: "International Owl Center", logo: { src: "/logos/partners/international-owl-center.png", width: 540, height: 410 } },
+  {
+    name: "International Owl Center",
+    logo: { src: "/logos/partners/international-owl-center.png", width: 540, height: 410 },
+    // /news/art-awards-and-awareness
+    relation: "Owl Hall of Fame award to Owlproject.org",
+  },
   { name: "BirdLife South Africa", logo: { src: "/logos/partners/birdlife.png", width: 1262, height: 939 } },
-  { name: "Steyn City", logo: { src: "/logos/partners/steyn-city.png", width: 1494, height: 372 } },
-  { name: "University of Venda", logo: { src: "/logos/partners/university-of-venda.png", width: 200, height: 198 } },
-  { name: "Subtrop", logo: { src: "/logos/partners/subtrop.png", width: 505, height: 193 } },
+  {
+    name: "Steyn City",
+    logo: { src: "/logos/partners/steyn-city.png", width: 1494, height: 372 },
+    // /news/barn-owls-tyto-alba-thrive-in-chartwell, /testimonials/beryl-scott-payet-steyn-city
+    relation: "Owl Box Project estate",
+  },
+  {
+    name: "University of Venda",
+    logo: { src: "/logos/partners/university-of-venda.png", width: 200, height: 198 },
+    // /non-toxic-pest-control/bats-and-agricultural-pest-control
+    relation: "Macadamia bat house research",
+  },
+  {
+    name: "Subtrop",
+    logo: { src: "/logos/partners/subtrop.png", width: 505, height: 193 },
+    relation: "Macadamia bat house research",
+  },
   { name: "Dainfern", logo: { src: "/logos/partners/dainfern.png", width: 946, height: 750 } },
   { name: "Nestlé South Africa", logo: { src: "/logos/partners/nestle.png", width: 346, height: 92 } },
   { name: "The Coves", logo: { src: "/logos/partners/the-coves.png", width: 586, height: 294 } },

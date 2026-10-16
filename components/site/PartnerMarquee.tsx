@@ -2,8 +2,8 @@ import Image from "next/image";
 import { partners } from "@/lib/site";
 
 /** Every logo covers roughly this many px², so wide and tall marks read at the same size. */
-const LOGO_AREA = 6000;
-const LOGO_MAX_H = 60;
+const LOGO_AREA = 4200;
+const LOGO_MAX_H = 48;
 
 function logoSize({ width, height }: { width: number; height: number }) {
   const ratio = width / height;
@@ -12,35 +12,39 @@ function logoSize({ width, height }: { width: number; height: number }) {
 }
 
 /**
- * Endless strip of partner logos (names where we have no logo). Pure CSS; pauses on hover.
- * Logos are greyscale until hovered; in dark mode they're inverted to stay visible.
+ * Endless strip of partner logos, each captioned with what the relationship
+ * was so none reads as an endorsement. Only partners with a recorded relation
+ * (lib/site.ts) are shown. Pure CSS; pauses on hover and stands still for
+ * reduced motion. Logos are greyscale until hovered; inverted in dark mode.
  */
 export default function PartnerMarquee() {
+  const shown = partners.filter((p) => p.logo && p.relation);
+  // Few logos fill less than a screen width, so repeat the list within each half of the loop.
+  const reps = Math.max(1, Math.ceil(8 / shown.length));
+  const list = Array.from({ length: reps }, () => shown).flat();
   const row = (hidden: boolean) => (
-    <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-14 pr-14">
-      {partners.map((p) => (
-        <li key={p.name} className="flex items-center gap-14">
-          {p.logo ? (
+    <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-start gap-14 pr-14">
+      {list.map((p, i) => (
+        <li key={`${p.name}-${i}`} aria-hidden={(!hidden && i >= shown.length) || undefined} className="flex w-44 flex-col items-center gap-2 text-center">
+          <span className="flex h-12 items-center">
             <Image
-              src={p.logo.src}
-              alt={hidden ? "" : p.name}
-              {...logoSize(p.logo)}
+              src={p.logo!.src}
+              alt={hidden || i >= shown.length ? "" : p.name}
+              {...logoSize(p.logo!)}
               className="max-w-none opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 dark:invert dark:hover:grayscale"
             />
-          ) : (
-            <span className="whitespace-nowrap text-[1.35rem] font-medium tracking-tight text-fg-3 transition-colors hover:text-fg sm:text-[1.6rem]">
-              {p.name}
-            </span>
-          )}
-          <span aria-hidden className="size-1.5 rounded-full bg-accent/60" />
+          </span>
+          <span className="text-[12.5px] leading-snug text-fg-3">{p.relation}</span>
         </li>
       ))}
     </ul>
   );
 
   return (
-    <section aria-label="Organisations we've worked with" className="border-y border-line py-9">
-      <p className="label mb-7 text-center text-fg-3">Worked with &amp; recognised by</p>
+    <section aria-labelledby="partners-heading" className="border-y border-line py-7">
+      <h2 id="partners-heading" className="label mb-5 text-center text-fg-3">
+        Projects and recognition
+      </h2>
       <div className="mask-x group flex overflow-hidden">
         <div className="flex animate-marquee group-hover:[animation-play-state:paused]">
           {row(false)}
