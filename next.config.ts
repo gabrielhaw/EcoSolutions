@@ -78,8 +78,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // A stray lockfile one directory up confuses workspace-root detection.
   turbopack: { root: __dirname },
-  // Let phones/laptops on the office Wi-Fi load the dev server's scripts.
-  allowedDevOrigins: ["192.168.178.201"],
+  // Let phones/laptops on the office Wi-Fi, and http://127.0.0.1, load the dev server's scripts.
+  allowedDevOrigins: ["192.168.178.201", "127.0.0.1"],
   images: {
     // WebP only: AVIF encoding is slow enough that photos appeared late on first view.
     formats: ["image/webp"],
