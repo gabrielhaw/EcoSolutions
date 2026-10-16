@@ -106,12 +106,18 @@ export function CtaBand({
   title = "Tell us what's moving in. We'll find a way to move it on, without poison.",
   image = "/images/spotted-eagle-owlets-in-owl-box.jpg",
   alt = "Three Spotted Eagle Owl chicks in an EcoSolutions owl box",
-  cta = { label: "Book a site visit", href: "/contact-us" },
+  cta = { label: "Contact our team", href: "/contact-us" },
+  body = "Call, WhatsApp or send a message. One of our consultants will get back to you to arrange a site visit or a remote assessment using satellite imagery.",
+  phone = false,
 }: {
   title?: string;
   cta?: { label: string; href: string };
   image?: string;
   alt?: string;
+  /** What happens after someone gets in touch. */
+  body?: string;
+  /** Also offer a call to the mobile number. */
+  phone?: boolean;
 }) {
   return (
     <section className="px-4 pb-16 pt-10 sm:px-6 sm:pb-24 sm:pt-12">
@@ -119,9 +125,7 @@ export function CtaBand({
         <div className="relative z-10 p-8 sm:p-12 lg:p-16" data-reveal data-cta-location="cta_band">
           <p className="label text-accent">Get in touch</p>
           <h2 className="display mt-5 max-w-xl text-display-m">{title}</h2>
-          <p className="mt-6 max-w-md text-[16px] leading-relaxed text-fg-2">
-            Call, WhatsApp or send a message. One of our consultants will get back to you to arrange a site visit or a remote assessment using satellite imagery.
-          </p>
+          <p className="mt-6 max-w-md text-[16px] leading-relaxed text-fg-2">{body}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <ButtonLink href={cta.href} cta={ctaId(cta.label)}>
               {cta.label}
@@ -129,6 +133,11 @@ export function CtaBand({
             <ButtonLink href={`https://wa.me/${site.whatsapp}`} variant="outline-light">
               WhatsApp {site.phone.mobile.replace("+27 ", "0")}
             </ButtonLink>
+            {phone && (
+              <ButtonLink href={`tel:${site.phone.mobile.replace(/[^+\d]/g, "")}`} variant="outline-light">
+                Call {site.phone.mobile.replace("+27 ", "0")}
+              </ButtonLink>
+            )}
           </div>
         </div>
         <div className="relative min-h-72 lg:min-h-full">

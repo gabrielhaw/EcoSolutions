@@ -89,10 +89,10 @@ export default function SiteHeader() {
           <Link
             href="/contact-us"
             data-track="enquiry_click"
-            data-cta="book_a_site_visit"
+            data-cta="contact_our_team"
             className="hidden rounded-full bg-accent px-5 py-2.5 text-[14px] font-medium text-canvas transition-colors hover:bg-accent-2 sm:inline-flex"
           >
-            Book a site visit
+            Contact our team
           </Link>
           <MobileMenu />
         </div>

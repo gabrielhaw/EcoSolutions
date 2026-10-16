@@ -104,7 +104,7 @@ export default function MobileMenu() {
                   WhatsApp us
                 </a>
                 <Link href="/contact-us" className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
-                  Book a site visit
+                  Contact our team
                 </Link>
               </div>
             </nav>
