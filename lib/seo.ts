@@ -39,9 +39,10 @@ export const seo: Record<string, PageSeo> = {
       { figure: "Steel", label: "or copper wool behind every foam seal. Foam on its own gets chewed through" },
       { figure: "0", label: "poison used. Proofing and habitat changes are permanent" },
     ],
-    title: "Non-Toxic Rodent Control | Poison-Free Rat Control",
+    // Search Console: "rodent control" (3.8K impressions) and "rodent control johannesburg" rank 13–20 with almost no clicks.
+    title: "Rodent Control Johannesburg | Non-Toxic Rat & Mouse Control",
     description:
-      "Get rid of rats and mice without poison. EcoSolutions seals entry points, removes harbourage and installs humane traps for homes and businesses in Gauteng.",
+      "Rodent control in Johannesburg and Gauteng without poison. EcoSolutions seals entry points, removes harbourage and installs humane traps for homes and businesses.",
     h1: "Non-toxic rodent control",
     lede: "Rat poison is a short-term fix that harms pets and owls. Proofing your property against rodents lasts much longer.",
     service: { name: "Non-toxic rodent control", serviceType: "Rodent control", cta: { label: "Book a rodent consultation", href: "/contact-us?topic=rodents" } },
@@ -67,8 +68,10 @@ export const seo: Record<string, PageSeo> = {
     faqs: [
       { q: "How do I know if there are bats in my roof?", a: "Look out for squeaking and scratching at dusk, droppings (guano) and white streaks of urine on the walls near where the bats get in and out." },
       { q: "Is it legal to remove bats myself?", a: "No. Bats are protected under the NEMBA Act 10 of 2004 and the Gauteng Nature Conservation Bill. You need a permit to catch, capture, keep or transport them. Spraying them with chemicals is illegal and unethical." },
-      { q: "How does a bat exclusion work?", a: "After an evening site visit and dusk survey, we seal every secondary gap and fit a one-way valve to the main exit. The bats leave at night and can't come back. Once the roof is clear, the valve comes off and the hole is sealed permanently." },
+      { q: "How do I get rid of bats in my roof?", a: "After an evening site visit and dusk survey, we seal every secondary gap and fit a one-way valve to the main exit. The bats leave at night and can't come back. Once the roof is clear, the valve comes off and the hole is sealed permanently." },
       { q: "Why do you install a bat house?", a: "Bats are very loyal to their roosts. A nearby bat house gives them an alternative, which makes the exclusion far more likely to succeed. We don't do exclusions without one." },
+      // Search Console: "bat repellent" queries have 4.5K impressions; answer them with the humane, legal route.
+      { q: "Will a bat repellent or spray get bats out of my roof?", a: "Spraying bats with ammonia or other chemicals is unethical and illegal under the NEMBA Act and the Gauteng Nature Conservation Bill, and bats are so loyal to their roost that they try to return. A permitted exclusion with a one-way valve, followed by sealing and a nearby bat house, removes them humanely and keeps them out." },
     ],
   },
   "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1": {

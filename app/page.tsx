@@ -82,6 +82,8 @@ const steps = [
 // Shop products featured on the home page rail, in this order (live prices from Shopify).
 const featured = [
   "spotted-eagle-owl-box",
+  // The store's second most-clicked product in Google Search (16 months to Oct 2026).
+  "bush-baby-box",
   "barn-owl-box",
   "owl-box-project-package-installation-5-year-service-plan",
   "bat-box",
