@@ -26,16 +26,15 @@ export const forms: Record<FormId, ZohoFormConfig> = {
   callback: {
     id: "callback",
     title: "Request a call back",
-    // From the old site's thank-you page path in GA4 (/info4949/form/RequestaCallBack/thankyou/formperma/…).
-    // To confirm against Zoho's own embed code before launch.
+    // Zoho embed code, confirmed by Gabriel 16 Oct 2026.
     url: "https://forms.zohopublic.com/info4949/form/RequestaCallBack/formperma/97U1CuB2sLKJUXfS8lDJ4KzmjIxZ3qY97tOTt295X6A",
     height: 620,
   },
   order: {
     id: "order",
     title: "Online order form",
-    // Missing: no embed code for the old "Online order form" was found.
-    url: null,
+    // Zoho embed code, confirmed by Gabriel 16 Oct 2026.
+    url: "https://forms.zohopublic.com/info4949/form/OnlineOrderForm/formperma/8269f_eP0XU139GGyaOwmqNpb-IShWusI2UgpRXzvb8",
     height: 900,
   },
 };

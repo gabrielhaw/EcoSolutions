@@ -52,7 +52,7 @@ All events are sent from `components/site/Analytics.tsx`, `components/site/ZohoF
 6. Under Admin > Data streams > More tagging settings > List unwanted referrals, add `forms.zohopublic.com` so the Zoho redirect doesn't start a new "referral" session.
 
 ### In Zoho Forms (each embedded form)
-1. Under Share > Embed, copy the iframe `src` into `lib/forms.ts`. The "Request a Call Back" URL there was inferred from GA data and needs checking.
+1. Under Share > Embed, copy the iframe `src` into `lib/forms.ts`. Both current forms (Request a Call Back, Online Order Form) are in place, confirmed 16 Oct 2026.
 2. Set Settings > Redirection after submission to "Redirect to URL": `https://ecosolutions.co.za/enquiry-received?form=callback` (or `form=order`). Leave "Append form fields" **off**.
 3. Turn off Zoho's Google Analytics integration for these forms (see above).
 4. If the redirect opens inside the frame instead of the whole page, set the form's redirect target to the parent window. Then test one real submission end to end in GA4 DebugView.
