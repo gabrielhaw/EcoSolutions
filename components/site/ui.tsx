@@ -116,7 +116,7 @@ export function CtaBand({
           </div>
         </div>
         <div className="relative min-h-72 lg:min-h-full">
-          <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover brightness-[1.2] saturate-[1.05]" />
           {/* Only a thin blend at the seam; the photo itself stays bright. */}
           <span aria-hidden className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-deep to-transparent lg:inset-y-0 lg:left-0 lg:right-auto lg:h-full lg:w-24 lg:bg-gradient-to-r" />
         </div>

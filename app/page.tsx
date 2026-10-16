@@ -138,13 +138,6 @@ export default async function HomePage() {
                 </ButtonLink>
               </div>
             </div>
-            <p className="mt-10 flex animate-fade items-center gap-2.5 text-[13px] text-fg-2 [animation-delay:600ms]">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
-                <span className="relative inline-flex size-2 rounded-full bg-accent" />
-              </span>
-              Bats leaving one of our bat houses at dusk
-            </p>
           </Wrap>
         </section>
       </div>
