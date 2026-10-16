@@ -55,3 +55,21 @@ export function reconcile(lines: CartLine[], live: LiveLookup): { lines: CartLin
 
 /** Lines that can go to Shopify's checkout. */
 export const buyable = (lines: CartLine[]) => lines.filter((l) => !l.soldOut && l.qty > 0);
+
+/** Largest request body /api/cart accepts: 100 ids fit in well under 4 KB. */
+export const MAX_CART_BODY = 4096;
+export const MAX_CART_IDS = 100;
+
+/** The variant ids in a /api/cart request body, or null if it isn't `{ ids: number[] }` within the limits. */
+export function parseCartIds(text: string): number[] | null {
+  if (text.length > MAX_CART_BODY) return null;
+  let body: unknown;
+  try {
+    body = JSON.parse(text);
+  } catch {
+    return null;
+  }
+  const ids = (body as { ids?: unknown } | null)?.ids;
+  if (!Array.isArray(ids) || ids.length === 0 || ids.length > MAX_CART_IDS) return null;
+  return ids.every((id) => Number.isSafeInteger(id) && id > 0) ? [...new Set(ids as number[])] : null;
+}

@@ -95,13 +95,28 @@ export async function getProducts(): Promise<Product[]> {
   return raw.filter((p) => !HIDDEN.has(p.handle)).map(normalise);
 }
 
+let liveRequest: Promise<Map<number, LiveVariant>> | null = null;
+
+/**
+ * Cart checks that arrive while a fetch is already running share it, so a burst
+ * of visitors (or a bot) costs Shopify one catalogue read, not one each. Nothing
+ * is kept once it settles: a check only ever gets a reply that was still being
+ * fetched when it arrived, never a stored one.
+ */
+export function fetchLiveVariants(): Promise<Map<number, LiveVariant>> {
+  liveRequest ??= loadLiveVariants().finally(() => {
+    liveRequest = null;
+  });
+  return liveRequest;
+}
+
 /**
  * Every variant as Shopify has it at this moment, for checking a saved cart.
  * Bypasses the hourly cache and never falls back to the snapshot: if Shopify
  * can't be reached or answers oddly this throws, so stale data is never
  * passed off as current stock or pricing.
  */
-export async function fetchLiveVariants(): Promise<Map<number, LiveVariant>> {
+async function loadLiveVariants(): Promise<Map<number, LiveVariant>> {
   const live = new Map<number, LiveVariant>();
   for (let page = 1; page <= 20; page++) {
     const res = await fetch(`${SHOP_ORIGIN}/products.json?limit=250&page=${page}`, {

@@ -1,4 +1,4 @@
-import type { LiveLookup } from "@/lib/cart-check";
+import { MAX_CART_BODY, parseCartIds, type LiveLookup } from "@/lib/cart-check";
 import { fetchLiveVariants } from "@/lib/shop";
 
 const noStore = { "Cache-Control": "no-store" };
@@ -9,14 +9,14 @@ const noStore = { "Cache-Control": "no-store" };
  * components/shop/Cart.tsx). 502 means Shopify couldn't be checked.
  */
 export async function POST(req: Request) {
-  const body = (await req.json().catch(() => null)) as { ids?: unknown } | null;
-  const ids = body?.ids;
-  if (!Array.isArray(ids) || ids.length === 0 || ids.length > 100 || !ids.every((id) => Number.isSafeInteger(id) && id > 0)) {
-    return Response.json({ error: "Expected { ids: number[] }" }, { status: 400, headers: noStore });
+  if (Number(req.headers.get("content-length") ?? 0) > MAX_CART_BODY) {
+    return Response.json({ error: "Request too large" }, { status: 413, headers: noStore });
   }
+  const ids = parseCartIds(await req.text().catch(() => ""));
+  if (!ids) return Response.json({ error: "Expected { ids: number[] }" }, { status: 400, headers: noStore });
   try {
     const live = await fetchLiveVariants();
-    const variants: LiveLookup = Object.fromEntries((ids as number[]).map((id) => [id, live.get(id) ?? null]));
+    const variants: LiveLookup = Object.fromEntries(ids.map((id) => [id, live.get(id) ?? null]));
     return Response.json({ variants }, { headers: noStore });
   } catch (err) {
     console.error("[cart check]", err);
