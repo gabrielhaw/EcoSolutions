@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SchoolMap from "@/components/maps/SchoolMap";
 
@@ -60,15 +61,15 @@ export default function SchoolsPage() {
                 <p className="text-xs text-fg-2 font-semibold">✓ Conservation Education</p>
               </div>
             </div>
-            <a 
-              href="/contact" 
+            <Link 
+              href="/contact-us" 
               className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-accent hover:bg-accent-2 text-canvas font-semibold rounded-xl transition-all"
             >
               <span>Bring This to Your School</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </Container>

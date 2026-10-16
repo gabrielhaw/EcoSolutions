@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 interface LineChartCardProps {
   title: string;
   subtitle?: string;
-  data: any[];
+  data: Record<string, string | number>[];
   dataKeys: { key: string; color: string; name: string }[];
   xAxisKey: string;
 }

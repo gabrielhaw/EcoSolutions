@@ -1,5 +1,8 @@
 import snapshot from "@/content/shop-snapshot.json";
+import type { LiveVariant } from "@/lib/cart-check";
 import { sanitizeProductHtml } from "@/lib/sanitize";
+import { createLimiter } from "@/lib/rate-limit";
+import { HANDLE_ALIASES, localShopHref } from "@/lib/shop-links";
 
 /**
  * Products come straight from the EcoSolutions Shopify store's public
@@ -33,17 +36,8 @@ export const categories: { id: Category; label: string; blurb: string }[] = [
   { id: "gifts", label: "Gifts", blurb: "Hampers, vouchers and owl goodies" },
 ];
 
-/** Duplicate listings in the Shopify store ("copy-of-…" and older handles). */
-const HIDDEN = new Set([
-  "owl-box",
-  "rocket-bat-hotel",
-  "copy-of-bats-in-your-roof",
-  "copy-of-bat-exclusion-consultation-for-residential-properties",
-  "copy-of-service-an-existing-owl-box-1",
-  "copy-of-service-your-bat-house",
-  "copy-of-control-rodents-at-home",
-  "bat-boxes-for-homes",
-]);
+/** Duplicate listings in the Shopify store, hidden here (see lib/shop-links.ts). */
+const HIDDEN = new Set(Object.keys(HANDLE_ALIASES));
 
 function categorise(p: RawProduct): Category {
   const t = `${p.product_type} ${p.title} ${p.handle}`.toLowerCase();
@@ -102,6 +96,69 @@ export async function getProducts(): Promise<Product[]> {
   return raw.filter((p) => !HIDDEN.has(p.handle)).map(normalise);
 }
 
+let liveRequest: Promise<Map<number, LiveVariant>> | null = null;
+
+/** Site-wide ceiling on Shopify catalogue reads, whatever mix of visitors asks. */
+const shopifyReads = createLimiter({ limit: 120, windowMs: 60_000 });
+/** Longest a whole catalogue read (every page) may take before the cart shows its retry message. */
+const LIVE_DEADLINE_MS = 10_000;
+
+/** Thrown when the site-wide read ceiling is reached; /api/cart answers 503 with Retry-After. */
+export class ShopifyBusyError extends Error {
+  constructor(readonly retryAfterSeconds: number) {
+    super("Shopify read limit reached");
+  }
+}
+
+/**
+ * Cart checks that arrive while a fetch is already running share it, so a burst
+ * of visitors (or a bot) costs Shopify one catalogue read, not one each. Nothing
+ * is kept once it settles: a check only ever gets a reply that was still being
+ * fetched when it arrived, never a stored one.
+ */
+export function fetchLiveVariants(): Promise<Map<number, LiveVariant>> {
+  if (!liveRequest) {
+    const slot = shopifyReads("shopify");
+    if (!slot.ok) return Promise.reject(new ShopifyBusyError(slot.retryAfterSeconds));
+    liveRequest = loadLiveVariants().finally(() => {
+      liveRequest = null;
+    });
+  }
+  return liveRequest;
+}
+
+/**
+ * Every variant as Shopify has it at this moment, for checking a saved cart.
+ * Bypasses the hourly cache and never falls back to the snapshot: if Shopify
+ * can't be reached or answers oddly this throws, so stale data is never
+ * passed off as current stock or pricing.
+ */
+async function loadLiveVariants(): Promise<Map<number, LiveVariant>> {
+  const live = new Map<number, LiveVariant>();
+  // One deadline for the whole read, not per page, so a slow Shopify can't hold a request for minutes.
+  const deadline = AbortSignal.timeout(LIVE_DEADLINE_MS);
+  for (let page = 1; page <= 20; page++) {
+    const res = await fetch(`${SHOP_ORIGIN}/products.json?limit=250&page=${page}`, {
+      cache: "no-store",
+      signal: deadline,
+    });
+    if (!res.ok) throw new Error(`Shopify products.json answered ${res.status}`);
+    const { products } = (await res.json()) as { products?: RawProduct[] };
+    if (!Array.isArray(products)) throw new Error("Shopify products.json had no products list");
+    for (const p of products) {
+      for (const v of p.variants) {
+        live.set(v.id, { id: v.id, handle: p.handle, title: p.title, variant: v.title, price: Number(v.price), available: v.available });
+      }
+    }
+    if (products.length < 250) {
+      // An empty catalogue is far more likely a glitch than a real store; don't empty carts over it.
+      if (live.size === 0) throw new Error("Shopify products.json was empty");
+      return live;
+    }
+  }
+  throw new Error("Shopify catalogue larger than expected");
+}
+
 export async function getProduct(handle: string) {
   return (await getProducts()).find((p) => p.handle === handle);
 }
@@ -109,9 +166,47 @@ export async function getProduct(handle: string) {
 export const formatRand = (n: number) =>
   `R${n.toLocaleString("en-ZA", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }).replace(/ /g, " ")}`;
 
-/** Ask Shopify's CDN for a resized copy (it also serves WebP/AVIF), instead of re-processing large PNGs ourselves. */
-export const shopImg = (src: string, width: number) => `${src}${src.includes("?") ? "&" : "?"}width=${width}`;
+/**
+ * Ask Shopify's CDN for a resized copy (it also serves WebP/AVIF), instead of re-processing large PNGs ourselves.
+ * With a height it crops to that shape around the centre, the same crop `object-cover` would make, without
+ * downloading the cropped-off pixels.
+ */
+export const shopImg = (src: string, width: number, height?: number) =>
+  `${src}${src.includes("?") ? "&" : "?"}width=${width}${height ? `&height=${height}&crop=center` : ""}`;
 
 /** Shopify cart permalink: sends the whole cart straight to checkout. */
 export const checkoutUrl = (lines: { id: number; qty: number }[]) =>
   `${SHOP_ORIGIN}/cart/${lines.map((l) => `${l.id}:${l.qty}`).join(",")}`;
+
+export { HANDLE_ALIASES };
+
+const STORE_LINK = /href="(https?:\/\/(?:www\.)?(?:ecosolutions\.myshopify\.com|shop\.ecosolutions\.co\.za)[^"]*)"/g;
+
+/**
+ * Migrated pages link straight to the Shopify storefront, often to duplicate
+ * "copy-of-…" listings. Point those links at this site instead, so visitors
+ * stay here until checkout. The rules (and the alias list) live in
+ * lib/shop-links.ts, shared with the HTML sanitizer; cart and checkout links
+ * are left alone.
+ */
+export function localiseShopLinks(html: string) {
+  return html.replace(STORE_LINK, (whole, href: string) => {
+    const local = localShopHref(href.replace(/&amp;/g, "&"));
+    return local ? `href="${local}"` : whole;
+  });
+}
+
+const PRICE_TOKEN = /\{\{price:([a-z0-9-]+)\}\}/g;
+
+/**
+ * Prices in page text come from the store, never from copy: migrated pages write
+ * {{price:<handle>}} and get the product's current Shopify price. A product the
+ * store no longer lists gets "see our shop" instead of a stale number.
+ */
+export function withStorePrices(html: string, products: Product[]) {
+  return html.replace(PRICE_TOKEN, (_, handle: string) => {
+    const p = products.find((x) => x.handle === handle);
+    if (!p || p.priceFrom <= 0) return "listed in our shop";
+    return `${p.variants.length > 1 ? "from " : ""}${formatRand(p.priceFrom)}`;
+  });
+}

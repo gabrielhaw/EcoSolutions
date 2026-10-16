@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact Us | Book a Pest Control Site Visit",
   description:
-    "Contact EcoSolutions in Randpark Ridge, Johannesburg: 072 365 9777 or info@ecosolutions.co.za. Book a site visit for rodent control, bat removal or owl boxes.",
+    "Contact EcoSolutions in Randpark Ridge, Randburg: 072 365 9777 or info@ecosolutions.co.za. Book a site visit for rodent control, bat removal or owl boxes.",
   alternates: { canonical: "/contact-us" },
 };
 
@@ -75,7 +75,7 @@ export default function ContactPage() {
                   {l}
                 </span>
               ))}
-              {site.address.suburb}, {site.address.city}
+              {site.address.suburb}, {site.address.city}, {site.address.postalCode}
             </address>
           </div>
           <div>

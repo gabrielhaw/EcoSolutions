@@ -17,11 +17,14 @@ export function ButtonLink({
   children,
   variant = "clay",
   className = "",
+  cta,
 }: {
   href: string;
   children: React.ReactNode;
   variant?: "clay" | "ink" | "outline" | "outline-light";
   className?: string;
+  /** Reports clicks as `enquiry_click` with this label (see components/site/Analytics.tsx). */
+  cta?: string;
 }) {
   const styles = {
     clay: "bg-accent text-canvas hover:bg-accent-2",
@@ -31,16 +34,27 @@ export function ButtonLink({
   }[variant];
   const external = href.startsWith("http");
   const cls = `inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-medium transition-colors ${styles} ${className}`;
-  return external ? (
-    <a href={href} className={cls} rel="noopener">
-      {children}
-    </a>
-  ) : (
-    <Link href={href} className={cls}>
+  const data = cta ? { "data-track": "enquiry_click", "data-cta": cta } : {};
+  if (external || href.startsWith("#") || href.startsWith("tel:") || href.startsWith("mailto:")) {
+    return (
+      <a href={href} className={cls} rel={external ? "noopener" : undefined} {...data}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={cls} {...data}>
       {children}
     </Link>
   );
 }
+
+/** A fixed analytics label for a button, from its text: "Request a callback" → "request_a_callback". */
+export const ctaId = (label: string) =>
+  label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_|_$/g, "");
 
 export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   return (
@@ -92,31 +106,42 @@ export function CtaBand({
   title = "Tell us what's moving in. We'll find a way to move it on, without poison.",
   image = "/images/spotted-eagle-owlets-in-owl-box.jpg",
   alt = "Three Spotted Eagle Owl chicks in an EcoSolutions owl box",
-  cta = { label: "Book a site visit", href: "/contact-us" },
+  cta = { label: "Contact our team", href: "/contact-us" },
+  body = "Call, WhatsApp or send a message. One of our consultants will get back to you to arrange a site visit or a remote assessment using satellite imagery.",
+  phone = false,
 }: {
   title?: string;
   cta?: { label: string; href: string };
   image?: string;
   alt?: string;
+  /** What happens after someone gets in touch. */
+  body?: string;
+  /** Also offer a call to the mobile number. */
+  phone?: boolean;
 }) {
   return (
     <section className="px-4 pb-16 pt-10 sm:px-6 sm:pb-24 sm:pt-12">
       <div data-theme="dark" className="relative mx-auto grid max-w-[77rem] overflow-hidden rounded-3xl border border-line bg-deep lg:grid-cols-2">
-        <div className="relative z-10 p-8 sm:p-12 lg:p-16" data-reveal>
+        <div className="relative z-10 p-8 sm:p-12 lg:p-16" data-reveal data-cta-location="cta_band">
           <p className="label text-accent">Get in touch</p>
           <h2 className="display mt-5 max-w-xl text-display-m">{title}</h2>
-          <p className="mt-6 max-w-md text-[16px] leading-relaxed text-fg-2">
-            Call, WhatsApp or send a message. One of our consultants will get back to you to arrange a site visit or a remote assessment using satellite imagery.
-          </p>
+          <p className="mt-6 max-w-md text-[16px] leading-relaxed text-fg-2">{body}</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <ButtonLink href={cta.href}>{cta.label}</ButtonLink>
+            <ButtonLink href={cta.href} cta={ctaId(cta.label)}>
+              {cta.label}
+            </ButtonLink>
             <ButtonLink href={`https://wa.me/${site.whatsapp}`} variant="outline-light">
               WhatsApp {site.phone.mobile.replace("+27 ", "0")}
             </ButtonLink>
+            {phone && (
+              <ButtonLink href={`tel:${site.phone.mobile.replace(/[^+\d]/g, "")}`} variant="outline-light">
+                Call {site.phone.mobile.replace("+27 ", "0")}
+              </ButtonLink>
+            )}
           </div>
         </div>
         <div className="relative min-h-72 lg:min-h-full">
-          <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <Image src={image} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover brightness-[1.2] saturate-[1.05]" />
           {/* Only a thin blend at the seam; the photo itself stays bright. */}
           <span aria-hidden className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-deep to-transparent lg:inset-y-0 lg:left-0 lg:right-auto lg:h-full lg:w-24 lg:bg-gradient-to-r" />
         </div>

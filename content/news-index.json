@@ -2707,7 +2707,7 @@
   "date": "2018-12-03",
   "author": "Sara",
   "kind": "link",
-  "externalUrl": "https://ecosolutions.myshopify.com/collections/frontpage/products/junior-scientist-kit",
+  "externalUrl": "/shop/junior-scientist-kit",
   "image": {
    "src": "/media/news-thumbs/d73a19fb65.jpg",
    "w": 960,
@@ -3272,7 +3272,7 @@
  {
   "slug": "autumn-newsletter-2017",
   "path": "/news/autumn-newsletter-2017",
-  "title": "Frequently asked owl box questions answered:",
+  "title": "Autumn Newsletter 2017: Owl Box Questions Answered",
   "description": "",
   "date": "2017-03-15",
   "author": "Sara",

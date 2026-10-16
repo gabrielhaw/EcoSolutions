@@ -10,6 +10,7 @@ const topics = {
   owls: "Owl box: new installation",
   service: "Owl box or bat house service",
   farm: "Farm, estate or agricultural project",
+  voucher: "Gift voucher",
   other: "Something else",
 } as const;
 

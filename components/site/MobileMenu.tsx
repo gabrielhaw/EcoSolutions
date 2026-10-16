@@ -93,13 +93,19 @@ export default function MobileMenu() {
                 <span className="text-[16px] text-fg-2">Light / dark</span>
                 <ThemeToggle />
               </div>
-              <div className="mt-8 grid gap-3">
-                <Link href="/contact-us" className="rounded-full bg-accent px-4 py-3.5 text-center font-medium text-canvas">
-                  Book a site visit
+              <div className="mt-8 grid gap-3" data-cta-location="mobile_menu">
+                <Link href="/request-a-callback" data-track="enquiry_click" data-cta="request_a_callback" className="rounded-full bg-accent px-4 py-3.5 text-center font-medium text-canvas">
+                  Request a callback
                 </Link>
-                <a href={`https://wa.me/${site.whatsapp}`} className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
-                  WhatsApp {site.phone.mobile}
+                <a href={`tel:${site.phone.mobile.replace(/[^+\d]/g, "")}`} className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
+                  Call {site.phone.mobile}
                 </a>
+                <a href={`https://wa.me/${site.whatsapp}`} className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
+                  WhatsApp us
+                </a>
+                <Link href="/contact-us" className="rounded-full border border-line-strong px-4 py-3.5 text-center font-medium">
+                  Contact our team
+                </Link>
               </div>
             </nav>
           </div>,

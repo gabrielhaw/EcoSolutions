@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { menu } from "@/lib/site";
+import { menu, site } from "@/lib/site";
 import HeaderShell from "./HeaderShell";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
@@ -23,8 +23,8 @@ export default function SiteHeader() {
     <HeaderShell>
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
         <Link href="/" className="shrink-0" aria-label="EcoSolutions home">
-          <Image src="/brand/logo-ink.png" alt="EcoSolutions — Integrated Pest Management" width={1200} height={293} priority className="h-8 w-auto dark:hidden sm:h-9" />
-          <Image src="/brand/logo-white.png" alt="EcoSolutions — Integrated Pest Management" width={1200} height={292} priority className="hidden h-8 w-auto dark:block sm:h-9" />
+          <Image src="/brand/logo-ink.png" alt="EcoSolutions — Integrated Pest Management" width={1200} height={293} priority sizes="160px" className="h-8 w-auto dark:hidden sm:h-9" />
+          <Image src="/brand/logo-white.png" alt="EcoSolutions — Integrated Pest Management" width={1200} height={292} priority sizes="160px" className="hidden h-8 w-auto dark:block sm:h-9" />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -74,14 +74,25 @@ export default function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" data-cta-location="header">
           <ThemeToggle className="hidden sm:grid" />
+          <a
+            href={`tel:${site.phone.mobile.replace(/[^+\d]/g, "")}`}
+            aria-label={`Call us on ${site.phone.mobile}`}
+            className="grid size-10 place-items-center rounded-full border border-line-strong bg-canvas/40 backdrop-blur-md sm:hidden"
+          >
+            <svg aria-hidden viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" strokeLinejoin="round" />
+            </svg>
+          </a>
           <CartButton />
           <Link
             href="/contact-us"
+            data-track="enquiry_click"
+            data-cta="contact_our_team"
             className="hidden rounded-full bg-accent px-5 py-2.5 text-[14px] font-medium text-canvas transition-colors hover:bg-accent-2 sm:inline-flex"
           >
-            Book a site visit
+            Contact our team
           </Link>
           <MobileMenu />
         </div>

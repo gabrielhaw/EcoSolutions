@@ -28,7 +28,7 @@ export default function AtAGlance({ facts }: { facts: Fact[] }) {
           Swipe →
         </p>
       </div>
-      <ul className="mt-2 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] lg:grid lg:snap-none lg:overflow-visible lg:pb-0 lg:[grid-template-columns:repeat(var(--n),minmax(0,1fr))]" style={{ "--n": facts.length } as React.CSSProperties}>
+      <ul tabIndex={0} aria-label="Key facts" className="mt-2 flex snap-x snap-mandatory overflow-x-auto pb-2 focus-visible:outline-2 focus-visible:outline-accent [scrollbar-width:none] lg:grid lg:snap-none lg:overflow-visible lg:pb-0 lg:[grid-template-columns:repeat(var(--n),minmax(0,1fr))]" style={{ "--n": facts.length } as React.CSSProperties}>
         {facts.map((f, i) => (
           <li
             key={f.figure + i}
@@ -42,7 +42,7 @@ export default function AtAGlance({ facts }: { facts: Fact[] }) {
               <Figure figure={f.figure} />
             </span>
             <span className="mt-4 block max-w-[28ch] text-[15px] leading-snug text-fg-2">{f.label}</span>
-            {f.source && <span className="mt-4 block font-mono text-[11.5px] uppercase tracking-[0.08em] text-fg-3">{f.source}</span>}
+            {f.source && <span className="mt-4 block font-mono text-[12.5px] uppercase tracking-[0.08em] text-fg-3">{f.source}</span>}
           </li>
         ))}
       </ul>

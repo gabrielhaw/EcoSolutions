@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import { localShopHref } from "@/lib/shop-links";
 
 /**
  * Every piece of HTML we didn't write ourselves (Shopify product descriptions,
@@ -32,14 +33,24 @@ const base: sanitizeHtml.IOptions = {
   allowedSchemes: ["http", "https", "mailto", "tel"],
   allowedSchemesAppliedToAttributes: ["href", "src"],
   allowProtocolRelative: false,
-  // Links opening a new tab must not get a handle on this page.
-  transformTags: {
-    a: (tagName, attribs) => ({
-      tagName,
-      attribs: attribs.target ? { ...attribs, rel: "noopener noreferrer" } : attribs,
-    }),
-  },
+  transformTags: { a: (tagName, attribs) => ({ tagName, attribs: link(attribs) }) },
 };
+
+/**
+ * Old Shopify storefront links point at the same product or category on this
+ * site instead (in the same tab). Links opening a new tab must not get a
+ * handle on this page.
+ */
+function link(attribs: sanitizeHtml.Attributes): sanitizeHtml.Attributes {
+  const local = attribs.href ? localShopHref(attribs.href) : null;
+  if (local) {
+    const rest: sanitizeHtml.Attributes = { ...attribs, href: local };
+    delete rest.target;
+    delete rest.rel;
+    return rest;
+  }
+  return attribs.target ? { ...attribs, rel: "noopener noreferrer" } : attribs;
+}
 
 /** Shopify product descriptions: text, lists, tables, links. No media. */
 export function sanitizeProductHtml(html: string) {
@@ -47,21 +58,54 @@ export function sanitizeProductHtml(html: string) {
     ...base,
     allowedTags: (base.allowedTags as string[]).filter((t) => t !== "img"),
     allowedAttributes: { a: ["href", "rel"], td: ["colspan", "rowspan"], th: ["colspan", "rowspan"] },
-    transformTags: { a: sanitizeHtml.simpleTransform("a", { rel: "noopener" }) },
+    transformTags: {
+      a: (tagName, attribs) => {
+        const local = attribs.href ? localShopHref(attribs.href) : null;
+        const next: sanitizeHtml.Attributes = local ? { href: local } : { ...attribs, rel: "noopener" };
+        return { tagName, attribs: next };
+      },
+    },
   });
 }
 
 /** Migrated pages and news: also images, video and embeds from known players. */
 export function sanitizeContentHtml(html: string) {
-  return sanitizeHtml(html, {
+  return nameImageLinks(sanitizeHtml(html, {
     ...base,
     allowedTags: [...(base.allowedTags as string[]), "iframe", "video", "source"],
     allowedAttributes: {
       ...base.allowedAttributes,
+      table: ["tabindex"],
       iframe: ["src", "loading", "allowfullscreen", "title"],
       video: ["preload", "controls", "poster"],
       source: ["src", "type"],
     },
     allowedIframeHostnames: EMBED_HOSTS,
+    transformTags: {
+      ...base.transformTags,
+      // Screen readers announce frames by title; migrated embeds rarely have one.
+      iframe: (tagName, attribs) => ({ tagName, attribs: { title: "Embedded media", ...attribs } }),
+      // Wide tables scroll sideways on phones; keyboard users need to reach them.
+      table: (tagName) => ({ tagName, attribs: { tabindex: "0" } }),
+    },
+  }));
+}
+
+/** A link whose only content is an image with empty alt text, as sanitize-html writes it. */
+const IMAGE_ONLY_LINK = /<a href="([^"]+)"([^>]*)>(\s*<img\b[^>]*\balt=""[^>]*>\s*)<\/a>/g;
+
+/**
+ * Old newsletters link their social icons with alt="" images, which leaves the
+ * link with no name for screen readers. Name it after where it goes.
+ */
+function nameImageLinks(html: string) {
+  return html.replace(IMAGE_ONLY_LINK, (whole, href: string, rest: string, img: string) => {
+    if (href.startsWith("/")) return `<a href="${href}" aria-label="EcoSolutions"${rest}>${img}</a>`;
+    try {
+      const host = new URL(href.replace(/&amp;/g, "&")).hostname.replace(/^www\./, "");
+      return `<a href="${href}" aria-label="${host}"${rest}>${img}</a>`;
+    } catch {
+      return whole;
+    }
   });
 }

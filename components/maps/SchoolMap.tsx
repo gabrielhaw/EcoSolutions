@@ -59,7 +59,7 @@ export default function SchoolMap() {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === 'all' 
-                  ? 'bg-emerald-600 text-white shadow-md' 
+                  ? 'bg-emerald-700 text-white shadow-md' 
                   : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
               }`}
             >
@@ -69,7 +69,7 @@ export default function SchoolMap() {
               onClick={() => setFilter('bat')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === 'bat' 
-                  ? 'bg-emerald-600 text-white shadow-md' 
+                  ? 'bg-emerald-700 text-white shadow-md' 
                   : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
               }`}
             >

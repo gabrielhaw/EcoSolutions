@@ -117,3 +117,23 @@ export function plainText(html: string, max = 160): string {
 export function metaDescription(text: string, max = 158): string {
   return plainText(text, max);
 }
+
+/**
+ * A meta description from the page's own summary, topped up from its text when
+ * the summary is too short to tell searchers what the page covers.
+ */
+export function describe(summary: string | undefined, html: string): string {
+  const s = plainText(summary ?? "", 1000);
+  if (s.length >= 70) return metaDescription(s);
+  const body = plainText(html, 1000);
+  return metaDescription(s && !body.startsWith(s) ? `${s.replace(/[:.]?$/, ".")} ${body}` : body);
+}
+
+/**
+ * The <title>. The layout appends " | EcoSolutions"; when that would push the
+ * title past what Google shows (about 60 characters), the suffix is dropped
+ * so the keywords at the start aren't cut off.
+ */
+export function pageTitle(title: string): string | { absolute: string } {
+  return title.length + " | EcoSolutions".length > 60 ? { absolute: title } : title;
+}
