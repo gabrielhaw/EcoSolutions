@@ -2,8 +2,8 @@ import Image from "next/image";
 import { partners } from "@/lib/site";
 
 /** Every logo covers roughly this many px², so wide and tall marks read at the same size. */
-const LOGO_AREA = 4200;
-const LOGO_MAX_H = 48;
+const LOGO_AREA = 5600;
+const LOGO_MAX_H = 60;
 
 function logoSize({ width, height }: { width: number; height: number }) {
   const ratio = width / height;
@@ -37,8 +37,8 @@ export default function PartnerMarquee() {
   );
 
   return (
-    <section aria-labelledby="partners-heading" className="border-y border-line py-7">
-      <h2 id="partners-heading" className="label mb-5 text-center text-fg-3">
+    <section aria-labelledby="partners-heading" className="border-y border-line py-9">
+      <h2 id="partners-heading" className="label mb-9 text-center text-fg-3">
         Worked with &amp; recognised by
       </h2>
       <div className="mask-x group flex overflow-hidden">

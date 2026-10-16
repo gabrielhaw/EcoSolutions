@@ -4,7 +4,7 @@ import Link from "next/link";
 import BackgroundVideo from "@/components/site/BackgroundVideo";
 import PartnerMarquee from "@/components/site/PartnerMarquee";
 import { ButtonLink, CtaBand, Wrap } from "@/components/site/ui";
-import { childPages, news, type NewsItem } from "@/lib/content";
+import { childPages, news, plainText, type NewsItem } from "@/lib/content";
 import { getOwlBoxes } from "@/lib/owl-boxes";
 import { site } from "@/lib/site";
 
@@ -73,11 +73,16 @@ const steps = [
   { t: "We explain what comes next", d: "What to watch for afterwards, and whether any follow-up or servicing makes sense for you." },
 ];
 
-/** Short excerpts, wording unchanged; the full testimonials are on /testimonials. */
-const testimonials = [
-  { slug: "kiran-reddy", excerpt: "Congratulations on your professional and technically skilled crew! The team online and onsite were punctual and polite.", job: "Bat exclusion" },
-  { slug: "ian-hall-in-emmarentia", excerpt: "Owl box was installed quickly and efficiently… Great service and now we wait for an owl!", job: "Owl box installation" },
-];
+/**
+ * Testimonials shown in full on the home page, with what each was about. Four fill the column
+ * beside the results; Cheryl Siewierski's (bat and owl boxes) is on /testimonials with the rest.
+ */
+const testimonialJobs: Record<string, string> = {
+  "kiran-reddy": "Bat exclusion",
+  "ian-hall-in-emmarentia": "Owl box installation",
+  "beryl-scott-payet-steyn-city": "Owl boxes and bat houses",
+  "jaxon-rice-in-westdene": "Owl box and barbet logs",
+};
 
 const fmtDate = (d: string | null) => (d ? new Date(d).toLocaleDateString("en-ZA", { day: "numeric", month: "short", year: "numeric" }) : "");
 const newsHref = (n: NewsItem) => (n.kind === "link" && n.externalUrl ? n.externalUrl : n.path);
@@ -99,11 +104,12 @@ export default async function HomePage() {
   const boxes = await getOwlBoxes();
   const years = boxes.map((b) => b.occupiedYear).filter((y): y is number => !!y);
   const firstYear = years.length ? Math.min(...years) : null;
-  // Attribution comes from the testimonial page itself; an excerpt whose page is gone isn't shown.
+  // Every customer testimonial page, in the order above, quoted in full with its own attribution.
   const pages = childPages("/testimonials");
-  const quotes = testimonials.flatMap((t) => {
-    const page = pages.find((p) => p.path.endsWith(`/${t.slug}`));
-    return page ? [{ ...t, who: page.title.replace(/ in /, ", ") }] : [];
+  const quotes = Object.entries(testimonialJobs).flatMap(([slug, job]) => {
+    const page = pages.find((p) => p.path.endsWith(`/${slug}`));
+    const quote = page ? plainText(page.html, 600) : "";
+    return page && quote ? [{ quote, who: page.title.replace(/ in /, ", "), job }] : [];
   });
   const latest = news.slice(0, 2);
 
@@ -220,7 +226,7 @@ export default async function HomePage() {
         <Wrap className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <h2 id="results" className="display text-display-l">Results and experiences</h2>
-            <dl className="mt-8 grid gap-6 sm:grid-cols-2">
+            <dl className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
               <div className="rounded-2xl border border-line p-5">
                 <dt className="label text-fg-3">Occupied-box map</dt>
                 <dd className="mt-3">
@@ -248,14 +254,14 @@ export default async function HomePage() {
             </dl>
           </div>
           <div className="lg:col-span-6 lg:border-l lg:border-line lg:pl-10">
-            <ul className="space-y-8">
+            <ul className="space-y-7">
               {quotes.map((q) => (
-                  <li key={q.slug}>
-                    <blockquote className="text-[17px] leading-relaxed">“{q.excerpt}”</blockquote>
-                    <p className="mt-2 text-[14px] text-fg-3">
-                      {q.who} · {q.job}
-                    </p>
-                  </li>
+                <li key={q.who}>
+                  <blockquote className="text-[16.5px] leading-relaxed">“{q.quote}”</blockquote>
+                  <p className="mt-2 text-[14px] text-fg-3">
+                    {q.who} · {q.job}
+                  </p>
+                </li>
               ))}
             </ul>
             <Link href="/testimonials" className="link-underline mt-8 inline-block text-[15px]">

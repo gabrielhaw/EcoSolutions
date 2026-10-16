@@ -20,10 +20,10 @@ About 470 visible words (guideline 500–700; no filler added). Mobile reading o
 | # | Section | Purpose | Words (approx.) | Notes |
 |---|---|---|---|---|
 | 1 | Hero | What we do, where, next step | 37 + heading | Heading kept; text names the services and coverage so it works without the video. Primary **Contact our team** → `/contact-us`; secondary **Shop owl & bat boxes** → `/shop`. Video fallbacks and chat clearance unchanged. |
-| 2 | Partner banner | Credibility, compact | 4 | Moving banner kept (requested), logos only, all ten organisations ("Worked with & recognised by"; relationships confirmed by Gabriel, 16 Oct 2026). Stands still for reduced motion. |
+| 2 | Partner banner | Credibility, compact | 4 | Moving banner kept (requested), logos only and slightly larger, all ten organisations ("Worked with & recognised by"; relationships confirmed by Gabriel, 16 Oct 2026). Stands still for reduced motion. |
 | 3 | How can we help? | Route to the right service | 110 | Four cards: Bats in your roof · Rats or mice · Owl boxes · Bat houses (13–19 words each). Two small routes: Farms and orchards (two links) · Already have an owl box? (servicing, empty box). Replaces "Most requested" and "What's the problem?". |
 | 4 | Our approach | Why no poison; how any job works | 100 | Poison argument in two sentences; three steps true for every service (assess; recommend and do the work; explain what comes next). Link to `/non-toxic-pest-control`. |
-| 5 | Results and experiences | Evidence in context | 110 | Live occupied-box map count with its definition and start year; Irene labelled as a case study; two testimonial excerpts (wording unchanged, with the job). |
+| 5 | Results and experiences | Evidence in context | 110 | Live occupied-box map count with its definition and start year; Irene labelled as a case study; four customer testimonials in full (Kiran Reddy, Ian Hall, Beryl Scott-Payet, Jaxon Rice), each with the job. No carousel controls. |
 | 6 | From the field | Recent activity, nonprofit | 85 | Two newest items (date · source · one sentence), All news, compact Owlproject.org block. No scrolling rail. |
 | 7 | Contact | For people unsure what they need | 45 | What to describe, what happens next, Contact our team, WhatsApp and call (central numbers). |
 
@@ -42,7 +42,7 @@ A separate product rail is **not** recommended: the hero, header menu, help card
 | Three poison news headlines | Removed from the homepage; the articles remain under `/news`. Candidate home: a "Further reading" list on the rodent control page. |
 | "How we do it" steps (6 mm gaps, 2–3 rodents a night, 60,000 insects, annual service) | Replaced by steps that hold for every service. The specific figures belong on their service pages: proofing detail on rodent control, servicing on owl box servicing. The 60,000-insects and 2–3-rodents figures need sources before reuse. |
 | Jane Goodall quotation | Full letter and quotation remain on `/testimonials`. Recommend adding it to `/about` or `/owlproject` with its context (handwritten note to Jonathan Haw). |
-| Three testimonials | Two shown as excerpts; all remain on `/testimonials`. |
+| Three testimonials | Four of the five customer testimonials shown in full; all, with the Jane Goodall letter, remain on `/testimonials`. |
 | Eight-item news rail | Two items shown; full archive on `/news`. |
 | Featured products rail | Removed earlier at your request; products remain on `/shop`. |
 
