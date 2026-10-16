@@ -193,20 +193,10 @@ export default async function HomePage() {
 
       {/* 4. Our approach: why not poison, and the steps any job follows */}
       <section data-theme="dark" aria-labelledby="approach" className="relative isolate overflow-hidden">
-        {/* The owlet sits mid-frame; on wide screens the photo runs past the right edge so the owl
-            lands in the open right-hand side, clear of the text, and needs only a light overlay there. */}
-        <div className="absolute inset-y-0 left-0 -z-10 w-full lg:w-[135%]">
-          <Image
-            src="/images/owlet-in-owl-box.jpg"
-            alt="A Spotted Eagle owlet looking out of an EcoSolutions owl box"
-            fill
-            sizes="(min-width: 1024px) 135vw, 100vw"
-            className="object-cover object-[50%_55%]"
-          />
-        </div>
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/55 to-black/25 lg:via-black/40 lg:to-transparent" />
+        <Image src="/images/owlet-in-owl-box.jpg" alt="" fill sizes="100vw" className="-z-10 object-cover" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/75 via-black/45 to-black/50" />
         <Wrap className="py-16 sm:py-20">
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             <p className="label text-accent">Our approach</p>
             <h2 id="approach" className="display mt-4 text-display-l">
               Poison doesn’t stay with the rat.
@@ -214,21 +204,19 @@ export default async function HomePage() {
             <p className="mt-6 text-[17px] leading-relaxed text-fg">
               A poisoned rat takes days to die, and the owls, cats and dogs that catch it are poisoned too, while rodents grow resistant. We deal with why animals are there instead.
             </p>
-            <ol className="mt-10 grid gap-5">
-              {steps.map((s, i) => (
-                <li key={s.t} className="grid grid-cols-[2.5rem_1fr] gap-3 border-t border-white/25 pt-5">
-                  <span className="label pt-1 text-accent">0{i + 1}</span>
-                  <div>
-                    <h3 className="text-[1.15rem] font-medium tracking-tight">{s.t}</h3>
-                    <p className="mt-1.5 text-[15px] leading-relaxed text-fg-2">{s.d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <Link href="/non-toxic-pest-control" className="mt-10 inline-flex items-baseline gap-2 text-[15px] text-fg hover:text-accent">
-              More on non-toxic pest control <span aria-hidden>→</span>
-            </Link>
           </div>
+          <ol className="mt-10 grid gap-6 sm:grid-cols-3">
+            {steps.map((s, i) => (
+              <li key={s.t} className="border-t border-white/25 pt-5">
+                <span className="label text-accent">0{i + 1}</span>
+                <h3 className="mt-2 text-[1.15rem] font-medium tracking-tight">{s.t}</h3>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-fg-2">{s.d}</p>
+              </li>
+            ))}
+          </ol>
+          <Link href="/non-toxic-pest-control" className="mt-10 inline-flex items-baseline gap-2 text-[15px] text-fg hover:text-accent">
+            More on non-toxic pest control <span aria-hidden>→</span>
+          </Link>
         </Wrap>
       </section>
 
