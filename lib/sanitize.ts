@@ -70,7 +70,7 @@ export function sanitizeProductHtml(html: string) {
 
 /** Migrated pages and news: also images, video and embeds from known players. */
 export function sanitizeContentHtml(html: string) {
-  return sanitizeHtml(html, {
+  return nameImageLinks(sanitizeHtml(html, {
     ...base,
     allowedTags: [...(base.allowedTags as string[]), "iframe", "video", "source"],
     allowedAttributes: {
@@ -85,5 +85,24 @@ export function sanitizeContentHtml(html: string) {
       // Screen readers announce frames by title; migrated embeds rarely have one.
       iframe: (tagName, attribs) => ({ tagName, attribs: { title: "Embedded media", ...attribs } }),
     },
+  }));
+}
+
+/** A link whose only content is an image with empty alt text, as sanitize-html writes it. */
+const IMAGE_ONLY_LINK = /<a href="([^"]+)"([^>]*)>(\s*<img\b[^>]*\balt=""[^>]*>\s*)<\/a>/g;
+
+/**
+ * Old newsletters link their social icons with alt="" images, which leaves the
+ * link with no name for screen readers. Name it after where it goes.
+ */
+function nameImageLinks(html: string) {
+  return html.replace(IMAGE_ONLY_LINK, (whole, href: string, rest: string, img: string) => {
+    if (href.startsWith("/")) return `<a href="${href}" aria-label="EcoSolutions"${rest}>${img}</a>`;
+    try {
+      const host = new URL(href.replace(/&amp;/g, "&")).hostname.replace(/^www\./, "");
+      return `<a href="${href}" aria-label="${host}"${rest}>${img}</a>`;
+    } catch {
+      return whole;
+    }
   });
 }
