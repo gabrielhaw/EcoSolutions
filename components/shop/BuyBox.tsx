@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import { formatRand, shopImg, SHOP_ORIGIN, type Product } from "@/lib/shop";
+import { formatRand, shopImg, type Product } from "@/lib/shop";
+import { site } from "@/lib/site";
 import { useCart } from "./Cart";
 
 /** Photo gallery + option picker + add to cart for one product. */
@@ -52,7 +54,7 @@ export default function BuyBox({ product }: { product: Product }) {
         <div className="lg:sticky lg:top-28">
           <h1 className="display text-display-m">{product.title}</h1>
           <p className="mt-4 text-2xl tabular-nums">
-            {sellsHere ? formatRand(variant.price) : "Choose an amount"}
+            {sellsHere ? formatRand(variant.price) : "Amount of your choice"}
             {product.poa && <span className="ml-2 align-middle text-[13px] text-fg-3">deposit · final price on quote</span>}
           </p>
           <p className="mt-5 text-[16px] leading-relaxed text-fg-2">{product.summary}</p>
@@ -100,9 +102,15 @@ export default function BuyBox({ product }: { product: Product }) {
               </button>
             </div>
           ) : (
-            <a href={`${SHOP_ORIGIN}/products/${product.handle}`} rel="noopener" className="mt-8 inline-flex rounded-full bg-accent px-6 py-3.5 font-medium text-canvas hover:bg-accent-2">
-              Choose an amount ↗
-            </a>
+            // No fixed price (gift vouchers): Shopify has no amount picker either, so arrange it with us.
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/contact-us?topic=voucher" className="inline-flex rounded-full bg-accent px-6 py-3.5 font-medium text-canvas hover:bg-accent-2">
+                Ask for a voucher
+              </Link>
+              <a href={`https://wa.me/${site.whatsapp}`} rel="noopener" className="inline-flex rounded-full border border-line-strong px-6 py-3.5 font-medium hover:border-fg">
+                WhatsApp us
+              </a>
+            </div>
           )}
 
           <ul className="mt-8 grid gap-2 border-t border-line pt-6 text-[14px] text-fg-2">

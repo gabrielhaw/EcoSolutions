@@ -19,6 +19,7 @@ function href(n: NewsItem) {
 
 function source(n: NewsItem) {
   if (n.kind !== "link" || !n.externalUrl) return "EcoSolutions";
+  if (n.externalUrl.startsWith("/")) return "EcoSolutions shop";
   try {
     const host = new URL(n.externalUrl).hostname.replace(/^www\./, "");
     return host === "zc.vg" ? "Newsletter" : host;

@@ -1,6 +1,7 @@
 import snapshot from "@/content/shop-snapshot.json";
 import type { LiveVariant } from "@/lib/cart-check";
 import { sanitizeProductHtml } from "@/lib/sanitize";
+import { DUPLICATE_PRODUCTS } from "@/lib/shop-links";
 
 /**
  * Products come straight from the EcoSolutions Shopify store's public
@@ -34,17 +35,8 @@ export const categories: { id: Category; label: string; blurb: string }[] = [
   { id: "gifts", label: "Gifts", blurb: "Hampers, vouchers and owl goodies" },
 ];
 
-/** Duplicate listings in the Shopify store ("copy-of-…" and older handles). */
-const HIDDEN = new Set([
-  "owl-box",
-  "rocket-bat-hotel",
-  "copy-of-bats-in-your-roof",
-  "copy-of-bat-exclusion-consultation-for-residential-properties",
-  "copy-of-service-an-existing-owl-box-1",
-  "copy-of-service-your-bat-house",
-  "copy-of-control-rodents-at-home",
-  "bat-boxes-for-homes",
-]);
+/** Duplicate listings in the Shopify store, hidden here (see lib/shop-links.ts). */
+const HIDDEN = new Set(Object.keys(DUPLICATE_PRODUCTS));
 
 function categorise(p: RawProduct): Category {
   const t = `${p.product_type} ${p.title} ${p.handle}`.toLowerCase();

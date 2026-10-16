@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import { localShopHref } from "@/lib/shop-links";
 
 /**
  * Every piece of HTML we didn't write ourselves (Shopify product descriptions,
@@ -32,14 +33,24 @@ const base: sanitizeHtml.IOptions = {
   allowedSchemes: ["http", "https", "mailto", "tel"],
   allowedSchemesAppliedToAttributes: ["href", "src"],
   allowProtocolRelative: false,
-  // Links opening a new tab must not get a handle on this page.
-  transformTags: {
-    a: (tagName, attribs) => ({
-      tagName,
-      attribs: attribs.target ? { ...attribs, rel: "noopener noreferrer" } : attribs,
-    }),
-  },
+  transformTags: { a: (tagName, attribs) => ({ tagName, attribs: link(attribs) }) },
 };
+
+/**
+ * Old Shopify storefront links point at the same product or category on this
+ * site instead (in the same tab). Links opening a new tab must not get a
+ * handle on this page.
+ */
+function link(attribs: sanitizeHtml.Attributes): sanitizeHtml.Attributes {
+  const local = attribs.href ? localShopHref(attribs.href) : null;
+  if (local) {
+    const rest: sanitizeHtml.Attributes = { ...attribs, href: local };
+    delete rest.target;
+    delete rest.rel;
+    return rest;
+  }
+  return attribs.target ? { ...attribs, rel: "noopener noreferrer" } : attribs;
+}
 
 /** Shopify product descriptions: text, lists, tables, links. No media. */
 export function sanitizeProductHtml(html: string) {
@@ -47,7 +58,13 @@ export function sanitizeProductHtml(html: string) {
     ...base,
     allowedTags: (base.allowedTags as string[]).filter((t) => t !== "img"),
     allowedAttributes: { a: ["href", "rel"], td: ["colspan", "rowspan"], th: ["colspan", "rowspan"] },
-    transformTags: { a: sanitizeHtml.simpleTransform("a", { rel: "noopener" }) },
+    transformTags: {
+      a: (tagName, attribs) => {
+        const local = attribs.href ? localShopHref(attribs.href) : null;
+        const next: sanitizeHtml.Attributes = local ? { href: local } : { ...attribs, rel: "noopener" };
+        return { tagName, attribs: next };
+      },
+    },
   });
 }
 

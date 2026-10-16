@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import BuyBox from "@/components/shop/BuyBox";
 import { Breadcrumbs, JsonLd, Wrap } from "@/components/site/ui";
 import { categories, getProduct, getProducts, shopImg } from "@/lib/shop";
+import { DUPLICATE_PRODUCTS } from "@/lib/shop-links";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -28,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { handle } = await params;
+  // Duplicate Shopify listings (e.g. from old links) go to the one this site shows.
+  if (DUPLICATE_PRODUCTS[handle]) permanentRedirect(`/shop/${DUPLICATE_PRODUCTS[handle]}`);
   const [product, all] = await Promise.all([getProduct(handle), getProducts()]);
   if (!product) notFound();
   const cat = categories.find((c) => c.id === product.category)!;
