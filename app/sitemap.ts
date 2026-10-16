@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry("/shop", 0.9),
     ...products,
     entry("/contact-us", 0.9),
+    entry("/request-a-callback", 0.8),
     entry("/about", 0.7),
     entry("/news", 0.6),
     ...["/owlproject", "/schools", "/our-work/international"].map((p) => entry(p, 0.5)),

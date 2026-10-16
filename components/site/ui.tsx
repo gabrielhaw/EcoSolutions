@@ -17,11 +17,14 @@ export function ButtonLink({
   children,
   variant = "clay",
   className = "",
+  cta,
 }: {
   href: string;
   children: React.ReactNode;
   variant?: "clay" | "ink" | "outline" | "outline-light";
   className?: string;
+  /** Reports clicks as `enquiry_click` with this label (see components/site/Analytics.tsx). */
+  cta?: string;
 }) {
   const styles = {
     clay: "bg-accent text-canvas hover:bg-accent-2",
@@ -31,16 +34,27 @@ export function ButtonLink({
   }[variant];
   const external = href.startsWith("http");
   const cls = `inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-medium transition-colors ${styles} ${className}`;
-  return external ? (
-    <a href={href} className={cls} rel="noopener">
-      {children}
-    </a>
-  ) : (
-    <Link href={href} className={cls}>
+  const data = cta ? { "data-track": "enquiry_click", "data-cta": cta } : {};
+  if (external || href.startsWith("#") || href.startsWith("tel:") || href.startsWith("mailto:")) {
+    return (
+      <a href={href} className={cls} rel={external ? "noopener" : undefined} {...data}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={cls} {...data}>
       {children}
     </Link>
   );
 }
+
+/** A fixed analytics label for a button, from its text: "Request a callback" → "request_a_callback". */
+export const ctaId = (label: string) =>
+  label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_|_$/g, "");
 
 export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   return (
@@ -102,14 +116,16 @@ export function CtaBand({
   return (
     <section className="px-4 pb-16 pt-10 sm:px-6 sm:pb-24 sm:pt-12">
       <div data-theme="dark" className="relative mx-auto grid max-w-[77rem] overflow-hidden rounded-3xl border border-line bg-deep lg:grid-cols-2">
-        <div className="relative z-10 p-8 sm:p-12 lg:p-16" data-reveal>
+        <div className="relative z-10 p-8 sm:p-12 lg:p-16" data-reveal data-cta-location="cta_band">
           <p className="label text-accent">Get in touch</p>
           <h2 className="display mt-5 max-w-xl text-display-m">{title}</h2>
           <p className="mt-6 max-w-md text-[16px] leading-relaxed text-fg-2">
             Call, WhatsApp or send a message. One of our consultants will get back to you to arrange a site visit or a remote assessment using satellite imagery.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <ButtonLink href={cta.href}>{cta.label}</ButtonLink>
+            <ButtonLink href={cta.href} cta={ctaId(cta.label)}>
+              {cta.label}
+            </ButtonLink>
             <ButtonLink href={`https://wa.me/${site.whatsapp}`} variant="outline-light">
               WhatsApp {site.phone.mobile.replace("+27 ", "0")}
             </ButtonLink>

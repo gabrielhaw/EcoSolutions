@@ -115,3 +115,47 @@ export const shopImg = (src: string, width: number) => `${src}${src.includes("?"
 /** Shopify cart permalink: sends the whole cart straight to checkout. */
 export const checkoutUrl = (lines: { id: number; qty: number }[]) =>
   `${SHOP_ORIGIN}/cart/${lines.map((l) => `${l.id}:${l.qty}`).join(",")}`;
+
+/** Old or duplicate Shopify handles that migrated pages still link to, and the listing that replaced each. */
+export const HANDLE_ALIASES: Record<string, string> = {
+  "owl-box": "spotted-eagle-owl-box",
+  "rocket-bat-hotel": "rocket-bat-box",
+  "bat-boxes-for-homes": "bat-box",
+  "copy-of-bats-in-your-roof": "bat-exclusion",
+  "copy-of-bat-exclusion-consultation-for-residential-properties": "bat-exclusion",
+  "copy-of-service-an-existing-owl-box-1": "annual-owl-box-service-1",
+  "copy-of-service-your-bat-house": "annual-owl-box-service",
+  "copy-of-control-rodents-at-home": "rodent-consultation",
+};
+
+const COLLECTIONS: Record<string, string> = {
+  owls: "/shop?c=owls",
+  bats: "/shop?c=bats",
+  services: "/shop?c=services",
+  hampers: "/shop?c=gifts",
+  frontpage: "/shop",
+  all: "/shop",
+};
+
+const STORE_LINK = /href="https?:\/\/(?:ecosolutions\.myshopify\.com|shop\.ecosolutions\.co\.za)(\/[^"]*)?"/g;
+
+/**
+ * Migrated pages link straight to the Shopify storefront, often to duplicate
+ * "copy-of-…" listings. Point those links at this site's own product pages
+ * instead, so visitors stay on the site until checkout. Links to products the
+ * site doesn't list are left as they are.
+ */
+export function localiseShopLinks(html: string, handles: ReadonlySet<string>) {
+  return html.replace(STORE_LINK, (whole, path: string = "/") => {
+    const clean = path.split(/[?#]/)[0].replace(/\/$/, "");
+    const product = clean.match(/\/products\/([^/]+)$/)?.[1];
+    if (product) {
+      const handle = HANDLE_ALIASES[product] ?? product;
+      return handles.has(handle) ? `href="/shop/${handle}"` : whole;
+    }
+    const collection = clean.match(/^\/collections\/([^/]+)$/)?.[1];
+    if (collection && COLLECTIONS[collection]) return `href="${COLLECTIONS[collection]}"`;
+    if (clean === "") return `href="/shop"`;
+    return whole;
+  });
+}

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { track } from "@/lib/analytics";
 import { checkoutUrl, formatRand, shopImg } from "@/lib/shop";
 
 export type CartLine = {
@@ -127,7 +128,7 @@ function CartDrawer() {
   }, [open, setOpen]);
 
   return (
-    <div aria-hidden={!open} className={`fixed inset-0 z-[70] ${open ? "" : "pointer-events-none"}`}>
+    <div aria-hidden={!open} inert={!open} className={`fixed inset-0 z-[70] ${open ? "" : "pointer-events-none"}`}>
       <div onClick={() => setOpen(false)} className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`} />
       <aside
         role="dialog"
@@ -187,6 +188,15 @@ function CartDrawer() {
               <p className="mt-1 text-[13px] text-fg-3">Delivery or installation is confirmed at checkout.</p>
               <a
                 href={checkoutUrl(lines)}
+                data-cta="checkout"
+                data-cta-location="cart"
+                onClick={() =>
+                  track("begin_checkout", {
+                    currency: "ZAR",
+                    value: total,
+                    items: lines.map((l) => ({ item_id: l.handle, item_name: l.title, item_variant: l.variant, price: l.price, quantity: l.qty })),
+                  })
+                }
                 className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 font-medium text-canvas transition-colors hover:bg-accent-2"
               >
                 Secure checkout →

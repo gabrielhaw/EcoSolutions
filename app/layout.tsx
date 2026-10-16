@@ -6,6 +6,7 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import SiteHeader from "@/components/site/SiteHeader";
 import SiteFooter from "@/components/site/SiteFooter";
 import { CartProvider } from "@/components/shop/Cart";
+import Analytics from "@/components/site/Analytics";
 import ChatLauncher from "@/components/site/ChatLauncher";
 import NavProgress from "@/components/site/NavProgress";
 import { JsonLd } from "@/components/site/ui";
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </CartProvider>
         <NavProgress />
         <ChatLauncher />
+        <Analytics />
       </body>
     </html>
   );

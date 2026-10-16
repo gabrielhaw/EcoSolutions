@@ -159,6 +159,38 @@ export const primaryNav: NavLink[] = [
   { label: "About", href: "/about" },
 ];
 
+/** The four services people look for most (GA4, Oct 2026): homepage shortcuts and the top of the Services menu. */
+export const keyServices: (NavLink & { image: string; alt: string })[] = [
+  {
+    label: "Bats in the roof",
+    href: "/bats-and-bat-boxes/bat-exclusions",
+    blurb: "Permitted, humane bat exclusion in Gauteng.",
+    image: "/media/bats-and-bat-boxes__bat-exclusions/773796afd4.jpg",
+    alt: "A colony of bats roosting on a brick wall inside a roof",
+  },
+  {
+    label: "Owl boxes",
+    href: "/products-services/owl-boxes",
+    blurb: "Made, installed and serviced by our team.",
+    image: "/images/spotted-eagle-owl-box.jpg",
+    alt: "A Spotted Eagle Owl sitting in an EcoSolutions owl box",
+  },
+  {
+    label: "Non-toxic rodent control",
+    href: "/non-toxic-pest-control/non-toxic-rodent-control-1",
+    blurb: "Rat and mouse proofing. No poison.",
+    image: "/images/barn-owl-with-rat.jpg",
+    alt: "A Barn Owl holding a rat",
+  },
+  {
+    label: "Bat houses",
+    href: "/products-services/bat-boxes",
+    blurb: "Homes for up to 100 or 300 bats.",
+    image: "/images/bat-house-chimney.jpg",
+    alt: "An EcoSolutions Slimline bat house mounted on a chimney",
+  },
+];
+
 export type MenuItem = NavLink & { items?: NavLink[]; image?: string; intro?: string };
 
 /**
@@ -170,10 +202,12 @@ export const menu: MenuItem[] = [
     label: "Services",
     href: "/non-toxic-pest-control",
     image: "/images/barn-owl-with-rat.jpg",
-    intro: "Rodent proofing, humane bat removal and predator programmes for homes, estates and farms.",
+    intro: "Humane bat removal, rodent proofing, owl boxes and bat houses for homes, estates and farms.",
     items: [
+      { label: "Bats in the roof? Humane bat removal", href: "/bats-and-bat-boxes/bat-exclusions" },
       { label: "Non-toxic rodent control", href: "/non-toxic-pest-control/non-toxic-rodent-control-1" },
-      { label: "Humane bat removal", href: "/bats-and-bat-boxes/bat-exclusions" },
+      { label: "Owl boxes, installed & serviced", href: "/products-services/owl-boxes" },
+      { label: "Bat houses, installed & serviced", href: "/products-services/bat-boxes" },
       { label: "Owls for farms", href: "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1" },
       { label: "Bats for farms", href: "/non-toxic-pest-control/bats-and-agricultural-pest-control" },
       { label: "Poison-free suburbs", href: "/non-toxic-pest-control/poison-free-suburbs" },
