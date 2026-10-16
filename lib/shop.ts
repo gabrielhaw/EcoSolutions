@@ -159,3 +159,18 @@ export function localiseShopLinks(html: string, handles: ReadonlySet<string>) {
     return whole;
   });
 }
+
+const PRICE_TOKEN = /\{\{price:([a-z0-9-]+)\}\}/g;
+
+/**
+ * Prices in page text come from the store, never from copy: migrated pages write
+ * {{price:<handle>}} and get the product's current Shopify price. A product the
+ * store no longer lists gets "see our shop" instead of a stale number.
+ */
+export function withStorePrices(html: string, products: Product[]) {
+  return html.replace(PRICE_TOKEN, (_, handle: string) => {
+    const p = products.find((x) => x.handle === handle);
+    if (!p || p.priceFrom <= 0) return "listed in our shop";
+    return `${p.variants.length > 1 ? "from " : ""}${formatRand(p.priceFrom)}`;
+  });
+}

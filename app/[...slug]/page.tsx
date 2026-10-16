@@ -23,7 +23,7 @@ import { faqJsonLd, seoFor, serviceJsonLd } from "@/lib/seo";
 import { arrangeImages } from "@/lib/arrange-images";
 import { sanitizeContentHtml } from "@/lib/sanitize";
 import { serviceFor } from "@/lib/services";
-import { getProducts, localiseShopLinks } from "@/lib/shop";
+import { getProducts, localiseShopLinks, withStorePrices } from "@/lib/shop";
 import { withSubheadings } from "@/lib/subheadings";
 import { extraSections, menu, sections, site, type Section } from "@/lib/site";
 
@@ -206,8 +206,8 @@ function shortLede(text: string | undefined, max = 230) {
 async function Article({ page }: { page: LegacyPage }) {
   const seo = seoFor(page.path);
   const service = serviceFor(page.path);
-  const handles = new Set((await getProducts()).map((p) => p.handle));
-  const html = localiseShopLinks(page.html, handles);
+  const products = await getProducts();
+  const html = withStorePrices(localiseShopLinks(page.html, new Set(products.map((p) => p.handle))), products);
   const crumbs = breadcrumbsFor(page.path, page.title);
   const section = sectionFor(page.path);
   const siblings = siblingsFor(page.path, 6);
