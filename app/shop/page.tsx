@@ -27,7 +27,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
             <h1 className="display mt-4 text-display-l">Owl boxes, bat houses &amp; the services that keep them occupied.</h1>
           </div>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[14px] text-fg-2">
-            {["Made by our own team", "Installation in Gauteng", "Secure checkout via Shopify"].map((t) => (
+            {["Made by our own team", "Installation across South Africa", "Secure checkout via Shopify"].map((t) => (
               <li key={t} className="flex items-center gap-2">
                 <span aria-hidden className="size-1.5 rounded-full bg-accent" />
                 {t}

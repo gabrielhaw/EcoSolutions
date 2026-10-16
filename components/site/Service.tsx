@@ -52,7 +52,7 @@ export function ServiceSummary({ service }: { service: Service }) {
           <h2 className="label text-accent">Where we work</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-fg">{service.area}</p>
           <p className="mt-3 text-[14.5px] leading-relaxed text-fg-2">
-            Office: {site.address.suburb}, {site.address.city}. {site.hours}.
+            Office: Lifestyle Garden Centre, Randburg, {site.address.city}. {site.hours}.
           </p>
         </div>
         <div className="md:col-span-3" data-cta-location="summary">

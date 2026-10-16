@@ -164,7 +164,7 @@ export const keyServices: (NavLink & { image: string; alt: string })[] = [
   {
     label: "Bats in the roof",
     href: "/bats-and-bat-boxes/bat-exclusions",
-    blurb: "Permitted, humane bat exclusion in Gauteng.",
+    blurb: "Permitted, humane bat exclusion.",
     image: "/media/bats-and-bat-boxes__bat-exclusions/773796afd4.jpg",
     alt: "A colony of bats roosting on a brick wall inside a roof",
   },

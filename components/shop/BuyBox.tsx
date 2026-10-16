@@ -114,7 +114,7 @@ export default function BuyBox({ product }: { product: Product }) {
           )}
 
           <ul className="mt-8 grid gap-2 border-t border-line pt-6 text-[14px] text-fg-2">
-            <li>✓ Made and installed by our own team in Gauteng</li>
+            <li>✓ Made and installed by our own team</li>
             <li>✓ Secure payment through Shopify</li>
             <li>✓ Questions? WhatsApp 072 365 9777</li>
           </ul>

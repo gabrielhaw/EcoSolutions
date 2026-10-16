@@ -193,7 +193,7 @@ export const seo: Record<string, PageSeo> = {
   },
   "/online-order-form": {
     title: "Order Owl Boxes, Bat Houses & Services Online",
-    description: "Order EcoSolutions owl boxes, bat houses and annual services online, or ask us to call you back. Installation in Gauteng; secure payment through Shopify.",
+    description: "Order EcoSolutions owl boxes, bat houses and annual services online, or ask us to call you back. Installation across South Africa; secure payment through Shopify.",
     h1: "Order online",
     lede: "Owl boxes, bat houses and annual services are in our online shop. For anything else, call, WhatsApp or ask us to call you back.",
   },
