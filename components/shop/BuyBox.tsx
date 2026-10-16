@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { formatRand, shopImg, type Product } from "@/lib/shop";
+import { formatRand, type Product } from "@/lib/shop";
+import ShopImage from "./ShopImage";
 import { site } from "@/lib/site";
 import { useCart } from "./Cart";
 
@@ -11,6 +11,12 @@ import { useCart } from "./Cart";
 export default function BuyBox({ product }: { product: Product }) {
   const { add } = useCart();
   const [img, setImg] = useState(0);
+  const [seen, setSeen] = useState<ReadonlySet<number>>(() => new Set([0]));
+  const preload = (i: number) => setSeen((s) => (s.has(i) ? s : new Set(s).add(i)));
+  const show = (i: number) => {
+    preload(i);
+    setImg(i);
+  };
   const [vid, setVid] = useState(product.variants.find((v) => v.available)?.id ?? product.variants[0].id);
   const [qty, setQty] = useState(1);
   const variant = product.variants.find((v) => v.id === vid)!;
@@ -21,17 +27,20 @@ export default function BuyBox({ product }: { product: Product }) {
     <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
       <div className="lg:col-span-7">
         <div className="relative aspect-square overflow-hidden rounded-3xl bg-canvas-2">
-          {product.images.map((im, i) => (
-            <Image
-              key={im.src}
-              src={shopImg(im.src, 1400)}
-              alt={im.alt}
-              fill
-              unoptimized
-              priority={i === 0}
-              className={`object-cover transition-opacity duration-500 ${i === img ? "opacity-100" : "opacity-0"}`}
-            />
-          ))}
+          {/* Only photos already shown (or hovered in the strip) are loaded, not the whole gallery up front. */}
+          {product.images.map((im, i) =>
+            seen.has(i) ? (
+              <ShopImage aspect={1}
+                key={im.src}
+                src={im.src}
+                alt={im.alt}
+                fill
+                sizes="(min-width: 1280px) 720px, (min-width: 1024px) 56vw, 92vw"
+                priority={i === 0}
+                className={`object-cover transition-opacity duration-500 ${i === img ? "opacity-100" : "opacity-0"}`}
+              />
+            ) : null,
+          )}
         </div>
         {product.images.length > 1 && (
           <div className="mt-3 flex gap-3">
@@ -39,11 +48,13 @@ export default function BuyBox({ product }: { product: Product }) {
               <button
                 key={im.src}
                 type="button"
-                onClick={() => setImg(i)}
+                onClick={() => show(i)}
+                onPointerEnter={() => preload(i)}
+                onFocus={() => preload(i)}
                 aria-label={`Show photo ${i + 1}`}
                 className={`relative size-20 overflow-hidden rounded-xl border-2 transition ${i === img ? "border-accent" : "border-transparent opacity-60 hover:opacity-100"}`}
               >
-                <Image src={shopImg(im.src, 200)} alt="" fill unoptimized className="object-cover" />
+                <ShopImage aspect={1} src={im.src} alt="" fill sizes="80px" className="object-cover" />
               </button>
             ))}
           </div>

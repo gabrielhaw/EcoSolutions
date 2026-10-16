@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import ZohoForm from "@/components/site/ZohoForm";
 import { ButtonLink, ctaId, Wrap } from "@/components/site/ui";
 import { forms } from "@/lib/forms";
-import { formatRand, getProducts, shopImg } from "@/lib/shop";
+import ShopImage from "@/components/shop/ShopImage";
+import { formatRand, getProducts } from "@/lib/shop";
 import { CALLBACK_ANCHOR, type Service } from "@/lib/services";
 import { site } from "@/lib/site";
 
@@ -103,12 +103,11 @@ export async function ServiceProducts({ service }: { service: Service }) {
               <Link href={`/shop/${p.handle}`} className="group block">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-canvas-2">
                   {p.images[0] && (
-                    <Image
-                      src={shopImg(p.images[0].src, 600)}
+                    <ShopImage aspect={4 / 3}
+                      src={p.images[0].src}
                       alt={p.images[0].alt}
                       fill
-                      unoptimized
-                      loading="lazy"
+                      sizes="(min-width: 1280px) 300px, (min-width: 1024px) 23vw, 46vw"
                       className="object-cover transition duration-700 group-hover:scale-105"
                     />
                   )}

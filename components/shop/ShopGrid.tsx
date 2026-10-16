@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { categories, formatRand, shopImg, type Category, type Product } from "@/lib/shop";
+import { categories, formatRand, type Category, type Product } from "@/lib/shop";
+import ShopImage from "./ShopImage";
 
 export default function ShopGrid({ products, initial }: { products: Product[]; initial?: Category }) {
   const [cat, setCat] = useState<Category | "all">(initial ?? "all");
@@ -36,11 +36,24 @@ export default function ShopGrid({ products, initial }: { products: Product[]; i
             <Link href={`/shop/${p.handle}`} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-canvas-2">
                 {p.images[0] && (
-                  <Image src={shopImg(p.images[0].src, 800)} alt={p.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />
+                  <ShopImage aspect={4 / 3}
+                    src={p.images[0].src}
+                    alt={p.images[0].alt}
+                    fill
+                    sizes="(min-width: 1280px) 400px, (min-width: 1024px) 31vw, (min-width: 640px) 48vw, 92vw"
+                    priority={i < 2}
+                    className="object-cover transition duration-700 group-hover:scale-105"
+                  />
                 )}
-                {/* Second photo fades in on hover */}
+                {/* Second photo fades in on hover; not rendered (so not downloaded) on touch screens */}
                 {p.images[1] && (
-                  <Image src={shopImg(p.images[1].src, 800)} alt="" fill unoptimized className="object-cover opacity-0 transition duration-700 group-hover:opacity-100" />
+                  <ShopImage aspect={4 / 3}
+                    src={p.images[1].src}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1280px) 400px, (min-width: 1024px) 31vw, 48vw"
+                    className="hidden object-cover opacity-0 transition duration-700 group-hover:opacity-100 [@media(hover:hover)]:block"
+                  />
                 )}
                 <span className="label absolute left-4 top-4 rounded-full bg-canvas/85 px-3 py-1.5 text-fg-2 backdrop-blur-md">
                   {categories.find((c) => c.id === p.category)?.label}

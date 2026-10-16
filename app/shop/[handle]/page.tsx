@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import BuyBox from "@/components/shop/BuyBox";
 import { Breadcrumbs, JsonLd, Wrap } from "@/components/site/ui";
-import { categories, formatRand, getProduct, getProducts, shopImg } from "@/lib/shop";
+import ShopImage from "@/components/shop/ShopImage";
+import { categories, formatRand, getProduct, getProducts } from "@/lib/shop";
 import { metaDescription } from "@/lib/content";
 import { productTitle } from "@/lib/seo";
 import { serviceForProduct } from "@/lib/services";
@@ -113,7 +113,9 @@ export default async function ProductPage({ params }: Props) {
                 <li key={r.handle}>
                   <Link href={`/shop/${r.handle}`} className="group block">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-canvas-2">
-                      {r.images[0] && <Image src={shopImg(r.images[0].src, 700)} alt={r.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />}
+                      {r.images[0] && (
+                        <ShopImage aspect={4 / 3} src={r.images[0].src} alt={r.images[0].alt} fill sizes="(min-width: 1280px) 400px, (min-width: 640px) 31vw, 92vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                      )}
                     </div>
                     <p className="mt-3 font-medium tracking-tight group-hover:text-accent">{r.title}</p>
                   </Link>

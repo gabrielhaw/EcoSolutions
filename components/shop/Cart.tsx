@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
 import { buyable, reconcile, type CartLine, type CartNotice, type LiveLookup } from "@/lib/cart-check";
-import { checkoutUrl, formatRand, SHOP_ORIGIN, shopImg } from "@/lib/shop";
+import { checkoutUrl, formatRand, SHOP_ORIGIN } from "@/lib/shop";
+import ShopImage from "./ShopImage";
 
 export type { CartLine };
 
@@ -317,7 +317,7 @@ function CartDrawer() {
               {lines.map((l) => (
                 <li key={l.id} className={`flex gap-4 py-5 ${l.soldOut ? "opacity-70" : ""}`}>
                   <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-canvas-2">
-                    {l.image && <Image src={shopImg(l.image, 200)} alt="" fill unoptimized className={`object-cover ${l.soldOut ? "grayscale" : ""}`} />}
+                    {l.image && <ShopImage aspect={1} src={l.image} alt="" fill sizes="80px" className={`object-cover ${l.soldOut ? "grayscale" : ""}`} />}
                   </div>
                   <div className="flex min-w-0 flex-1 flex-col">
                     <Link href={`/shop/${l.handle}`} className="font-medium leading-snug hover:text-accent">

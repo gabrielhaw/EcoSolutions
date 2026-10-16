@@ -8,7 +8,8 @@ import ProblemPicker, { type Problem } from "@/components/site/ProblemPicker";
 import Rail from "@/components/site/Rail";
 import { ButtonLink, CtaBand, Wrap } from "@/components/site/ui";
 import { childPages, news, plainText } from "@/lib/content";
-import { formatRand, getProducts, shopImg } from "@/lib/shop";
+import ShopImage from "@/components/shop/ShopImage";
+import { formatRand, getProducts } from "@/lib/shop";
 import { keyServices, site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -325,7 +326,13 @@ export default async function HomePage() {
                 <Link href={`/shop/${p.handle}`} className="group block">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-canvas-2">
                     {p.images[0] && (
-<Image src={shopImg(p.images[0].src, 700)} alt={p.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />
+                      <ShopImage aspect={4 / 3}
+                        src={p.images[0].src}
+                        alt={p.images[0].alt}
+                        fill
+                        sizes="(min-width: 1024px) 240px, (min-width: 640px) 31vw, (min-width: 480px) 48vw, 62vw"
+                        className="object-cover transition duration-700 group-hover:scale-105"
+                      />
                     )}
                   </div>
                   <div className="mt-4 flex items-start justify-between gap-3">

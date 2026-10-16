@@ -166,8 +166,13 @@ export async function getProduct(handle: string) {
 export const formatRand = (n: number) =>
   `R${n.toLocaleString("en-ZA", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }).replace(/ /g, " ")}`;
 
-/** Ask Shopify's CDN for a resized copy (it also serves WebP/AVIF), instead of re-processing large PNGs ourselves. */
-export const shopImg = (src: string, width: number) => `${src}${src.includes("?") ? "&" : "?"}width=${width}`;
+/**
+ * Ask Shopify's CDN for a resized copy (it also serves WebP/AVIF), instead of re-processing large PNGs ourselves.
+ * With a height it crops to that shape around the centre, the same crop `object-cover` would make, without
+ * downloading the cropped-off pixels.
+ */
+export const shopImg = (src: string, width: number, height?: number) =>
+  `${src}${src.includes("?") ? "&" : "?"}width=${width}${height ? `&height=${height}&crop=center` : ""}`;
 
 /** Shopify cart permalink: sends the whole cart straight to checkout. */
 export const checkoutUrl = (lines: { id: number; qty: number }[]) =>
