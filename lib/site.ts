@@ -264,8 +264,8 @@ export const partners: {
   name: string;
   logo?: { src: string; width: number; height: number };
   /**
-   * What the relationship actually was, as the site's own pages record it. Only organisations
-   * with one are shown on the home page; the rest need confirming before they're presented.
+   * What the relationship was, where the site's own pages record it. All organisations in this
+   * list were confirmed as worked with by Gabriel (16 Oct 2026); the others have no write-up yet.
    */
   relation?: string;
 }[] = [

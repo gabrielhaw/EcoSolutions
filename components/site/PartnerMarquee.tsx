@@ -12,13 +12,12 @@ function logoSize({ width, height }: { width: number; height: number }) {
 }
 
 /**
- * Endless strip of partner logos. Only partners with a recorded relationship
- * (`relation` in lib/site.ts) are shown, so none appears without one. Pure
- * CSS; pauses on hover and stands still for reduced motion. Logos are
- * greyscale until hovered; inverted in dark mode.
+ * Endless strip of the logos of organisations we've worked with or been
+ * recognised by (lib/site.ts). Pure CSS; pauses on hover and stands still for
+ * reduced motion. Logos are greyscale until hovered; inverted in dark mode.
  */
 export default function PartnerMarquee() {
-  const shown = partners.filter((p) => p.logo && p.relation);
+  const shown = partners.filter((p) => p.logo);
   // Few logos fill less than a screen width, so repeat the list within each half of the loop.
   const reps = Math.max(1, Math.ceil(8 / shown.length));
   const list = Array.from({ length: reps }, () => shown).flat();
@@ -40,7 +39,7 @@ export default function PartnerMarquee() {
   return (
     <section aria-labelledby="partners-heading" className="border-y border-line py-7">
       <h2 id="partners-heading" className="label mb-5 text-center text-fg-3">
-        Projects and recognition
+        Worked with &amp; recognised by
       </h2>
       <div className="mask-x group flex overflow-hidden">
         <div className="flex animate-marquee group-hover:[animation-play-state:paused]">
