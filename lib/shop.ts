@@ -1,4 +1,5 @@
 import snapshot from "@/content/shop-snapshot.json";
+import type { LiveVariant } from "@/lib/cart-check";
 import { sanitizeProductHtml } from "@/lib/sanitize";
 
 /**
@@ -100,6 +101,36 @@ export async function getProducts(): Promise<Product[]> {
     // Shopify unreachable at build time: fall back to the saved snapshot.
   }
   return raw.filter((p) => !HIDDEN.has(p.handle)).map(normalise);
+}
+
+/**
+ * Every variant as Shopify has it at this moment, for checking a saved cart.
+ * Bypasses the hourly cache and never falls back to the snapshot: if Shopify
+ * can't be reached or answers oddly this throws, so stale data is never
+ * passed off as current stock or pricing.
+ */
+export async function fetchLiveVariants(): Promise<Map<number, LiveVariant>> {
+  const live = new Map<number, LiveVariant>();
+  for (let page = 1; page <= 20; page++) {
+    const res = await fetch(`${SHOP_ORIGIN}/products.json?limit=250&page=${page}`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) throw new Error(`Shopify products.json answered ${res.status}`);
+    const { products } = (await res.json()) as { products?: RawProduct[] };
+    if (!Array.isArray(products)) throw new Error("Shopify products.json had no products list");
+    for (const p of products) {
+      for (const v of p.variants) {
+        live.set(v.id, { id: v.id, handle: p.handle, title: p.title, variant: v.title, price: Number(v.price), available: v.available });
+      }
+    }
+    if (products.length < 250) {
+      // An empty catalogue is far more likely a glitch than a real store; don't empty carts over it.
+      if (live.size === 0) throw new Error("Shopify products.json was empty");
+      return live;
+    }
+  }
+  throw new Error("Shopify catalogue larger than expected");
 }
 
 export async function getProduct(handle: string) {

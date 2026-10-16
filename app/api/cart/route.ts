@@ -1,0 +1,25 @@
+import type { LiveLookup } from "@/lib/cart-check";
+import { fetchLiveVariants } from "@/lib/shop";
+
+const noStore = { "Cache-Control": "no-store" };
+
+/**
+ * The cart drawer posts its saved variant ids here when it opens and right
+ * before checkout; the answer comes from Shopify at that moment (see
+ * components/shop/Cart.tsx). 502 means Shopify couldn't be checked.
+ */
+export async function POST(req: Request) {
+  const body = (await req.json().catch(() => null)) as { ids?: unknown } | null;
+  const ids = body?.ids;
+  if (!Array.isArray(ids) || ids.length === 0 || ids.length > 100 || !ids.every((id) => Number.isSafeInteger(id) && id > 0)) {
+    return Response.json({ error: "Expected { ids: number[] }" }, { status: 400, headers: noStore });
+  }
+  try {
+    const live = await fetchLiveVariants();
+    const variants: LiveLookup = Object.fromEntries((ids as number[]).map((id) => [id, live.get(id) ?? null]));
+    return Response.json({ variants }, { headers: noStore });
+  } catch (err) {
+    console.error("[cart check]", err);
+    return Response.json({ error: "Could not reach Shopify" }, { status: 502, headers: noStore });
+  }
+}
