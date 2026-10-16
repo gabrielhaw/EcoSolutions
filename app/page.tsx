@@ -74,14 +74,13 @@ const steps = [
 ];
 
 /**
- * Testimonials shown in full on the home page, with what each was about. Four fill the column
- * beside the results; Cheryl Siewierski's (bat and owl boxes) is on /testimonials with the rest.
+ * Testimonials shown in full on the home page, with what each was about: three, so the column
+ * ends level with the results beside it. The rest are on /testimonials.
  */
 const testimonialJobs: Record<string, string> = {
   "kiran-reddy": "Bat exclusion",
   "ian-hall-in-emmarentia": "Owl box installation",
   "beryl-scott-payet-steyn-city": "Owl boxes and bat houses",
-  "jaxon-rice-in-westdene": "Owl box and barbet logs",
 };
 
 const fmtDate = (d: string | null) => (d ? new Date(d).toLocaleDateString("en-ZA", { day: "numeric", month: "short", year: "numeric" }) : "");
@@ -253,7 +252,8 @@ export default async function HomePage() {
               </div>
             </dl>
           </div>
-          <div className="lg:col-span-6 lg:border-l lg:border-line lg:pl-10">
+          {/* Stretches to the results column; the link sits at the bottom so both columns end level. */}
+          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-between lg:border-l lg:border-line lg:pl-10">
             <ul className="space-y-7">
               {quotes.map((q) => (
                 <li key={q.who}>
