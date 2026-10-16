@@ -7,9 +7,10 @@ import { useEffect, useRef } from "react";
  * Silent looping background video over its poster photo.
  * - iOS Safari only autoplays when `muted` is in the HTML, which React doesn't
  *   reliably render, so we set it ourselves and nudge playback.
- * - The video stays invisible until it is actually playing, so where autoplay
- *   is blocked (e.g. iPhone Low Power Mode) visitors see the still photo,
- *   never a play button.
+ * - The video stays invisible until it is actually playing, and is removed
+ *   from view if the browser refuses to play it (e.g. iPhone Low Power Mode)
+ *   or the visitor prefers reduced motion, so they see the still photo, never
+ *   a play button.
  */
 export default function BackgroundVideo({ poster, mobile, desktop, className = "" }: { poster: string; mobile: string; desktop: string; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -20,11 +21,21 @@ export default function BackgroundVideo({ poster, mobile, desktop, className = "
     // Autoplay can start before React hydrates (so a React onPlaying handler
     // would miss it); listen natively and check the current state too.
     const show = () => v.classList.replace("opacity-0", "opacity-100");
+    // Where playback is refused (Low Power Mode, in-app browsers, data saver)
+    // take the element out entirely, so no browser can draw its play button.
+    const hide = () => {
+      v.pause();
+      v.hidden = true;
+    };
     v.addEventListener("playing", show);
     v.muted = true;
     v.setAttribute("muted", "");
-    if (!v.paused && v.readyState > 2) show();
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) v.play().then(show, () => {});
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) hide();
+    else {
+      if (!v.paused && v.readyState > 2) show();
+      // AbortError just means a load interrupted play(); autoplay carries on.
+      v.play().then(show, (e: DOMException) => e.name !== "AbortError" && hide());
+    }
     return () => v.removeEventListener("playing", show);
   }, []);
 
