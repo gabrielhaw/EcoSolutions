@@ -4,7 +4,9 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import BuyBox from "@/components/shop/BuyBox";
 import { Breadcrumbs, JsonLd, Wrap } from "@/components/site/ui";
-import { categories, getProduct, getProducts, shopImg } from "@/lib/shop";
+import { categories, formatRand, getProduct, getProducts, shopImg } from "@/lib/shop";
+import { metaDescription } from "@/lib/content";
+import { productTitle } from "@/lib/seo";
 import { serviceForProduct } from "@/lib/services";
 import { HANDLE_ALIASES } from "@/lib/shop-links";
 import { site } from "@/lib/site";
@@ -20,9 +22,11 @@ type Props = { params: Promise<{ handle: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = await getProduct((await params).handle);
   if (!p) return {};
+  // Price first, from the store, so it survives Google's snippet cut-off.
+  const price = p.priceFrom > 0 ? `${p.variants.length > 1 ? "From " : ""}${formatRand(p.priceFrom)}. ` : "";
   return {
-    title: p.title,
-    description: p.summary.slice(0, 158),
+    title: productTitle(p.handle, p.title),
+    description: metaDescription(`${price}${p.summary}`),
     alternates: { canonical: `/shop/${p.handle}` },
     openGraph: { images: p.images[0] ? [{ url: p.images[0].src }] : undefined },
   };

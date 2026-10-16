@@ -6,7 +6,8 @@ import { categories, getProducts, type Category } from "@/lib/shop";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Shop Owl Boxes, Bat Houses & Services",
+  // Search Console: "owl boxes south africa", "owl for sale", "bat houses for sale".
+  title: "Owl Boxes & Bat Houses for Sale in South Africa",
   description:
     "Buy EcoSolutions owl boxes, bat houses, annual services and consultations online. Made and installed in Gauteng. Poison-free pest control that lasts.",
   alternates: { canonical: "/shop" },

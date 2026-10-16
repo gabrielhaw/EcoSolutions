@@ -317,3 +317,35 @@ export function articleJsonLd(a: { path: string; title: string; description: str
     publisher: { "@id": ORG_ID },
   };
 }
+
+/**
+ * Product page titles, worded the way people search for them (Google Search
+ * Console for the Shopify store, 16 months to Oct 2026). The " | EcoSolutions"
+ * suffix is added by the layout. Products not listed get "<title> for Sale | South Africa".
+ */
+export const productTitles: Record<string, string> = {
+  // "spotted eagle owl box", "owl for sale", "owl price south africa", "owl box south africa"
+  "spotted-eagle-owl-box": "Spotted Eagle Owl Box for Sale | South Africa",
+  "barn-owl-box": "Barn Owl Box for Sale | South Africa",
+  // "bush baby nesting box", "bush baby box"
+  "bush-baby-box": "Bush Baby Nesting Box for Sale | South Africa",
+  // "bat box", "bat house", "bat houses for sale", "bat boxes south africa"
+  "bat-box": "Slimline Bat Box for Sale | South Africa",
+  // "bat hotel", "bat hotels"
+  "bat-hotel": "Nursery Bat Hotel for Sale | South Africa",
+  "rocket-bat-box": "Rocket Bat Hotel for Sale | South Africa",
+  // "bat removal", "bat removal johannesburg", "bats in roof"
+  "bat-exclusion": "Bat Removal Site Visit | Bats in Your Roof?",
+  // "rodent control johannesburg"
+  "rodent-consultation": "Rodent Control Consultation | Johannesburg",
+  "annual-owl-box-service-1": "Annual Owl Box Service | Gauteng",
+  "annual-owl-box-service": "Annual Bat House Service | Gauteng",
+  "owl-box-project-package-installation-5-year-service-plan": "Owl Box Installation + 5-Year Service Plan",
+  // "how to build an owl box", "owl box plans"
+  "build-it-kit-diy-owl-home": "DIY Owl Box Kit | Build Your Own Owl Box",
+  "bats-and-stables": "Bat Bank for Farms & Stables | Bat Houses",
+};
+
+export function productTitle(handle: string, title: string) {
+  return productTitles[handle] ?? `${title} for Sale | South Africa`;
+}
