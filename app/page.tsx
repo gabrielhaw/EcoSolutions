@@ -120,29 +120,31 @@ export default async function HomePage() {
     <>
       {/* Hero: bats leaving a bat house at dusk */}
       <div className="px-2 pt-2 sm:px-3 sm:pt-3">
-        <section data-theme="dark" className="relative isolate flex min-h-[calc(100svh-84px)] items-end overflow-hidden rounded-[1.75rem] bg-[#1d2a33]">
+        <section data-theme="dark" className="relative isolate flex min-h-[calc(100svh-84px)] overflow-hidden rounded-[1.75rem] bg-[#1d2a33]">
           <BackgroundVideo className="absolute inset-0 -z-10 size-full object-cover" poster="/images/hero-poster.jpg" mobile="/media/video/hero-540.mp4" desktop="/media/video/hero-1080.mp4" />
-          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/10 to-black/45" />
 
-          <Wrap className="relative z-10 pb-10 pt-32 sm:pb-14">
-            <p className="label animate-rise text-accent">Poison-free pest control · Johannesburg</p>
-            <h1 className="display mt-5 max-w-4xl animate-rise text-display-xl [animation-delay:120ms]">
-              Pest control that works the <span className="text-accent">night shift.</span>
-            </h1>
-            <div className="mt-8 grid animate-rise items-end gap-6 [animation-delay:260ms] lg:grid-cols-12">
-              <p className="max-w-lg text-[1.1rem] font-medium leading-relaxed text-fg lg:col-span-7">
+          {/* Message top-left on the video itself (not the page column), calls to action bottom-right. */}
+          <div className="relative z-10 flex min-h-[inherit] w-full flex-col justify-between gap-10 px-5 pb-8 pt-8 sm:px-8 sm:pb-12 sm:pt-12 lg:px-12 lg:pt-14">
+            <div>
+              <p className="label animate-rise text-accent">Poison-free pest control · Johannesburg</p>
+              <h1 className="display mt-5 max-w-4xl animate-rise text-display-xl [animation-delay:120ms]">
+                Pest control that works the <span className="text-accent">night shift.</span>
+              </h1>
+              <p className="mt-6 max-w-lg animate-rise text-[1.1rem] font-medium leading-relaxed text-fg [animation-delay:260ms]">
                 Bats and owls hunt pests every night. We give them a home, seal rodents out, and remove bats from roofs humanely.
               </p>
-              <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end" data-cta-location="home_hero">
-                <ButtonLink href="/request-a-callback" cta="request_a_callback">
-                  Request a callback
-                </ButtonLink>
-                <ButtonLink href="/shop" variant="outline-light" className="bg-white/10 backdrop-blur-md">
-                  Shop owl &amp; bat boxes
-                </ButtonLink>
-              </div>
             </div>
-          </Wrap>
+            {/* Right inset keeps the buttons clear of the floating "Ask us" chat button. */}
+            <div className="flex animate-rise flex-wrap gap-3 [animation-delay:380ms] lg:justify-end lg:pr-16" data-cta-location="home_hero">
+              <ButtonLink href="/request-a-callback" cta="request_a_callback">
+                Request a callback
+              </ButtonLink>
+              <ButtonLink href="/shop" variant="outline-light" className="bg-white/10 backdrop-blur-md">
+                Shop owl &amp; bat boxes
+              </ButtonLink>
+            </div>
+          </div>
         </section>
       </div>
 
@@ -323,7 +325,7 @@ export default async function HomePage() {
                 <Link href={`/shop/${p.handle}`} className="group block">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-canvas-2">
                     {p.images[0] && (
-                      <Image src={shopImg(p.images[0].src, 700)} alt={p.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />
+<Image src={shopImg(p.images[0].src, 700)} alt={p.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />
                     )}
                   </div>
                   <div className="mt-4 flex items-start justify-between gap-3">
