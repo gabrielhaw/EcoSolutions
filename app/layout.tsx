@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["400", "500"], varia
 // Dev only: report browser errors (and whether the page came alive) to the dev server's terminal.
 const devLogScript = `(function(){function s(k,m){try{navigator.sendBeacon("/api/dev-log",JSON.stringify({k:k,m:String(m).slice(0,800),u:location.href,w:innerWidth}))}catch(e){}}addEventListener("error",function(e){s("error",(e.message||"")+" @ "+(e.filename||(e.target&&(e.target.src||e.target.href))||"")+":"+(e.lineno||""))},true);addEventListener("unhandledrejection",function(e){s("rejection",e.reason&&(e.reason.stack||e.reason))});var ce=console.error;console.error=function(){s("console",[].map.call(arguments,String).join(" "));return ce.apply(console,arguments)};addEventListener("load",function(){setTimeout(function(){s("status",(document.querySelector("[data-hydrated]")?"hydrated":"NOT hydrated")+" text="+document.body.innerText.length)},6000)})})()`;
 const themeScript = `(function(){var d=document.documentElement,t;try{t=sessionStorage.getItem("theme")}catch(e){}if(t!=="light"&&t!=="dark"){var h=new Date().getHours();t=h>=18||h<6?"dark":"light"}d.dataset.theme=t;d.classList.add("js")})()`;
+// Background videos start playing from the HTML (autoplay muted) long before React runs; mark <html> as soon
+// one does, so CSS can show it straight away. BackgroundVideo takes over (and clears the mark) once hydrated.
+const bgVideoScript = `document.addEventListener("playing",function(e){var v=e.target;if(v&&v.classList&&v.classList.contains("bg-video"))document.documentElement.setAttribute("data-bg-playing","")},true)`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -53,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Before paint: pick light/dark (a choice made this visit, else by time of day) and mark JS as available. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bgVideoScript }} />
         {process.env.NODE_ENV === "development" && <script dangerouslySetInnerHTML={{ __html: devLogScript }} />}
       </head>
       <body>

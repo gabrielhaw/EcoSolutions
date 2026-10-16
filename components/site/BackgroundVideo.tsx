@@ -18,15 +18,21 @@ export default function BackgroundVideo({ poster, mobile, desktop, className = "
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    // Autoplay can start before React hydrates (so a React onPlaying handler
-    // would miss it); listen natively and check the current state too.
-    const show = () => v.classList.replace("opacity-0", "opacity-100");
+    // The pre-hydration mark (app/layout.tsx) only bridges the gap until this runs; drop it so it can't carry
+    // over to the next page's video.
+    const unmark = () => document.documentElement.removeAttribute("data-bg-playing");
+    const show = () => {
+      v.classList.replace("opacity-0", "opacity-100");
+      unmark();
+    };
     // Where playback is refused (Low Power Mode, in-app browsers, data saver)
     // take the element out entirely, so no browser can draw its play button.
     const hide = () => {
       v.pause();
       v.hidden = true;
     };
+    // Autoplay can start before React hydrates (so a React onPlaying handler
+    // would miss it); listen natively and check the current state too.
     v.addEventListener("playing", show);
     v.muted = true;
     v.setAttribute("muted", "");
@@ -36,7 +42,10 @@ export default function BackgroundVideo({ poster, mobile, desktop, className = "
       // AbortError just means a load interrupted play(); autoplay carries on.
       v.play().then(show, (e: DOMException) => e.name !== "AbortError" && hide());
     }
-    return () => v.removeEventListener("playing", show);
+    return () => {
+      v.removeEventListener("playing", show);
+      unmark();
+    };
   }, []);
 
   return (

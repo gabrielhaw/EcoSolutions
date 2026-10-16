@@ -159,6 +159,19 @@ body {
   -webkit-appearance: none;
 }
 
+/*
+ * Show a background video as soon as it is actually playing, without waiting
+ * for the page's JavaScript (BackgroundVideo does the same once it runs, for
+ * browsers without :playing). A video that never plays stays hidden, so the
+ * poster shows and no play button can appear. Never for reduced motion.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .bg-video:playing,
+  [data-bg-playing] .bg-video {
+    opacity: 1;
+  }
+}
+
 /* Soft edge fade for the partner marquee */
 .mask-x {
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
