@@ -8,11 +8,7 @@ import ProblemPicker, { type Problem } from "@/components/site/ProblemPicker";
 import Rail from "@/components/site/Rail";
 import { ButtonLink, CtaBand, Wrap } from "@/components/site/ui";
 import { childPages, news, plainText } from "@/lib/content";
-import ShopImage from "@/components/shop/ShopImage";
-import { formatRand, getProducts } from "@/lib/shop";
 import { keyServices, site } from "@/lib/site";
-
-export const revalidate = 3600;
 
 export const metadata: Metadata = {
   description:
@@ -80,22 +76,6 @@ const steps = [
   },
 ];
 
-// Shop products featured on the home page rail, in this order (live prices from Shopify).
-const featured = [
-  "spotted-eagle-owl-box",
-  // The store's second most-clicked product in Google Search (16 months to Oct 2026).
-  "bush-baby-box",
-  "barn-owl-box",
-  "owl-box-project-package-installation-5-year-service-plan",
-  "bat-box",
-  "bat-hotel",
-  "rocket-bat-box",
-  "bats-and-stables",
-  "annual-owl-box-service-1",
-  "build-it-kit-diy-owl-home",
-  "junior-scientist-kit",
-];
-
 const whyNotPoison = [
   { href: "/news/41-children-hospitalised-after-rat-poison-consumption", label: "41 children hospitalised after rat poison consumption" },
   { href: "/news/a-new-breed-of-2018super-rodents2019-resistant-to-poison-could-be-dangerous-to-humans", label: "Poison-resistant ‘super rodents’ are spreading" },
@@ -110,9 +90,7 @@ function testimonials() {
 
 const newsHref = (n: (typeof news)[number]) => (n.kind === "link" && n.externalUrl ? n.externalUrl : n.path);
 
-export default async function HomePage() {
-  const shop = await getProducts();
-  const rail = featured.map((h) => shop.find((p) => p.handle === h)).filter((p) => p !== undefined);
+export default function HomePage() {
   const quotes = testimonials();
   const latest = news.slice(0, 8);
   const delay = (i: number, step = 80) => ({ "--d": `${i * step}ms` }) as React.CSSProperties;
@@ -285,10 +263,6 @@ export default async function HomePage() {
             <blockquote className="display mt-6 text-[clamp(1.6rem,1.2rem+1.6vw,2.5rem)] leading-[1.2]">
               <span className="text-accent">“</span>Together we can make this a better world for all, save some of the amazing animals with whom we share this planet. What you are doing is amazing &amp; I truly look forward to working with you.”
             </blockquote>
-            <p className="mt-6 flex items-center gap-2 text-[15px] text-fg-3">
-              Handwritten note to Jonathan Haw
-              <span className="text-accent transition-transform group-hover:translate-x-1">→ see the letter</span>
-            </p>
           </Link>
           <ul className="space-y-8 lg:col-span-5 lg:border-l lg:border-line lg:pl-10">
             {quotes.slice(0, 3).map((q, i) => (
@@ -305,47 +279,6 @@ export default async function HomePage() {
               </Link>
             </li>
           </ul>
-        </Wrap>
-      </section>
-
-      {/* Shop */}
-      <section className="py-14 sm:py-20">
-        <Wrap>
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6" data-reveal>
-            <div>
-              <p className="label text-fg-3">Made, installed &amp; serviced by us</p>
-              <h2 className="display mt-4 text-display-l">Homes for the pest controllers</h2>
-            </div>
-            <ButtonLink href="/shop" variant="outline-light">
-              Visit the shop
-            </ButtonLink>
-          </div>
-          <Rail label="Featured products">
-            {rail.map((p) => (
-              <li key={p.handle} className="w-[64%] shrink-0 snap-start min-[480px]:w-[calc(50%-10px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)]">
-                <Link href={`/shop/${p.handle}`} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-canvas-2">
-                    {p.images[0] && (
-                      <ShopImage aspect={4 / 3}
-                        src={p.images[0].src}
-                        alt={p.images[0].alt}
-                        fill
-                        sizes="(min-width: 1024px) 240px, (min-width: 640px) 31vw, (min-width: 480px) 48vw, 62vw"
-                        className="object-cover transition duration-700 group-hover:scale-105"
-                      />
-                    )}
-                  </div>
-                  <div className="mt-4 flex items-start justify-between gap-3">
-                    <span className="line-clamp-2 text-[15px] font-medium leading-snug tracking-tight group-hover:text-accent">{p.title}</span>
-                    <span className="shrink-0 text-[13.5px] tabular-nums text-fg-2">
-                      {p.variants.length > 1 && <span className="text-fg-3">from </span>}
-                      {formatRand(p.priceFrom)}
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </Rail>
         </Wrap>
       </section>
 
