@@ -20,7 +20,7 @@ About 470 visible words (guideline 500–700; no filler added). Mobile reading o
 | # | Section | Purpose | Words (approx.) | Notes |
 |---|---|---|---|---|
 | 1 | Hero | What we do, where, next step | 37 + heading | Heading kept; text names the services and coverage so it works without the video. Primary **Contact our team** → `/contact-us`; secondary **Shop owl & bat boxes** → `/shop`. Video fallbacks and chat clearance unchanged. |
-| 2 | Partner banner | Credibility, compact | 20 | Moving banner kept (requested), captioned with each relationship; only organisations with a recorded relationship appear. Stands still for reduced motion. |
+| 2 | Partner banner | Credibility, compact | 3 | Moving banner kept (requested), logos only (captions removed at your request); only organisations with a recorded relationship appear, so none is shown without one. Stands still for reduced motion. |
 | 3 | How can we help? | Route to the right service | 110 | Four cards: Bats in your roof · Rats or mice · Owl boxes · Bat houses (13–19 words each). Two small routes: Farms and orchards (two links) · Already have an owl box? (servicing, empty box). Replaces "Most requested" and "What's the problem?". |
 | 4 | Our approach | Why no poison; how any job works | 100 | Poison argument in two sentences; three steps true for every service (assess; recommend and do the work; explain what comes next). Link to `/non-toxic-pest-control`. |
 | 5 | Results and experiences | Evidence in context | 110 | Live occupied-box map count with its definition and start year; Irene labelled as a case study; two testimonial excerpts (wording unchanged, with the job). |

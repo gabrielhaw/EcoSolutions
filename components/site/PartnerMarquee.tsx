@@ -12,10 +12,10 @@ function logoSize({ width, height }: { width: number; height: number }) {
 }
 
 /**
- * Endless strip of partner logos, each captioned with what the relationship
- * was so none reads as an endorsement. Only partners with a recorded relation
- * (lib/site.ts) are shown. Pure CSS; pauses on hover and stands still for
- * reduced motion. Logos are greyscale until hovered; inverted in dark mode.
+ * Endless strip of partner logos. Only partners with a recorded relationship
+ * (`relation` in lib/site.ts) are shown, so none appears without one. Pure
+ * CSS; pauses on hover and stands still for reduced motion. Logos are
+ * greyscale until hovered; inverted in dark mode.
  */
 export default function PartnerMarquee() {
   const shown = partners.filter((p) => p.logo && p.relation);
@@ -23,18 +23,15 @@ export default function PartnerMarquee() {
   const reps = Math.max(1, Math.ceil(8 / shown.length));
   const list = Array.from({ length: reps }, () => shown).flat();
   const row = (hidden: boolean) => (
-    <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-start gap-14 pr-14">
+    <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-14 pr-14">
       {list.map((p, i) => (
-        <li key={`${p.name}-${i}`} aria-hidden={(!hidden && i >= shown.length) || undefined} className="flex w-44 flex-col items-center gap-2 text-center">
-          <span className="flex h-12 items-center">
-            <Image
-              src={p.logo!.src}
-              alt={hidden || i >= shown.length ? "" : p.name}
-              {...logoSize(p.logo!)}
-              className="max-w-none opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 dark:invert dark:hover:grayscale"
-            />
-          </span>
-          <span className="text-[12.5px] leading-snug text-fg-3">{p.relation}</span>
+        <li key={`${p.name}-${i}`} aria-hidden={(!hidden && i >= shown.length) || undefined} className="flex items-center">
+          <Image
+            src={p.logo!.src}
+            alt={hidden || i >= shown.length ? "" : p.name}
+            {...logoSize(p.logo!)}
+            className="max-w-none opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 dark:invert dark:hover:grayscale"
+          />
         </li>
       ))}
     </ul>
