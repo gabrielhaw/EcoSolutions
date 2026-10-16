@@ -1,6 +1,7 @@
 import snapshot from "@/content/shop-snapshot.json";
 import type { LiveVariant } from "@/lib/cart-check";
 import { sanitizeProductHtml } from "@/lib/sanitize";
+import { createLimiter } from "@/lib/rate-limit";
 import { HANDLE_ALIASES, localShopHref } from "@/lib/shop-links";
 
 /**
@@ -97,6 +98,18 @@ export async function getProducts(): Promise<Product[]> {
 
 let liveRequest: Promise<Map<number, LiveVariant>> | null = null;
 
+/** Site-wide ceiling on Shopify catalogue reads, whatever mix of visitors asks. */
+const shopifyReads = createLimiter({ limit: 120, windowMs: 60_000 });
+/** Longest a whole catalogue read (every page) may take before the cart shows its retry message. */
+const LIVE_DEADLINE_MS = 10_000;
+
+/** Thrown when the site-wide read ceiling is reached; /api/cart answers 503 with Retry-After. */
+export class ShopifyBusyError extends Error {
+  constructor(readonly retryAfterSeconds: number) {
+    super("Shopify read limit reached");
+  }
+}
+
 /**
  * Cart checks that arrive while a fetch is already running share it, so a burst
  * of visitors (or a bot) costs Shopify one catalogue read, not one each. Nothing
@@ -104,9 +117,13 @@ let liveRequest: Promise<Map<number, LiveVariant>> | null = null;
  * fetched when it arrived, never a stored one.
  */
 export function fetchLiveVariants(): Promise<Map<number, LiveVariant>> {
-  liveRequest ??= loadLiveVariants().finally(() => {
-    liveRequest = null;
-  });
+  if (!liveRequest) {
+    const slot = shopifyReads("shopify");
+    if (!slot.ok) return Promise.reject(new ShopifyBusyError(slot.retryAfterSeconds));
+    liveRequest = loadLiveVariants().finally(() => {
+      liveRequest = null;
+    });
+  }
   return liveRequest;
 }
 
@@ -118,10 +135,12 @@ export function fetchLiveVariants(): Promise<Map<number, LiveVariant>> {
  */
 async function loadLiveVariants(): Promise<Map<number, LiveVariant>> {
   const live = new Map<number, LiveVariant>();
+  // One deadline for the whole read, not per page, so a slow Shopify can't hold a request for minutes.
+  const deadline = AbortSignal.timeout(LIVE_DEADLINE_MS);
   for (let page = 1; page <= 20; page++) {
     const res = await fetch(`${SHOP_ORIGIN}/products.json?limit=250&page=${page}`, {
       cache: "no-store",
-      signal: AbortSignal.timeout(8000),
+      signal: deadline,
     });
     if (!res.ok) throw new Error(`Shopify products.json answered ${res.status}`);
     const { products } = (await res.json()) as { products?: RawProduct[] };
