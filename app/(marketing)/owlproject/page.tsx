@@ -3,6 +3,7 @@
 import Container from "@/components/ui/Container";
 import BackgroundVideo from "@/components/site/BackgroundVideo";
 import Image from "next/image";
+import Link from "next/link";
 import content from "@/content/owlproject-education.json";
 import { useState, useEffect } from "react";
 
@@ -130,7 +131,7 @@ export default function OwlProjectPage() {
               ))}
             </div>
 
-            <a
+            <Link
               href="/contact-us"
               className="inline-flex items-center gap-3 rounded-full bg-accent px-7 py-3.5 font-medium text-canvas transition-colors hover:bg-accent-2"
             >
@@ -138,7 +139,7 @@ export default function OwlProjectPage() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </a>
+            </Link>
           </div>
         </Container>
 
