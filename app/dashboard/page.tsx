@@ -2,22 +2,25 @@
 
 import { useRef, useState } from "react";
 import Container from "@/components/ui/Container";
-import MetricCard from "@/components/dashboard/MetricCard";
 import BarChartCard from "@/components/dashboard/BarChartCard";
-import LineChartCard from "@/components/dashboard/LineChartCard";
-import FilterPanel from "@/components/dashboard/FilterPanel";
+import FilterPanel, { type DashboardFilters } from "@/components/dashboard/FilterPanel";
+
+/** One row of a chart's data, as stored in public/data/*-analytics.json. */
+type Row = Record<string, string | number>;
+type BoxTypeRow = { type: string; count: number; occupied: number; occupancyRate: number };
+type LocationRow = Row & { occupancyRate: number };
 
 interface DashboardData {
   totalBoxes: number;
   occupiedBoxes: number;
   occupancyRate: number;
   lastUpdated: string;
-  boxTypeDistribution: any[];
-  occupancyByWaterDistance: any[];
-  occupancyByNeighborDistance: any[];
-  occupancyByVegetation: any[];
-  featureImportance: any[];
-  topLocations: any[];
+  boxTypeDistribution: BoxTypeRow[];
+  occupancyByWaterDistance: Row[];
+  occupancyByNeighborDistance: Row[];
+  occupancyByVegetation: Row[];
+  featureImportance: Row[];
+  topLocations: LocationRow[];
 }
 
 export default function DashboardPage() {
@@ -54,11 +57,11 @@ export default function DashboardPage() {
       });
   };
 
-  const handleFilterChange = (filters: any) => {
+  const handleFilterChange = (filters: DashboardFilters) => {
     setActiveFilters(filters);
     if (!data) return;
 
-    let filtered = { ...data };
+    const filtered = { ...data };
 
     // Filter by box type - affects distribution and water/neighbor distance charts
     if (filters.boxType) {
@@ -268,7 +271,7 @@ export default function DashboardPage() {
           
           <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-neutral-100">
             <p className="text-sm font-medium text-neutral-600 mb-1">Best Factor</p>
-            <p className="text-3xl font-bold text-neutral-900 mb-1 truncate">{filteredData.featureImportance[0]?.feature.replace('Distance to ', '') || 'Water'}</p>
+            <p className="text-3xl font-bold text-neutral-900 mb-1 truncate">{String(filteredData.featureImportance[0]?.feature ?? '').replace('Distance to ', '') || 'Water'}</p>
             <p className="text-xs text-neutral-500">{filteredData.featureImportance[0]?.importance || 35}% influence</p>
           </div>
           

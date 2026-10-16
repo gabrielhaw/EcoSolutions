@@ -16,7 +16,7 @@ function QuoteBlock({ quote, author }: QuoteBlockProps) {
   return (
     <blockquote className="my-12 pl-8 border-l-2 border-accent">
       <p className="text-xl md:text-2xl italic text-fg-2 leading-relaxed mb-4">
-        "{quote}"
+        “{quote}”
       </p>
       <footer className="text-sm text-fg-3 font-medium">
         {author}
@@ -35,7 +35,7 @@ function TestimonialCard({ quote, author, location }: TestimonialCardProps) {
   return (
     <div className="border border-line rounded-lg p-8 hover:border-accent transition-colors">
       <p className="text-lg text-fg-2 leading-relaxed mb-6 italic">
-        "{quote}"
+        “{quote}”
       </p>
       <div className="text-sm text-fg-3">
         <span className="font-medium text-fg">— {author}</span>
@@ -110,7 +110,7 @@ export default function InternationalPage() {
             />
 
             <p>
-              The South African students performed a song titled "Help me save an owl" and presented 
+              The South African students performed a song titled “Help me save an owl” and presented 
               on South African owl species, the dangers of rat poison, myths surrounding owls, and 
               owl names in indigenous African languages.
             </p>
@@ -135,7 +135,7 @@ export default function InternationalPage() {
               and owlproject.org was officially inducted into the Owl Hall of Fame.
             </p>
             <p>
-              This recognition reflects the global importance of owlproject.org's educational and 
+              This recognition reflects the global importance of owlproject.org’s educational and 
               conservation work.
             </p>
           </Section>
@@ -147,8 +147,8 @@ export default function InternationalPage() {
               Conference in Evora, Portugal.
             </p>
             <p>
-              He presented: <em>"From Cures to Curses – Owls and their place in Traditional 
-              medicine in Southern Africa"</em>
+              He presented: <em>“From Cures to Curses – Owls and their place in Traditional 
+              medicine in Southern Africa”</em>
             </p>
             <p>
               The conference emphasized global collaboration and conservation education.
@@ -180,7 +180,7 @@ export default function InternationalPage() {
           <Section title="Austria and South Africa Educational Exchange">
             <p>
               Students from Alexandra Township collaborated with Austrian students through 
-              owlproject.org's education programme.
+              owlproject.org’s education programme.
             </p>
 
             <QuoteBlock

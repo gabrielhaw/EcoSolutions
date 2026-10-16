@@ -74,7 +74,7 @@ function AustrianTestimonials() {
                       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
                     <p className="text-base text-fg-2 leading-relaxed mb-4 max-w-2xl italic">
-                      "{testimonial.quote}"
+                      “{testimonial.quote}”
                     </p>
                     <div className="font-semibold text-fg">{testimonial.author}</div>
                   </div>
@@ -88,11 +88,12 @@ function AustrianTestimonials() {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex ? "bg-accent w-8" : "bg-canvas-3"
-                  }`}
+                  className="grid h-6 min-w-6 place-items-center"
                   aria-label={`Go to testimonial ${index + 1}`}
-                />
+                  aria-current={index === currentIndex}
+                >
+                  <span className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? "w-8 bg-accent" : "w-2 bg-canvas-3"}`} />
+                </button>
               ))}
             </div>
           </div>
@@ -184,7 +185,7 @@ export default function OwlProjectPage() {
               {/* Right: Headmaster Quote */}
               <div className="bg-canvas-2 border border-line rounded-xl p-8 flex flex-col justify-center">
                 <blockquote className="text-lg text-fg leading-relaxed mb-6 italic">
-                  "owlproject.org raises the standard of living for children in these areas in 2 ways. It teaches them to nurture. They learn to look after the owls in their care, something not generally experienced by township children. Secondly, it teaches them awe and amazement for the world in which they live and the creatures with whom they share that world."
+                  “owlproject.org raises the standard of living for children in these areas in 2 ways. It teaches them to nurture. They learn to look after the owls in their care, something not generally experienced by township children. Secondly, it teaches them awe and amazement for the world in which they live and the creatures with whom they share that world.”
                 </blockquote>
                 <cite className="text-sm font-medium text-fg-2 not-italic">
                   — Headmaster, participating township school
@@ -205,10 +206,10 @@ export default function OwlProjectPage() {
                 Owlproject.org was founded in 2001 with the purpose of introducing young South African children to the wonderful world of owls, their beauty as well as their enormous potential as partners in the control and management of rats within the often rodent infested and impoverished communities in which they live. In order to achieve this, it was essential to demystify the negative stigma attached to owls in Southern Africa.
               </p>
               <p>
-                20 years on, 260,000 children and their parents have participated in the owlproject.org programme. A simple question to many urban South African children regarding owls will be met with the instantaneous answer, "they eat rats". Many informal settlement schools now enjoy occupied owl boxes of their own and participate in owl pellet dissection programmes that contribute greatly to owl/prey data analysis. The programme has been presented at 2 world owl conferences and was awarded the Birdlife Africa Award for Conservation as well as an award from the International Owl Centre in Houston, Minnesota. Owlproject.org is now underway with the continuation of this programme into other parts of South Africa as well as into our neighbouring African countries.
+                20 years on, 260,000 children and their parents have participated in the owlproject.org programme. A simple question to many urban South African children regarding owls will be met with the instantaneous answer, “they eat rats”. Many informal settlement schools now enjoy occupied owl boxes of their own and participate in owl pellet dissection programmes that contribute greatly to owl/prey data analysis. The programme has been presented at 2 world owl conferences and was awarded the Birdlife Africa Award for Conservation as well as an award from the International Owl Centre in Houston, Minnesota. Owlproject.org is now underway with the continuation of this programme into other parts of South Africa as well as into our neighbouring African countries.
               </p>
               <p>
-                The cornerstone of this programme is educational, although social and economic consideration is vital for the programme's success. In Africa, with its kaleidoscope of problems, from poverty, corruption, political and social unrest, the maxim "Without education there can be no conservation" could not be more true.
+                The cornerstone of this programme is educational, although social and economic consideration is vital for the programme’s success. In Africa, with its kaleidoscope of problems, from poverty, corruption, political and social unrest, the maxim “Without education there can be no conservation” could not be more true.
               </p>
               <p>
                 There are so many challenges facing the youth in our country that the idea of donating to an owl programme in townships may seem frivolous. There are big issues that donor funds are required to tackle - health, education, food security, safety and more. Although rodents in townships impact on food security, affect health and the owlproject.org programme is highly educational, a discussion with a headmaster at one of our participating schools was particularly insightful.
@@ -225,7 +226,7 @@ export default function OwlProjectPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-fg mb-4">Why Owls?</h2>
               <p className="text-lg text-fg-2 max-w-3xl mx-auto">
-                Nature's most effective pest control solution
+                Nature’s most effective pest control solution
               </p>
             </div>
 

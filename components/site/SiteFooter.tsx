@@ -130,9 +130,12 @@ export default function SiteFooter() {
       </div>
 
       {/* Oversized wordmark, cropped at the bottom edge */}
-      <p aria-hidden className="pointer-events-none select-none whitespace-nowrap text-center text-[15.5vw] font-semibold leading-[0.72] tracking-[-0.06em] text-fg/[0.05]">
-        EcoSolutions
-      </p>
+      {/* Drawn from CSS content so it isn't page text: decorative, and too faint to pass contrast checks. */}
+      <p
+        aria-hidden
+        data-wordmark="EcoSolutions"
+        className="pointer-events-none select-none whitespace-nowrap text-center text-[15.5vw] font-semibold leading-[0.72] tracking-[-0.06em] text-fg/[0.05] before:content-[attr(data-wordmark)]"
+      />
     </footer>
   );
 }

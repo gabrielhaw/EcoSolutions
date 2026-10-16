@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Breadcrumbs, CtaBand, Wrap } from "@/components/site/ui";
 
 export const metadata: Metadata = {
-  title: "About EcoSolutions | Urban Ecology & Poison-Free Pest Control",
+  title: { absolute: "About EcoSolutions | Urban Ecology & Poison-Free Pest Control" },
   description:
     "EcoSolutions is a Johannesburg urban ecology company that replaces poison with owls, bats and exclusion. Led by director Jonathan Haw. Winner of BirdLife SA's 2025 Owl Award.",
   alternates: { canonical: "/about" },

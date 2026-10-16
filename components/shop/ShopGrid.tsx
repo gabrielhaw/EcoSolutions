@@ -18,7 +18,7 @@ export default function ShopGrid({ products, initial }: { products: Product[]; i
     <>
       <div role="tablist" aria-label="Filter products" className="flex flex-wrap gap-2">
         <button role="tab" aria-selected={cat === "all"} onClick={() => setCat("all")} className={pill(cat === "all")}>
-          All <span className="ml-1 text-fg-3">{products.length}</span>
+          All <span className={cat === "all" ? "ml-1 opacity-60" : "ml-1 text-fg-3"}>{products.length}</span>
         </button>
         {categories.map((c) => {
           const n = products.filter((p) => p.category === c.id).length;

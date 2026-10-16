@@ -12,7 +12,9 @@ import {
   childPages,
   getPage,
   getSection,
+  describe,
   metaDescription,
+  pageTitle,
   plainText,
   sectionFor,
   siblingsFor,
@@ -56,14 +58,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const section = getSection(path);
   const seo = seoFor(path);
   const title = seo.title ?? page?.title ?? section?.eyebrow ?? "EcoSolutions";
-  const description = metaDescription(
-    seo.description ?? (page?.description || (page ? page.html : section?.intro ?? site.description)),
-  );
+  const description = seo.description
+    ? metaDescription(seo.description)
+    : page
+      ? describe(page.description, page.html)
+      : metaDescription(section?.intro ?? site.description);
   const image = page?.image?.src;
   return {
-    title,
+    title: pageTitle(title),
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: seo.canonical ?? path },
     openGraph: {
       type: "article",
       url: path,
@@ -123,7 +127,7 @@ function Hub({ section, page }: { section: Section; page?: LegacyPage }) {
           <Wrap className={`grid gap-4 ${groups.length > 2 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
             {groups.map((g, gi) => (
               <div key={g.title} className="rounded-3xl border border-line bg-canvas-2 p-6 sm:p-8" data-reveal style={{ "--d": `${gi * 90}ms` } as React.CSSProperties}>
-                <p className="label text-accent">{g.title}</p>
+                <p className="label text-accent-2">{g.title}</p>
                 <ul className="mt-6">
                   {g.links.map((l) => (
                     <li key={l.href} className="border-t border-line first:border-t-0">

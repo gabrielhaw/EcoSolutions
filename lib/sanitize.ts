@@ -75,6 +75,7 @@ export function sanitizeContentHtml(html: string) {
     allowedTags: [...(base.allowedTags as string[]), "iframe", "video", "source"],
     allowedAttributes: {
       ...base.allowedAttributes,
+      table: ["tabindex"],
       iframe: ["src", "loading", "allowfullscreen", "title"],
       video: ["preload", "controls", "poster"],
       source: ["src", "type"],
@@ -84,6 +85,8 @@ export function sanitizeContentHtml(html: string) {
       ...base.transformTags,
       // Screen readers announce frames by title; migrated embeds rarely have one.
       iframe: (tagName, attribs) => ({ tagName, attribs: { title: "Embedded media", ...attribs } }),
+      // Wide tables scroll sideways on phones; keyboard users need to reach them.
+      table: (tagName) => ({ tagName, attribs: { tabindex: "0" } }),
     },
   }));
 }

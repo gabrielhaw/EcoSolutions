@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 interface BarChartCardProps {
   title: string;
   subtitle?: string;
-  data: any[];
+  data: Record<string, string | number>[];
   dataKey: string;
   xAxisKey: string;
   color?: string;

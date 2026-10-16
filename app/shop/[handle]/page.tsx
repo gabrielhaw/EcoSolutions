@@ -5,7 +5,7 @@ import BuyBox from "@/components/shop/BuyBox";
 import { Breadcrumbs, JsonLd, Wrap } from "@/components/site/ui";
 import ShopImage from "@/components/shop/ShopImage";
 import { categories, formatRand, getProduct, getProducts } from "@/lib/shop";
-import { metaDescription } from "@/lib/content";
+import { metaDescription, pageTitle } from "@/lib/content";
 import { productTitle } from "@/lib/seo";
 import { serviceForProduct } from "@/lib/services";
 import { HANDLE_ALIASES } from "@/lib/shop-links";
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Price first, from the store, so it survives Google's snippet cut-off.
   const price = p.priceFrom > 0 ? `${p.variants.length > 1 ? "From " : ""}${formatRand(p.priceFrom)}. ` : "";
   return {
-    title: productTitle(p.handle, p.title),
+    title: pageTitle(productTitle(p.handle, p.title)),
     description: metaDescription(`${price}${p.summary}`),
     alternates: { canonical: `/shop/${p.handle}` },
     openGraph: { images: p.images[0] ? [{ url: p.images[0].src }] : undefined },

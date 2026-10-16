@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import redirects from "@/content/redirects.json";
 import { allPages, news } from "@/lib/content";
+import { seoFor } from "@/lib/seo";
 import { getProducts } from "@/lib/shop";
 import { extraSections, sections, site } from "@/lib/site";
 
@@ -19,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const money = new Set(sections.flatMap((s) => s.children.map((c) => c.href)));
 
   const pages = allPages()
-    .filter((p) => !p.path.startsWith("/news/") && !TESTIMONIAL.test(p.path) && !hubs.includes(p.path) && !REDIRECTED.has(p.path))
+    .filter((p) => !p.path.startsWith("/news/") && !TESTIMONIAL.test(p.path) && !hubs.includes(p.path) && !REDIRECTED.has(p.path) && !seoFor(p.path).canonical)
     .map((p) => entry(p.path, money.has(p.path) ? 0.8 : 0.6, p.modified));
 
   const articles = news

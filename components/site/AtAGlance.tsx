@@ -42,7 +42,7 @@ export default function AtAGlance({ facts }: { facts: Fact[] }) {
               <Figure figure={f.figure} />
             </span>
             <span className="mt-4 block max-w-[28ch] text-[15px] leading-snug text-fg-2">{f.label}</span>
-            {f.source && <span className="mt-4 block font-mono text-[11.5px] uppercase tracking-[0.08em] text-fg-3">{f.source}</span>}
+            {f.source && <span className="mt-4 block font-mono text-[12.5px] uppercase tracking-[0.08em] text-fg-3">{f.source}</span>}
           </li>
         ))}
       </ul>

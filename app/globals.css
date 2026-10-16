@@ -130,7 +130,7 @@ body {
 /* Small field labels */
 .label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }

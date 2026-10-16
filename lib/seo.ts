@@ -17,6 +17,8 @@ export type PageSeo = {
   faqs?: Faq[];
   /** "At a glance" numbers shown above the long-form article, with sources where the article cites them. */
   facts?: Fact[];
+  /** Copy of a page that lives elsewhere: Google is pointed at the original and it leaves the sitemap. */
+  canonical?: string;
 };
 
 export type Fact = { figure: string; label: string; source?: string };
@@ -198,6 +200,7 @@ export const seo: Record<string, PageSeo> = {
     lede: "Owl boxes, bat houses and annual services are in our online shop. For anything else, call, WhatsApp or ask us to call you back.",
   },
   "/faqs": { title: "Owl Box FAQs", description: "Answers to common questions about owl box occupancy, orientation, location and servicing." },
+  "/owls-and-owl-boxes/autumn-newsletter-2017": { canonical: "/news/autumn-newsletter-2017" },
   "/testimonials": { title: "Client Testimonials", description: "What homeowners, estates and conservationists say about EcoSolutions' owl box, bat house and bat exclusion work." },
 };
 

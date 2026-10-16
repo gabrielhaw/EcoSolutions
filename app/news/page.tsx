@@ -4,7 +4,7 @@ import { Breadcrumbs, CtaBand, Wrap } from "@/components/site/ui";
 import { news, type NewsItem } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "News & Press — Owls, Bats and Poison-Free Pest Control",
+  title: { absolute: "EcoSolutions News & Press | Owls, Bats, Poison-Free Pest Control" },
   description:
     "EcoSolutions in the press, plus news on owls, bats, rodents and the case against rat poison. Over 280 stories since 2009.",
   alternates: { canonical: "/news" },
