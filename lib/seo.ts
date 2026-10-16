@@ -124,7 +124,7 @@ export const seo: Record<string, PageSeo> = {
   "/owls-and-owl-boxes/join-the-owl-box-project": {
     title: "Join the Owl Box Project | Get an Owl Box Installed",
     description:
-      "Join the Owl Box Project and give Spotted Eagle Owls and Barn Owls a safe place to breed. Installation, annual servicing and monitoring in Gauteng.",
+      "Join the Owl Box Project and give Spotted Eagle Owls and Barn Owls a safe place to breed. Installation, annual servicing and monitoring across South Africa.",
     lede: "We install an owl box for Spotted Eagle Owls or Barn Owls, service it every year and keep records on it. You get owls; the owls get a safe place to breed.",
     service: { name: "Owl Box Project package", serviceType: "Owl box installation and servicing", cta: { label: "See the package", href: "/shop/owl-box-project-package-installation-5-year-service-plan" } },
     facts: [
@@ -169,7 +169,7 @@ export const seo: Record<string, PageSeo> = {
       { figure: "300", label: "bats in a Nursery or Rocket bat hotel on a gum pole" },
       { figure: "60,000", label: "insects a night eaten by one occupied bat house" },
     ],
-    title: "Bat Houses & Bat Boxes | Installed in Gauteng",
+    title: "Bat Houses & Bat Boxes | Installed Across South Africa",
     description:
       "Slimline bat houses (up to 100 bats) and Nursery and Rocket bat hotels (up to 300 bats), made and installed by EcoSolutions. Natural mosquito control.",
     service: { name: "Bat house supply and installation", serviceType: "Bat house installation", cta: { label: "Order a bat house", href: "/shop?c=bats" } },
@@ -227,6 +227,7 @@ export function organizationJsonLd() {
       "@type": "PostalAddress",
       streetAddress: site.address.street,
       addressLocality: `${site.address.suburb}, ${site.address.city}`,
+      postalCode: site.address.postalCode,
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
@@ -337,9 +338,9 @@ export const productTitles: Record<string, string> = {
   // "bat removal", "bat removal johannesburg", "bats in roof"
   "bat-exclusion": "Bat Removal Site Visit | Bats in Your Roof?",
   // "rodent control johannesburg"
-  "rodent-consultation": "Rodent Control Consultation | Johannesburg",
-  "annual-owl-box-service-1": "Annual Owl Box Service | Gauteng",
-  "annual-owl-box-service": "Annual Bat House Service | Gauteng",
+  "rodent-consultation": "Rodent Control Consultation | South Africa",
+  "annual-owl-box-service-1": "Annual Owl Box Service | South Africa",
+  "annual-owl-box-service": "Annual Bat House Service | South Africa",
   "owl-box-project-package-installation-5-year-service-plan": "Owl Box Installation + 5-Year Service Plan",
   // "how to build an owl box", "owl box plans"
   "build-it-kit-diy-owl-home": "DIY Owl Box Kit | Build Your Own Owl Box",

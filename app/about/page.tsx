@@ -49,7 +49,7 @@ export default function AboutPage() {
             <p className="label text-fg-3">How we work</p>
             <h2 className="display mt-4 text-display-l">Integrated pest management, built on data.</h2>
             <p className="mt-6 max-w-md text-[16px] leading-relaxed text-fg-2">
-              Based in Randpark Ridge, Johannesburg, and led by director Jonathan Haw. We work for homes, schools, estates, farms and stables across Gauteng, and run projects nationally and abroad.
+              Based in Randpark Ridge, Randburg, and led by director Jonathan Haw. We work for homes, schools, estates, farms and stables across Gauteng, and run projects nationally and abroad.
             </p>
           </div>
           <ol className="lg:col-span-7">

@@ -68,7 +68,7 @@ export default function SiteFooter() {
             <span className="mt-3">
               {site.address.lines[0]}, {site.address.lines[1]}
               <br />
-              {site.address.suburb}, {site.address.city}
+              {site.address.suburb}, {site.address.city}, {site.address.postalCode}
             </span>
             <a href={site.address.mapsUrl} rel="noopener" className="link-underline w-fit text-fg">
               Get directions

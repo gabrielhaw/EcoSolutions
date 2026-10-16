@@ -12,10 +12,12 @@ export const site = {
   email: "info@ecosolutions.co.za",
   hours: "Weekdays 08:00 – 17:00",
   address: {
-    lines: ["Building A, Ground Floor", "Lifestyle Business Park", "Lifestyle Garden Centre", "Cnr Ysterhout & Beyers Naudé Drive"],
-    street: "Building A, Ground Floor, Lifestyle Business Park, Cnr Ysterhout Drive & Beyers Naudé Drive",
+    // Confirmed by Gabriel, 16 Oct 2026.
+    lines: ["Building B, Ground Floor", "Lifestyle Business Park", "Lifestyle Garden Centre", "Cnr Ysterhout & Beyers Naudé Drive"],
+    street: "Building B, Ground Floor, Lifestyle Business Park, Cnr Ysterhout Drive & Beyers Naudé Drive",
     suburb: "Randpark Ridge",
-    city: "Johannesburg",
+    city: "Randburg",
+    postalCode: "2196",
     region: "Gauteng",
     country: "ZA",
     geo: { lat: -26.0948375, lng: 27.941258 },
