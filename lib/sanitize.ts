@@ -80,5 +80,10 @@ export function sanitizeContentHtml(html: string) {
       source: ["src", "type"],
     },
     allowedIframeHostnames: EMBED_HOSTS,
+    transformTags: {
+      ...base.transformTags,
+      // Screen readers announce frames by title; migrated embeds rarely have one.
+      iframe: (tagName, attribs) => ({ tagName, attribs: { title: "Embedded media", ...attribs } }),
+    },
   });
 }

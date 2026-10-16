@@ -60,7 +60,7 @@ export default function SiteFooter() {
         {/* Links */}
         <div className="grid gap-12 pb-14 pt-16 lg:grid-cols-12 lg:pt-20">
           <address className="grid content-start gap-1.5 not-italic text-[14.5px] leading-relaxed lg:col-span-3">
-            <Image src="/brand/logo-white.png" alt="EcoSolutions" width={1200} height={292} className="h-8 w-auto" />
+            <Image src="/brand/logo-white.png" alt="EcoSolutions" width={1200} height={292} sizes="140px" className="h-8 w-auto" />
             <p className="mb-5 mt-4 max-w-[26ch] text-fg-3">Poison-free pest control from Johannesburg.</p>
             <a href={telHref(site.phone.mobile)} className="text-fg hover:text-accent">{site.phone.mobile}</a>
             <a href={telHref(site.phone.office)} className="text-fg hover:text-accent">{site.phone.office}</a>

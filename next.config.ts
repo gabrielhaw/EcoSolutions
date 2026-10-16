@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 import legacyRedirects from "./content/redirects.json";
+import { ZOHO_HOSTS } from "./lib/forms";
 
 const dev = process.env.NODE_ENV === "development";
+/** GA4 loads only when a measurement ID is configured, and only then is Google allowed in the CSP. */
+const ga = Boolean(process.env.NEXT_PUBLIC_GA_ID);
+const GA_SCRIPT = "https://www.googletagmanager.com";
+const GA_CONNECT = "https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com";
 
 /** Players that migrated pages embed, plus the Zapier chat assistant. */
 const FRAME_HOSTS = [
@@ -14,6 +19,8 @@ const FRAME_HOSTS = [
   "https://open.spotify.com",
   "https://www.google.com",
   "https://g2.ipcamlive.com",
+  // Enquiry forms (lib/forms.ts)
+  ...ZOHO_HOSTS,
 ];
 
 /**
@@ -24,13 +31,13 @@ const FRAME_HOSTS = [
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}${ga ? ` ${GA_SCRIPT}` : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   "media-src 'self'",
   // Map tiles, fonts and sprites for the owl box map.
-  `connect-src 'self' https://tiles.openfreemap.org${dev ? " ws:" : ""}`,
+  `connect-src 'self' https://tiles.openfreemap.org${ga ? ` ${GA_CONNECT}` : ""}${dev ? " ws:" : ""}`,
   "worker-src 'self' blob:",
   `frame-src ${FRAME_HOSTS.join(" ")}`,
   "frame-ancestors 'none'",
@@ -47,6 +54,24 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
+];
+
+/**
+ * Folders under the old /siteworkspace media area, and the page each one's images belonged to.
+ * Order matters: the first match wins. Anything else under /siteworkspace goes to the home page.
+ */
+const siteworkspace: [string, string][] = [
+  ["bat-exclusion", "/bats-and-bat-boxes/bat-exclusions"],
+  ["5-tips", "/news/5-tips-for-a-rodent-free-winter"],
+  ["empty", "/owls-and-owl-boxes/empty"],
+  ["empty2", "/owls-and-owl-boxes/empty"],
+  ["owl-cam-collage-images", "/spotted-eagle-owl-webcam-1"],
+  ["webcam-img:n(.*)", "/owl-webcam"],
+  ["pictures-for-news-items", "/news"],
+  ["newletter-:n(.*)", "/news"],
+  ["rodent-control", "/non-toxic-pest-control/non-toxic-rodent-control-1"],
+  ["rodent-page", "/non-toxic-pest-control/non-toxic-rodent-control-1"],
+  ["owl-boxes-tab", "/products-services/owl-boxes"],
 ];
 
 const nextConfig: NextConfig = {
@@ -71,12 +96,15 @@ const nextConfig: NextConfig = {
       // Bat data dashboard is hidden until real data is in; the code stays in app/dashboard.
       { source: "/dashboard", destination: "/bats-and-bat-boxes", permanent: false },
       ...(legacyRedirects as { source: string; destination: string; permanent: boolean }[]),
-      // Old Plone item views (…/photo.jpg/view, …/some-image/view) → the page they sat on
-      { source: "/:item/view", destination: "/", permanent: true },
-      { source: "/:path+/:item/view", destination: "/:path+", permanent: true },
-      // Plone utility views
-      { source: "/:path*/@@:view(.*)", destination: "/:path*", permanent: true },
+      // Plone's media folder: images by topic go to the page about that topic, in one hop.
+      ...siteworkspace.map(([folder, destination]) => ({ source: `/siteworkspace/${folder}/:rest*`, destination, permanent: true })),
       { source: "/siteworkspace/:path*", destination: "/", permanent: true },
+      // Old Plone item views (…/photo.jpg/view, …/image_view_fullscreen) → the page they sat on
+      { source: "/:item/:view(view|image_view_fullscreen|image_view)", destination: "/", permanent: true },
+      { source: "/:path+/:item/:view(view|image_view_fullscreen|image_view)", destination: "/:path+", permanent: true },
+      // Plone utility views (/@@search, /some/page/@@images/…)
+      { source: "/@@:view(.*)", destination: "/", permanent: true },
+      { source: "/:path+/@@:view(.*)", destination: "/:path+", permanent: true },
     ];
   },
   async headers() {

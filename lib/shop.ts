@@ -1,7 +1,7 @@
 import snapshot from "@/content/shop-snapshot.json";
 import type { LiveVariant } from "@/lib/cart-check";
 import { sanitizeProductHtml } from "@/lib/sanitize";
-import { DUPLICATE_PRODUCTS } from "@/lib/shop-links";
+import { HANDLE_ALIASES, localShopHref } from "@/lib/shop-links";
 
 /**
  * Products come straight from the EcoSolutions Shopify store's public
@@ -36,7 +36,7 @@ export const categories: { id: Category; label: string; blurb: string }[] = [
 ];
 
 /** Duplicate listings in the Shopify store, hidden here (see lib/shop-links.ts). */
-const HIDDEN = new Set(Object.keys(DUPLICATE_PRODUCTS));
+const HIDDEN = new Set(Object.keys(HANDLE_ALIASES));
 
 function categorise(p: RawProduct): Category {
   const t = `${p.product_type} ${p.title} ${p.handle}`.toLowerCase();
@@ -138,3 +138,36 @@ export const shopImg = (src: string, width: number) => `${src}${src.includes("?"
 /** Shopify cart permalink: sends the whole cart straight to checkout. */
 export const checkoutUrl = (lines: { id: number; qty: number }[]) =>
   `${SHOP_ORIGIN}/cart/${lines.map((l) => `${l.id}:${l.qty}`).join(",")}`;
+
+export { HANDLE_ALIASES };
+
+const STORE_LINK = /href="(https?:\/\/(?:www\.)?(?:ecosolutions\.myshopify\.com|shop\.ecosolutions\.co\.za)[^"]*)"/g;
+
+/**
+ * Migrated pages link straight to the Shopify storefront, often to duplicate
+ * "copy-of-…" listings. Point those links at this site instead, so visitors
+ * stay here until checkout. The rules (and the alias list) live in
+ * lib/shop-links.ts, shared with the HTML sanitizer; cart and checkout links
+ * are left alone.
+ */
+export function localiseShopLinks(html: string) {
+  return html.replace(STORE_LINK, (whole, href: string) => {
+    const local = localShopHref(href.replace(/&amp;/g, "&"));
+    return local ? `href="${local}"` : whole;
+  });
+}
+
+const PRICE_TOKEN = /\{\{price:([a-z0-9-]+)\}\}/g;
+
+/**
+ * Prices in page text come from the store, never from copy: migrated pages write
+ * {{price:<handle>}} and get the product's current Shopify price. A product the
+ * store no longer lists gets "see our shop" instead of a stale number.
+ */
+export function withStorePrices(html: string, products: Product[]) {
+  return html.replace(PRICE_TOKEN, (_, handle: string) => {
+    const p = products.find((x) => x.handle === handle);
+    if (!p || p.priceFrom <= 0) return "listed in our shop";
+    return `${p.variants.length > 1 ? "from " : ""}${formatRand(p.priceFrom)}`;
+  });
+}

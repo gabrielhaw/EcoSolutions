@@ -7,8 +7,12 @@
 
 const STOREFRONT = /^(?:www\.)?(?:ecosolutions\.myshopify\.com|shop\.ecosolutions\.co\.za)$/i;
 
-/** Duplicate listings in the Shopify store ("copy-of-…" and older handles) → the listing this site shows. */
-export const DUPLICATE_PRODUCTS: Record<string, string> = {
+/**
+ * Old or duplicate Shopify handles ("copy-of-…" and older listings) → the listing
+ * this site shows. The one list for hiding duplicates, redirecting their URLs
+ * and rewriting old links.
+ */
+export const HANDLE_ALIASES: Record<string, string> = {
   "owl-box": "spotted-eagle-owl-box",
   "rocket-bat-hotel": "rocket-bat-box",
   "copy-of-bats-in-your-roof": "bat-exclusion",
@@ -33,6 +37,8 @@ const COLLECTIONS: Record<string, string> = {
   services: "/shop?c=services",
   hampers: "/shop?c=gifts",
   birds: "/shop?c=garden",
+  frontpage: "/shop",
+  all: "/shop",
 };
 
 /** Paths that must stay on Shopify: cart, checkout, customer accounts and order status. */
@@ -51,7 +57,7 @@ export function localShopHref(href: string): string | null {
   const product = path.match(/^(?:\/collections\/[^/]+)?\/products\/([^/]+)$/)?.[1];
   if (product) {
     const handle = decodeURIComponent(product).toLowerCase();
-    return RETIRED_PRODUCTS[handle] ?? `/shop/${DUPLICATE_PRODUCTS[handle] ?? handle}`;
+    return RETIRED_PRODUCTS[handle] ?? `/shop/${HANDLE_ALIASES[handle] ?? handle}`;
   }
   const collection = path.match(/^\/collections\/([^/]+)$/)?.[1];
   if (collection) return COLLECTIONS[collection.toLowerCase()] ?? "/shop";

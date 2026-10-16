@@ -153,6 +153,12 @@ export const seo: Record<string, PageSeo> = {
     description:
       "EcoSolutions makes, installs and services owl boxes for Spotted Eagle Owls and Barn Owls, with more than 150 occupied boxes nationally. Order yours online.",
     service: { name: "Owl box supply and installation", serviceType: "Owl box installation", cta: { label: "Order an owl box", href: "/shop?c=owls" } },
+    faqs: [
+      { q: "Which owls are your boxes for?", a: "We make two designs: one for Spotted Eagle Owls (Bubo africanus), our most successful owl box occupants, and one for Barn Owls (Tyto alba), the rodent specialists of the owl world." },
+      { q: "Why does an owl box need an annual service?", a: "Squirrels, Egyptian geese, genets and other birds use owl boxes out of season and fill them with sticks, paper and litter. Unless that is removed and the substrate replaced, owls won’t breed in the box. The service also checks that the box is still firmly attached, re-varnishes it and renews the bee-proofing." },
+      { q: "What if I can’t commit to the annual service?", a: "Then it may be worth not installing one. Without fresh substrate each year owls won’t use the box, and an empty box usually brings disappointment." },
+      { q: "Can I collect a box instead of having it installed?", a: "Yes. Each box is available with installation, with installation on a gum pole, or ready for collection." },
+    ],
   },
   "/products-services/bat-boxes": {
     facts: [
@@ -164,6 +170,12 @@ export const seo: Record<string, PageSeo> = {
     description:
       "Slimline bat houses (up to 100 bats) and Nursery and Rocket bat hotels (up to 300 bats), made and installed by EcoSolutions. Natural mosquito control.",
     service: { name: "Bat house supply and installation", serviceType: "Bat house installation", cta: { label: "Order a bat house", href: "/shop?c=bats" } },
+    faqs: [
+      { q: "Which bat house should I choose?", a: "The Slimline bat house holds up to 100 bats and goes against a wall that gets afternoon sun. The Nursery and Rocket bat hotels hold up to 300 bats and are mounted on a gum pole in full sun." },
+      { q: "Are bats harmful to people or pets?", a: "No. Bats are unobtrusive, aren’t harmful to you or your pets and have no interest in getting caught in your hair. They help keep mosquitoes under control." },
+      { q: "Does a bat house need servicing?", a: "Yes, once a year. Without it a bat house deteriorates and becomes uninhabitable. The service covers re-varnishing, a bee treatment, an occupancy check and fixing or replacing worn boxes." },
+      { q: "Why is my bat house still empty?", a: "Placement, heat and patience all play a part. Our guide “Why is my bat box empty?” explains what to check." },
+    ],
   },
   "/products-services/barbet-nesting-logs": {
     title: "Barbet Nesting Logs | 100% Sisal Barbet Logs",
@@ -175,6 +187,12 @@ export const seo: Record<string, PageSeo> = {
     description:
       "Annual servicing keeps owl boxes and bat houses occupied: structural checks, new substrate, re-varnishing and bee-proofing before breeding season.",
     service: { name: "Annual owl box and bat house service", serviceType: "Wildlife habitat maintenance", cta: { label: "Book a service", href: site.bookService } },
+  },
+  "/online-order-form": {
+    title: "Order Owl Boxes, Bat Houses & Services Online",
+    description: "Order EcoSolutions owl boxes, bat houses and annual services online, or ask us to call you back. Installation in Gauteng; secure payment through Shopify.",
+    h1: "Order online",
+    lede: "Owl boxes, bat houses and annual services are in our online shop. For anything else, call, WhatsApp or ask us to call you back.",
   },
   "/faqs": { title: "Owl Box FAQs", description: "Answers to common questions about owl box occupancy, orientation, location and servicing." },
   "/testimonials": { title: "Client Testimonials", description: "What homeowners, estates and conservationists say about EcoSolutions' owl box, bat house and bat exclusion work." },

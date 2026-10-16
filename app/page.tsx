@@ -9,7 +9,7 @@ import Rail from "@/components/site/Rail";
 import { ButtonLink, CtaBand, Wrap } from "@/components/site/ui";
 import { childPages, news, plainText } from "@/lib/content";
 import { formatRand, getProducts, shopImg } from "@/lib/shop";
-import { site } from "@/lib/site";
+import { keyServices, site } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -131,8 +131,10 @@ export default async function HomePage() {
               <p className="max-w-lg text-[1.1rem] font-medium leading-relaxed text-fg lg:col-span-7">
                 Bats and owls hunt pests every night. We give them a home, seal rodents out, and remove bats from roofs humanely.
               </p>
-              <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-                <ButtonLink href="/contact-us">Book a site visit</ButtonLink>
+              <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end" data-cta-location="home_hero">
+                <ButtonLink href="/request-a-callback" cta="request_a_callback">
+                  Request a callback
+                </ButtonLink>
                 <ButtonLink href="/shop" variant="outline-light" className="bg-white/10 backdrop-blur-md">
                   Shop owl &amp; bat boxes
                 </ButtonLink>
@@ -141,6 +143,33 @@ export default async function HomePage() {
           </Wrap>
         </section>
       </div>
+
+      {/* Shortcuts to the four services visitors look for most */}
+      <nav aria-labelledby="most-requested" className="pt-10 sm:pt-14">
+        <Wrap>
+          <h2 id="most-requested" className="label text-fg-3">
+            Most requested
+          </h2>
+          <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {keyServices.map((s, i) => (
+              <li key={s.href} data-reveal style={delay(i, 70)}>
+                <Link href={s.href} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-canvas transition-colors hover:border-line-strong">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-canvas-2">
+                    <Image src={s.image} alt={s.alt} fill sizes="(min-width: 1024px) 22vw, 46vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="flex flex-1 items-start justify-between gap-3 p-4 sm:p-5">
+                    <span>
+                      <span className="block text-[16px] font-medium leading-snug tracking-tight group-hover:text-accent sm:text-[1.15rem]">{s.label}</span>
+                      <span className="mt-1 block text-[13.5px] leading-snug text-fg-3 sm:text-[14.5px]">{s.blurb}</span>
+                    </span>
+                    <span aria-hidden className="mt-0.5 text-fg-3 transition group-hover:translate-x-1 group-hover:text-accent">→</span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Wrap>
+      </nav>
 
       <PartnerMarquee />
 

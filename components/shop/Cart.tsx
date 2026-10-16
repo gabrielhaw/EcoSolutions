@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { track } from "@/lib/analytics";
 import { buyable, reconcile, type CartLine, type CartNotice, type LiveLookup } from "@/lib/cart-check";
 import { checkoutUrl, formatRand, shopImg } from "@/lib/shop";
 
@@ -255,6 +256,13 @@ function CartDrawer() {
     const { verdict, lines: checked } = await verify();
     const ready = buyable(checked);
     if (verdict === "ok" && ready.length) {
+      // Only what actually goes to Shopify, at the prices just confirmed. Product
+      // details only; nothing about the customer.
+      track("begin_checkout", {
+        currency: "ZAR",
+        value: ready.reduce((n, l) => n + l.qty * l.price, 0),
+        items: ready.map((l) => ({ item_id: l.handle, item_name: l.title, item_variant: l.variant, price: l.price, quantity: l.qty })),
+      });
       window.location.href = checkoutUrl(ready);
       return;
     }
@@ -264,7 +272,7 @@ function CartDrawer() {
   }
 
   return (
-    <div aria-hidden={!open} className={`fixed inset-0 z-[70] ${open ? "" : "pointer-events-none"}`}>
+    <div aria-hidden={!open} inert={!open} className={`fixed inset-0 z-[70] ${open ? "" : "pointer-events-none"}`}>
       <div onClick={() => setOpen(false)} className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`} />
       <aside
         role="dialog"
@@ -367,6 +375,8 @@ function CartDrawer() {
 
               <a
                 href={toBuy.length ? checkoutUrl(toBuy) : undefined}
+                data-cta="checkout"
+                data-cta-location="cart"
                 onClick={checkout}
                 aria-disabled={!toBuy.length || going}
                 className={`mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 font-medium text-canvas transition-colors hover:bg-accent-2 ${

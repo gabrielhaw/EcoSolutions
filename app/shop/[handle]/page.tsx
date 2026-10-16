@@ -5,7 +5,8 @@ import { notFound, permanentRedirect } from "next/navigation";
 import BuyBox from "@/components/shop/BuyBox";
 import { Breadcrumbs, JsonLd, Wrap } from "@/components/site/ui";
 import { categories, getProduct, getProducts, shopImg } from "@/lib/shop";
-import { DUPLICATE_PRODUCTS } from "@/lib/shop-links";
+import { serviceForProduct } from "@/lib/services";
+import { HANDLE_ALIASES } from "@/lib/shop-links";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -30,10 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProductPage({ params }: Props) {
   const { handle } = await params;
   // Duplicate Shopify listings (e.g. from old links) go to the one this site shows.
-  if (DUPLICATE_PRODUCTS[handle]) permanentRedirect(`/shop/${DUPLICATE_PRODUCTS[handle]}`);
+  if (HANDLE_ALIASES[handle]) permanentRedirect(`/shop/${HANDLE_ALIASES[handle]}`);
   const [product, all] = await Promise.all([getProduct(handle), getProducts()]);
   if (!product) notFound();
   const cat = categories.find((c) => c.id === product.category)!;
+  const service = serviceForProduct(product.handle);
   const related = all.filter((p) => p.category === product.category && p.handle !== product.handle).slice(0, 3);
 
   return (
@@ -70,6 +72,24 @@ export default async function ProductPage({ params }: Props) {
         <div className="mt-8">
           <BuyBox product={product} />
         </div>
+
+        {service && (
+          <aside aria-label="About this service" className="mt-14 grid gap-6 rounded-3xl border border-line bg-canvas-2 p-6 sm:p-8 lg:grid-cols-12 lg:items-center" data-cta-location="product_service">
+            <div className="lg:col-span-8">
+              <p className="label text-accent-2">{service.name}</p>
+              <p className="mt-3 text-[16px] leading-relaxed text-fg-2">{service.offer[0]}</p>
+              <p className="mt-2 text-[14.5px] text-fg-3">Where we work: {service.area}</p>
+            </div>
+            <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
+              <Link href={service.path} className="inline-flex items-center rounded-full border border-line-strong px-5 py-3 text-[15px] font-medium hover:border-fg">
+                How it works
+              </Link>
+              <Link href="/request-a-callback" data-track="enquiry_click" data-cta="request_a_callback" className="inline-flex items-center rounded-full bg-accent px-5 py-3 text-[15px] font-medium text-canvas hover:bg-accent-2">
+                Request a callback
+              </Link>
+            </div>
+          </aside>
+        )}
 
         <section className="mt-20 grid gap-10 border-t border-line pt-14 lg:grid-cols-12">
           <h2 className="label text-fg-3 lg:col-span-3">Details</h2>
