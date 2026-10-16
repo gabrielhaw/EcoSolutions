@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
 import { buyable, reconcile, type CartLine, type CartNotice, type LiveLookup } from "@/lib/cart-check";
-import { checkoutUrl, formatRand, shopImg } from "@/lib/shop";
+import { checkoutUrl, formatRand, SHOP_ORIGIN, shopImg } from "@/lib/shop";
 
 export type { CartLine };
 
@@ -263,6 +263,8 @@ function CartDrawer() {
         value: ready.reduce((n, l) => n + l.qty * l.price, 0),
         items: ready.map((l) => ({ item_id: l.handle, item_name: l.title, item_variant: l.variant, price: l.price, quantity: l.qty })),
       });
+      // Counted here, not by the site-wide click listener, so a checkout the checks stop isn't a store visit.
+      track("shop_visit", { cta: "checkout", cta_location: "cart", link_url: `${SHOP_ORIGIN}/cart` });
       window.location.href = checkoutUrl(ready);
       return;
     }
@@ -375,6 +377,7 @@ function CartDrawer() {
 
               <a
                 href={toBuy.length ? checkoutUrl(toBuy) : undefined}
+                data-track="manual"
                 data-cta="checkout"
                 data-cta-location="cart"
                 onClick={checkout}

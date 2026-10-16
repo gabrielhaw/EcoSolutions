@@ -22,7 +22,7 @@ All events are sent from `components/site/Analytics.tsx`, `components/site/ZohoF
 | `phone_click` | Any `tel:` link is tapped | Contact intent (optional key event) | `cta`, `cta_location` |
 | `email_click` | Any `mailto:` link is clicked | Contact intent | `cta`, `cta_location` |
 | `whatsapp_click` | Any `wa.me` link is clicked | Contact intent (optional key event) | `cta`, `cta_location` |
-| `shop_visit` | Any link to `shop.ecosolutions.co.za` or `ecosolutions.myshopify.com` is clicked, including checkout | Hand-off to the store | `cta`, `cta_location`, `link_url` (no query string) |
+| `shop_visit` | Any link to `shop.ecosolutions.co.za` or `ecosolutions.myshopify.com` is clicked. For the cart's checkout button, only once the cart checks pass and the visitor is actually sent to Shopify | Hand-off to the store | `cta`, `cta_location`, `link_url` (no query string) |
 | `begin_checkout` | "Secure checkout" in the cart is clicked | Ecommerce | `currency`, `value`, `items` (handle, title, variant, price, quantity) |
 
 ### Keeping each outcome separate and counted once
