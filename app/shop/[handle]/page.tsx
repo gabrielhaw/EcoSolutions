@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import BuyBox from "@/components/shop/BuyBox";
 import { Breadcrumbs, JsonLd, Wrap } from "@/components/site/ui";
-import { categories, getProduct, getProducts, shopImg } from "@/lib/shop";
+import ShopImage from "@/components/shop/ShopImage";
+import { categories, formatRand, getProduct, getProducts } from "@/lib/shop";
+import { metaDescription, pageTitle } from "@/lib/content";
+import { productTitle } from "@/lib/seo";
+import { serviceForProduct } from "@/lib/services";
+import { HANDLE_ALIASES } from "@/lib/shop-links";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -18,9 +22,11 @@ type Props = { params: Promise<{ handle: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = await getProduct((await params).handle);
   if (!p) return {};
+  // Price first, from the store, so it survives Google's snippet cut-off.
+  const price = p.priceFrom > 0 ? `${p.variants.length > 1 ? "From " : ""}${formatRand(p.priceFrom)}. ` : "";
   return {
-    title: p.title,
-    description: p.summary.slice(0, 158),
+    title: pageTitle(productTitle(p.handle, p.title)),
+    description: metaDescription(`${price}${p.summary}`),
     alternates: { canonical: `/shop/${p.handle}` },
     openGraph: { images: p.images[0] ? [{ url: p.images[0].src }] : undefined },
   };
@@ -28,9 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { handle } = await params;
+  // Duplicate Shopify listings (e.g. from old links) go to the one this site shows.
+  if (HANDLE_ALIASES[handle]) permanentRedirect(`/shop/${HANDLE_ALIASES[handle]}`);
   const [product, all] = await Promise.all([getProduct(handle), getProducts()]);
   if (!product) notFound();
   const cat = categories.find((c) => c.id === product.category)!;
+  const service = serviceForProduct(product.handle);
   const related = all.filter((p) => p.category === product.category && p.handle !== product.handle).slice(0, 3);
 
   return (
@@ -68,6 +77,24 @@ export default async function ProductPage({ params }: Props) {
           <BuyBox product={product} />
         </div>
 
+        {service && (
+          <aside aria-label="About this service" className="mt-14 grid gap-6 rounded-3xl border border-line bg-canvas-2 p-6 sm:p-8 lg:grid-cols-12 lg:items-center" data-cta-location="product_service">
+            <div className="lg:col-span-8">
+              <p className="label text-accent-2">{service.name}</p>
+              <p className="mt-3 text-[16px] leading-relaxed text-fg-2">{service.offer[0]}</p>
+              <p className="mt-2 text-[14.5px] text-fg-3">Where we work: {service.area}</p>
+            </div>
+            <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
+              <Link href={service.path} className="inline-flex items-center rounded-full border border-line-strong px-5 py-3 text-[15px] font-medium hover:border-fg">
+                How it works
+              </Link>
+              <Link href="/request-a-callback" data-track="enquiry_click" data-cta="request_a_callback" className="inline-flex items-center rounded-full bg-accent px-5 py-3 text-[15px] font-medium text-canvas hover:bg-accent-2">
+                Request a callback
+              </Link>
+            </div>
+          </aside>
+        )}
+
         <section className="mt-20 grid gap-10 border-t border-line pt-14 lg:grid-cols-12">
           <h2 className="label text-fg-3 lg:col-span-3">Details</h2>
           <div className="prose-eco lg:col-span-9" dangerouslySetInnerHTML={{ __html: product.html }} />
@@ -86,7 +113,9 @@ export default async function ProductPage({ params }: Props) {
                 <li key={r.handle}>
                   <Link href={`/shop/${r.handle}`} className="group block">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-canvas-2">
-                      {r.images[0] && <Image src={shopImg(r.images[0].src, 700)} alt={r.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />}
+                      {r.images[0] && (
+                        <ShopImage aspect={4 / 3} src={r.images[0].src} alt={r.images[0].alt} fill sizes="(min-width: 1280px) 400px, (min-width: 640px) 31vw, 92vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                      )}
                     </div>
                     <p className="mt-3 font-medium tracking-tight group-hover:text-accent">{r.title}</p>
                   </Link>

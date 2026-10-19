@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, CtaBand, JsonLd, Wrap } from "@/components/site/ui";
-import { getNewsArticle, metaDescription, news } from "@/lib/content";
+import { describe, getNewsArticle, news, pageTitle } from "@/lib/content";
 import { articleJsonLd } from "@/lib/seo";
 import { arrangeImages } from "@/lib/arrange-images";
 import { sanitizeContentHtml } from "@/lib/sanitize";
@@ -20,9 +20,9 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = getNewsArticle(decodeURIComponent((await params).slug));
   if (!a) return {};
-  const description = metaDescription(a.item.description || a.page.description || a.page.html);
+  const description = describe(a.item.description || a.page.description, a.page.html);
   return {
-    title: a.page.title,
+    title: pageTitle(a.page.title),
     description,
     alternates: { canonical: a.item.path },
     openGraph: {

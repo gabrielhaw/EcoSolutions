@@ -12,10 +12,12 @@ export const site = {
   email: "info@ecosolutions.co.za",
   hours: "Weekdays 08:00 – 17:00",
   address: {
-    lines: ["Building A, Ground Floor", "Lifestyle Business Park", "Lifestyle Garden Centre", "Cnr Ysterhout & Beyers Naudé Drive"],
-    street: "Building A, Ground Floor, Lifestyle Business Park, Cnr Ysterhout Drive & Beyers Naudé Drive",
+    // Confirmed by Gabriel, 16 Oct 2026.
+    lines: ["Building B, Ground Floor", "Lifestyle Business Park", "Lifestyle Garden Centre", "Cnr Ysterhout & Beyers Naudé Drive"],
+    street: "Building B, Ground Floor, Lifestyle Business Park, Cnr Ysterhout Drive & Beyers Naudé Drive",
     suburb: "Randpark Ridge",
-    city: "Johannesburg",
+    city: "Randburg",
+    postalCode: "2196",
     region: "Gauteng",
     country: "ZA",
     geo: { lat: -26.0948375, lng: 27.941258 },
@@ -159,6 +161,38 @@ export const primaryNav: NavLink[] = [
   { label: "About", href: "/about" },
 ];
 
+/** The four services people look for most (GA4, Oct 2026): homepage shortcuts and the top of the Services menu. */
+export const keyServices: (NavLink & { image: string; alt: string })[] = [
+  {
+    label: "Bats in the roof",
+    href: "/bats-and-bat-boxes/bat-exclusions",
+    blurb: "Permitted, humane bat exclusion.",
+    image: "/media/bats-and-bat-boxes__bat-exclusions/773796afd4.jpg",
+    alt: "A colony of bats roosting on a brick wall inside a roof",
+  },
+  {
+    label: "Owl boxes",
+    href: "/products-services/owl-boxes",
+    blurb: "Made, installed and serviced by our team.",
+    image: "/images/spotted-eagle-owl-box.jpg",
+    alt: "A Spotted Eagle Owl sitting in an EcoSolutions owl box",
+  },
+  {
+    label: "Non-toxic rodent control",
+    href: "/non-toxic-pest-control/non-toxic-rodent-control-1",
+    blurb: "Rat and mouse proofing. No poison.",
+    image: "/images/barn-owl-with-rat.jpg",
+    alt: "A Barn Owl holding a rat",
+  },
+  {
+    label: "Bat houses",
+    href: "/products-services/bat-boxes",
+    blurb: "Homes for up to 100 or 300 bats.",
+    image: "/images/bat-house-chimney.jpg",
+    alt: "An EcoSolutions Slimline bat house mounted on a chimney",
+  },
+];
+
 export type MenuItem = NavLink & { items?: NavLink[]; image?: string; intro?: string };
 
 /**
@@ -170,10 +204,12 @@ export const menu: MenuItem[] = [
     label: "Services",
     href: "/non-toxic-pest-control",
     image: "/images/barn-owl-with-rat.jpg",
-    intro: "Rodent proofing, humane bat removal and predator programmes for homes, estates and farms.",
+    intro: "Humane bat removal, rodent proofing, owl boxes and bat houses for homes, estates and farms.",
     items: [
+      { label: "Bats in the roof? Humane bat removal", href: "/bats-and-bat-boxes/bat-exclusions" },
       { label: "Non-toxic rodent control", href: "/non-toxic-pest-control/non-toxic-rodent-control-1" },
-      { label: "Humane bat removal", href: "/bats-and-bat-boxes/bat-exclusions" },
+      { label: "Owl boxes, installed & serviced", href: "/products-services/owl-boxes" },
+      { label: "Bat houses, installed & serviced", href: "/products-services/bat-boxes" },
       { label: "Owls for farms", href: "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1" },
       { label: "Bats for farms", href: "/non-toxic-pest-control/bats-and-agricultural-pest-control" },
       { label: "Poison-free suburbs", href: "/non-toxic-pest-control/poison-free-suburbs" },
@@ -183,7 +219,7 @@ export const menu: MenuItem[] = [
     label: "Owls",
     href: "/owls-and-owl-boxes",
     image: "/images/barn-owl-portrait.jpg",
-    intro: "More than 160 occupied owl boxes across Gauteng, installed and serviced by us.",
+    intro: "Owl boxes made, installed and serviced by us, with a live map of the boxes owls have moved into.",
     items: [
       { label: "Join the Owl Box Project", href: "/owls-and-owl-boxes/join-the-owl-box-project" },
       { label: "Owl box service", href: "/owls-and-owl-boxes/servicing" },
@@ -227,12 +263,36 @@ export const menu: MenuItem[] = [
 export const partners: {
   name: string;
   logo?: { src: string; width: number; height: number };
+  /**
+   * What the relationship was, where the site's own pages record it. All organisations in this
+   * list were confirmed as worked with by Gabriel (16 Oct 2026); the others have no write-up yet.
+   */
+  relation?: string;
 }[] = [
-  { name: "International Owl Center", logo: { src: "/logos/partners/international-owl-center.png", width: 540, height: 410 } },
+  {
+    name: "International Owl Center",
+    logo: { src: "/logos/partners/international-owl-center.png", width: 540, height: 410 },
+    // /news/art-awards-and-awareness
+    relation: "Owl Hall of Fame award to Owlproject.org",
+  },
   { name: "BirdLife South Africa", logo: { src: "/logos/partners/birdlife.png", width: 1262, height: 939 } },
-  { name: "Steyn City", logo: { src: "/logos/partners/steyn-city.png", width: 1494, height: 372 } },
-  { name: "University of Venda", logo: { src: "/logos/partners/university-of-venda.png", width: 200, height: 198 } },
-  { name: "Subtrop", logo: { src: "/logos/partners/subtrop.png", width: 505, height: 193 } },
+  {
+    name: "Steyn City",
+    logo: { src: "/logos/partners/steyn-city.png", width: 1494, height: 372 },
+    // /news/barn-owls-tyto-alba-thrive-in-chartwell, /testimonials/beryl-scott-payet-steyn-city
+    relation: "Owl Box Project estate",
+  },
+  {
+    name: "University of Venda",
+    logo: { src: "/logos/partners/university-of-venda.png", width: 200, height: 198 },
+    // /non-toxic-pest-control/bats-and-agricultural-pest-control
+    relation: "Macadamia bat house research",
+  },
+  {
+    name: "Subtrop",
+    logo: { src: "/logos/partners/subtrop.png", width: 505, height: 193 },
+    relation: "Macadamia bat house research",
+  },
   { name: "Dainfern", logo: { src: "/logos/partners/dainfern.png", width: 946, height: 750 } },
   { name: "Nestlé South Africa", logo: { src: "/logos/partners/nestle.png", width: 346, height: 92 } },
   { name: "The Coves", logo: { src: "/logos/partners/the-coves.png", width: 586, height: 294 } },

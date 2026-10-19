@@ -1,23 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import Container from "@/components/ui/Container";
-import MetricCard from "@/components/dashboard/MetricCard";
 import BarChartCard from "@/components/dashboard/BarChartCard";
-import LineChartCard from "@/components/dashboard/LineChartCard";
-import FilterPanel from "@/components/dashboard/FilterPanel";
+import FilterPanel, { type DashboardFilters } from "@/components/dashboard/FilterPanel";
+
+/** One row of a chart's data, as stored in public/data/*-analytics.json. */
+type Row = Record<string, string | number>;
+type BoxTypeRow = { type: string; count: number; occupied: number; occupancyRate: number };
+type LocationRow = Row & { occupancyRate: number };
 
 interface DashboardData {
   totalBoxes: number;
   occupiedBoxes: number;
   occupancyRate: number;
   lastUpdated: string;
-  boxTypeDistribution: any[];
-  occupancyByWaterDistance: any[];
-  occupancyByNeighborDistance: any[];
-  occupancyByVegetation: any[];
-  featureImportance: any[];
-  topLocations: any[];
+  boxTypeDistribution: BoxTypeRow[];
+  occupancyByWaterDistance: Row[];
+  occupancyByNeighborDistance: Row[];
+  occupancyByVegetation: Row[];
+  featureImportance: Row[];
+  topLocations: LocationRow[];
 }
 
 export default function DashboardPage() {
@@ -31,30 +34,34 @@ export default function DashboardPage() {
     dateRange: 'all'
   });
 
-  useEffect(() => {
-    if (!selectedBoxType) return;
-    
+  // Loads when a box type is picked (not in an effect), and ignores a reply
+  // that arrives after the visitor has already picked again or gone back.
+  const request = useRef(0);
+  const chooseBoxType = (type: 'bat' | 'owl' | null) => {
+    const seq = ++request.current;
+    setSelectedBoxType(type);
+    if (!type) return;
     setLoading(true);
-    const dataFile = selectedBoxType === 'bat' ? '/data/bat-analytics.json' : '/data/owl-analytics.json';
-    
-    fetch(dataFile)
+    fetch(type === 'bat' ? '/data/bat-analytics.json' : '/data/owl-analytics.json')
       .then(res => res.json())
       .then(data => {
+        if (seq !== request.current) return;
         setData(data);
         setFilteredData(data);
         setLoading(false);
       })
       .catch(error => {
+        if (seq !== request.current) return;
         console.error('Error loading dashboard data:', error);
         setLoading(false);
       });
-  }, [selectedBoxType]);
+  };
 
-  const handleFilterChange = (filters: any) => {
+  const handleFilterChange = (filters: DashboardFilters) => {
     setActiveFilters(filters);
     if (!data) return;
 
-    let filtered = { ...data };
+    const filtered = { ...data };
 
     // Filter by box type - affects distribution and water/neighbor distance charts
     if (filters.boxType) {
@@ -118,7 +125,7 @@ export default function DashboardPage() {
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               {/* Bat Boxes */}
               <button
-                onClick={() => setSelectedBoxType('bat')}
+                onClick={() => chooseBoxType('bat')}
                 className="group relative overflow-hidden bg-white hover:bg-emerald-50 p-8 rounded-2xl text-left transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl border-2 border-neutral-200 hover:border-emerald-400"
               >
                 <div className="relative z-10">
@@ -135,7 +142,7 @@ export default function DashboardPage() {
 
               {/* Owl Boxes */}
               <button
-                onClick={() => setSelectedBoxType('owl')}
+                onClick={() => chooseBoxType('owl')}
                 className="group relative overflow-hidden bg-white hover:bg-neutral-50 p-8 rounded-2xl text-left transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl border-2 border-neutral-200 hover:border-neutral-400"
               >
                 <div className="relative z-10">
@@ -185,7 +192,7 @@ export default function DashboardPage() {
         {/* Header with Back Button */}
         <div className="mb-10">
           <button
-            onClick={() => setSelectedBoxType(null)}
+            onClick={() => chooseBoxType(null)}
             className="mb-6 flex items-center gap-2 text-neutral-600 hover:text-emerald-600 transition-colors group"
           >
             <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,7 +271,7 @@ export default function DashboardPage() {
           
           <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-neutral-100">
             <p className="text-sm font-medium text-neutral-600 mb-1">Best Factor</p>
-            <p className="text-3xl font-bold text-neutral-900 mb-1 truncate">{filteredData.featureImportance[0]?.feature.replace('Distance to ', '') || 'Water'}</p>
+            <p className="text-3xl font-bold text-neutral-900 mb-1 truncate">{String(filteredData.featureImportance[0]?.feature ?? '').replace('Distance to ', '') || 'Water'}</p>
             <p className="text-xs text-neutral-500">{filteredData.featureImportance[0]?.importance || 35}% influence</p>
           </div>
           

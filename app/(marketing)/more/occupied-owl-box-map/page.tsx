@@ -55,7 +55,7 @@ export default async function OccupiedOwlBoxMapPage() {
         </Wrap>
       </header>
 
-      <section aria-label="Map of occupied owl boxes" className="pb-10">
+      <section className="pb-10">
         <Wrap>
           <OwlBoxMap boxes={boxes} />
           <div className="mt-4 flex flex-col gap-3 text-[13.5px] text-fg-3 sm:flex-row sm:items-center sm:justify-between">

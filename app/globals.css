@@ -18,7 +18,7 @@
   --canvas-3: #e2e7e3;
   --fg: #111713;
   --fg-2: #47524b;
-  --fg-3: #6f7a72;
+  --fg-3: #626d66;
   --deep: #e6efe1;
   --accent: #3f7d2c;
   --accent-2: #336a22;
@@ -130,7 +130,7 @@ body {
 /* Small field labels */
 .label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -157,6 +157,19 @@ body {
 .bg-video::-webkit-media-controls-start-playback-button {
   display: none !important;
   -webkit-appearance: none;
+}
+
+/*
+ * Show a background video as soon as it is actually playing, without waiting
+ * for the page's JavaScript (BackgroundVideo does the same once it runs, for
+ * browsers without :playing). A video that never plays stays hidden, so the
+ * poster shows and no play button can appear. Never for reduced motion.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .bg-video:playing,
+  [data-bg-playing] .bg-video {
+    opacity: 1;
+  }
 }
 
 /* Soft edge fade for the partner marquee */

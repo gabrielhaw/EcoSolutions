@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import BackgroundVideo from "@/components/site/BackgroundVideo";
-import CountUp from "@/components/site/CountUp";
 import PartnerMarquee from "@/components/site/PartnerMarquee";
-import ProblemPicker, { type Problem } from "@/components/site/ProblemPicker";
-import Rail from "@/components/site/Rail";
 import { ButtonLink, CtaBand, Wrap } from "@/components/site/ui";
-import { childPages, news, plainText } from "@/lib/content";
-import { formatRand, getProducts, shopImg } from "@/lib/shop";
+import { childPages, news, plainText, type NewsItem } from "@/lib/content";
+import { getOwlBoxes } from "@/lib/owl-boxes";
 import { site } from "@/lib/site";
 
+/** The results section reads the live occupied-box map (Google My Maps), refreshed hourly. */
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -19,356 +17,314 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const problems: Problem[] = [
+/** The four things most visitors come for, in the order the brief sets. */
+const routes = [
   {
-    label: "Rats or mice in the house",
-    href: "/non-toxic-pest-control/non-toxic-rodent-control-1",
-    blurb: "We find how they get in, seal it properly and remove what attracts them.",
-    image: "/images/barn-owl-with-rat.jpg",
-    alt: "A Barn Owl holding a rat",
-  },
-  {
-    label: "Bats in the roof",
+    label: "Bats in your roof",
+    blurb: "Humane bat exclusion: we confirm how bats get in, let them leave safely, then seal the gaps behind them.",
     href: "/bats-and-bat-boxes/bat-exclusions",
-    blurb: "Permitted, humane exclusion plus a bat house so they don't come back.",
     image: "/media/bats-and-bat-boxes__bat-exclusions/773796afd4.jpg",
     alt: "A colony of bats roosting on a brick wall inside a roof",
   },
   {
-    label: "Rodents on the farm",
-    href: "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1",
-    blurb: "Barn owl programmes planned from satellite imagery and installed nationwide.",
-    image: "/images/owl-box-in-gum-tree.jpg",
-    alt: "An EcoSolutions owl box mounted in a gum tree",
+    label: "Rats or mice",
+    blurb: "Non-toxic rodent control: we find where they get in, proof it properly and remove what draws them.",
+    href: "/non-toxic-pest-control/non-toxic-rodent-control-1",
+    image: "/images/barn-owl-with-rat.jpg",
+    alt: "A Barn Owl holding a rat",
   },
   {
-    label: "Insects in crops or orchards",
-    href: "/non-toxic-pest-control/bats-and-agricultural-pest-control",
-    blurb: "Bat banks that hunt crop pests every night of the season.",
-    image: "/media/non-toxic-pest-control__bats-and-agricultural-pest-control/c6f8a0fdaa.jpg",
-    alt: "A bat bank on poles above a farm dam",
+    label: "Owl boxes",
+    blurb: "Spotted Eagle and Barn Owl boxes made by our team, to buy, have installed and have serviced each year.",
+    href: "/products-services/owl-boxes",
+    image: "/images/spotted-eagle-owl-box.jpg",
+    alt: "A Spotted Eagle Owl sitting in an EcoSolutions owl box",
   },
   {
-    label: "I'd like owls in my garden",
-    href: "/owls-and-owl-boxes/join-the-owl-box-project",
-    blurb: "Join the Owl Box Project: installation, annual service and monitoring.",
-    image: "/images/spotted-eagle-owlets-in-owl-box.jpg",
-    alt: "Three Spotted Eagle owlets in an owl box",
+    label: "Bat houses",
+    blurb: "Slimline, Nursery and Rocket bat houses for homes, estates and farms, installed by us or collected.",
+    href: "/products-services/bat-boxes",
+    image: "/images/bat-house-chimney.jpg",
+    alt: "An EcoSolutions Slimline bat house mounted on a chimney",
+  },
+];
+
+/** Smaller routes for two groups the four cards don't cover. There is no single farms page yet. */
+const supportRoutes = [
+  {
+    label: "Farms and orchards",
+    links: [
+      { label: "Barn owls for rodent control", href: "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1" },
+      { label: "Bat houses for crop and orchard insects", href: "/non-toxic-pest-control/bats-and-agricultural-pest-control" },
+    ],
   },
   {
-    label: "My owl box is still empty",
-    href: "/owls-and-owl-boxes/empty",
-    blurb: "Usually it's the substrate or the spot. Here's what to check.",
-    image: "/images/owl-box-service.jpg",
-    alt: "A technician servicing an owl box from a ladder",
+    label: "Already have an owl box?",
+    links: [
+      { label: "Annual owl box servicing", href: "/owls-and-owl-boxes/servicing" },
+      { label: "Why is my box still empty?", href: "/owls-and-owl-boxes/empty" },
+    ],
   },
 ];
 
 const steps = [
-  {
-    t: "Take away the reasons to stay",
-    d: "Seal every gap over 6 mm with steel, mesh or cement, and cut the creepers and branches rodents use as highways.",
-  },
-  {
-    t: "Bring in the predators",
-    d: "One owlet eats 2–3 rodents a night; one bat house, up to 60,000 insects. We place boxes where they get used.",
-  },
-  {
-    t: "Keep it working",
-    d: "An annual service before breeding season: new substrate, varnish, bee-proofing, and data on every box.",
-  },
+  { t: "We assess", d: "A site visit, or for some properties a remote assessment using satellite imagery, to see what's going on and why." },
+  { t: "We recommend and do the work", d: "Only what the situation needs, carried out by our own team." },
+  { t: "We explain what comes next", d: "What to watch for afterwards, and whether any follow-up or servicing makes sense for you." },
 ];
 
-// Shop products featured on the home page rail, in this order (live prices from Shopify).
-const featured = [
-  "spotted-eagle-owl-box",
-  "barn-owl-box",
-  "owl-box-project-package-installation-5-year-service-plan",
-  "bat-box",
-  "bat-hotel",
-  "rocket-bat-box",
-  "bats-and-stables",
-  "annual-owl-box-service-1",
-  "build-it-kit-diy-owl-home",
-  "junior-scientist-kit",
-];
+/**
+ * Testimonials shown in full on the home page, with what each was about: three, so the column
+ * ends level with the results beside it. The rest are on /testimonials.
+ */
+const testimonialJobs: Record<string, string> = {
+  "kiran-reddy": "Bat exclusion",
+  "ian-hall-in-emmarentia": "Owl box installation",
+  "beryl-scott-payet-steyn-city": "Owl boxes and bat houses",
+};
 
-const whyNotPoison = [
-  { href: "/news/41-children-hospitalised-after-rat-poison-consumption", label: "41 children hospitalised after rat poison consumption" },
-  { href: "/news/a-new-breed-of-2018super-rodents2019-resistant-to-poison-could-be-dangerous-to-humans", label: "Poison-resistant ‘super rodents’ are spreading" },
-  { href: "/news/cat-poisoned-and-dying-dog2019s-blood-saves-his-life", label: "A cat poisoned by rodenticide, saved by a dog’s blood" },
-];
+const fmtDate = (d: string | null) => (d ? new Date(d).toLocaleDateString("en-ZA", { day: "numeric", month: "short", year: "numeric" }) : "");
+const newsHref = (n: NewsItem) => (n.kind === "link" && n.externalUrl ? n.externalUrl : n.path);
 
-function testimonials() {
-  return childPages("/testimonials")
-    .filter((t) => !t.path.endsWith("karen-stander-krugersdorp"))
-    .map((t) => ({ quote: plainText(t.html, 260), who: t.title.replace(/ in /, ", ") }));
+/** What a news item is, from where it lives: our news, our newsletter, or another site. */
+function newsCategory(n: NewsItem) {
+  if (n.kind !== "link" || !n.externalUrl || n.externalUrl.startsWith("/")) return "EcoSolutions news";
+  try {
+    const host = new URL(n.externalUrl).hostname.replace(/^(www|news)\./, "");
+    return host === "zc.vg" ? "Our newsletter" : `External article · ${host}`;
+  } catch {
+    return "External article";
+  }
 }
 
-const newsHref = (n: (typeof news)[number]) => (n.kind === "link" && n.externalUrl ? n.externalUrl : n.path);
+const firstSentence = (s: string) => s.match(/^.{20,180}?[.!?](\s|$)/)?.[0].trim() ?? s.slice(0, 160);
 
 export default async function HomePage() {
-  const shop = await getProducts();
-  const rail = featured.map((h) => shop.find((p) => p.handle === h)).filter((p) => p !== undefined);
-  const quotes = testimonials();
-  const latest = news.slice(0, 8);
-  const delay = (i: number, step = 80) => ({ "--d": `${i * step}ms` }) as React.CSSProperties;
+  const boxes = await getOwlBoxes();
+  const years = boxes.map((b) => b.occupiedYear).filter((y): y is number => !!y);
+  const firstYear = years.length ? Math.min(...years) : null;
+  // Every customer testimonial page, in the order above, quoted in full with its own attribution.
+  const pages = childPages("/testimonials");
+  const quotes = Object.entries(testimonialJobs).flatMap(([slug, job]) => {
+    const page = pages.find((p) => p.path.endsWith(`/${slug}`));
+    const quote = page ? plainText(page.html, 600) : "";
+    return page && quote ? [{ quote, who: page.title.replace(/ in /, ", "), job }] : [];
+  });
+  const latest = news.slice(0, 2);
 
   return (
     <>
-      {/* Hero: bats leaving a bat house at dusk */}
+      {/* 1. Hero: what we do and where, without needing the video */}
       <div className="px-2 pt-2 sm:px-3 sm:pt-3">
-        <section data-theme="dark" className="relative isolate flex min-h-[calc(100svh-84px)] items-end overflow-hidden rounded-[1.75rem] bg-[#1d2a33]">
+        <section data-theme="dark" className="relative isolate flex min-h-[calc(100svh-84px)] overflow-hidden rounded-[1.75rem] bg-[#1d2a33]">
           <BackgroundVideo className="absolute inset-0 -z-10 size-full object-cover" poster="/images/hero-poster.jpg" mobile="/media/video/hero-540.mp4" desktop="/media/video/hero-1080.mp4" />
-          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/10 to-black/45" />
 
-          <Wrap className="relative z-10 pb-10 pt-32 sm:pb-14">
-            <p className="label animate-rise text-accent">Poison-free pest control · Johannesburg</p>
-            <h1 className="display mt-5 max-w-4xl animate-rise text-display-xl [animation-delay:120ms]">
-              Pest control that works the <span className="text-accent">night shift.</span>
-            </h1>
-            <div className="mt-8 grid animate-rise items-end gap-6 [animation-delay:260ms] lg:grid-cols-12">
-              <p className="max-w-lg text-[1.1rem] font-medium leading-relaxed text-fg lg:col-span-7">
-                Bats and owls hunt pests every night. We give them a home, seal rodents out, and remove bats from roofs humanely.
+          {/* Message top-left on the video itself (not the page column), calls to action bottom-right. */}
+          <div className="relative z-10 flex min-h-[inherit] w-full flex-col justify-between gap-10 px-5 pb-8 pt-8 sm:px-8 sm:pb-12 sm:pt-12 lg:px-12 lg:pt-14">
+            <div>
+              <p className="label animate-rise text-accent">Poison-free pest control</p>
+              <h1 className="display mt-5 max-w-4xl animate-rise text-display-xl [animation-delay:120ms]">
+                Pest control that works the <span className="text-accent">night shift.</span>
+              </h1>
+              <p className="mt-6 max-w-xl animate-rise text-[1.1rem] font-medium leading-relaxed text-fg [animation-delay:260ms]">
+                We remove bats from roofs humanely, rodent-proof homes without poison, and make, install and service owl boxes and bat houses. Based in Johannesburg, working with homes, estates and farms across South Africa.
               </p>
-              <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-                <ButtonLink href="/contact-us">Book a site visit</ButtonLink>
-                <ButtonLink href="/shop" variant="outline-light" className="bg-white/10 backdrop-blur-md">
-                  Shop owl &amp; bat boxes
-                </ButtonLink>
-              </div>
             </div>
-            <p className="mt-10 flex animate-fade items-center gap-2.5 text-[13px] text-fg-2 [animation-delay:600ms]">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
-                <span className="relative inline-flex size-2 rounded-full bg-accent" />
-              </span>
-              Bats leaving one of our bat houses at dusk
-            </p>
-          </Wrap>
+            {/* Right inset keeps the buttons clear of the floating "Ask us" chat button. */}
+            <div className="flex animate-rise flex-wrap gap-3 [animation-delay:380ms] lg:justify-end lg:pr-16" data-cta-location="home_hero">
+              <ButtonLink href="/contact-us" cta="contact_our_team">
+                Contact our team
+              </ButtonLink>
+              <ButtonLink href="/shop" variant="outline-light" className="bg-white/10 backdrop-blur-md">
+                Shop owl &amp; bat boxes
+              </ButtonLink>
+            </div>
+          </div>
         </section>
       </div>
 
+      {/* 2. Who we've worked with, and how (moving banner, captioned) */}
       <PartnerMarquee />
 
-      {/* Proof in numbers */}
-      <section aria-label="EcoSolutions in numbers" className="pt-16 sm:pt-20">
+      {/* 3. How can we help? */}
+      <section aria-labelledby="help" className="py-14 sm:py-20">
         <Wrap>
-          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line lg:grid-cols-4">
-            {[
-              { fig: <CountUp to={160} suffix="+" />, label: "occupied EcoSolutions owl boxes in Gauteng", href: "/more/occupied-owl-box-map" },
-              { fig: <CountUp to={9000} suffix="+" />, label: "rodents a year eaten from 12 owl boxes at Irene", href: "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1" },
-              { fig: "GDARD", label: "accredited for permitted bat exclusions in Gauteng", href: "/bats-and-bat-boxes/bat-exclusions" },
-              { fig: <CountUp to={260000} />, label: "children and parents reached by Owlproject.org", href: "/owlproject" },
-            ].map((f, i) => (
-              <li key={f.href} className="bg-canvas" data-reveal style={delay(i, 90)}>
-                <Link href={f.href} className="group flex h-full flex-col justify-between gap-6 p-5 transition-colors hover:bg-canvas-2 sm:gap-10 sm:p-8">
-                  <span className="display block text-[clamp(1.9rem,1.4rem+2.4vw,3.6rem)] leading-none">{f.fig}</span>
-                  <span className="flex items-end justify-between gap-4 text-[13.5px] leading-snug text-fg-2 sm:text-[14.5px]">
-                    <span className="max-w-[24ch]">{f.label}</span>
-                    <span aria-hidden className="text-fg-3 transition group-hover:translate-x-1 group-hover:text-accent">→</span>
-                  </span>
+          <h2 id="help" className="display text-display-l">How can we help?</h2>
+          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-fg-2">Choose the closest match to see how we handle it.</p>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {routes.map((r) => (
+              <li key={r.href}>
+                {/* Phones: a compact row (photo beside the text); larger screens: photo on top. */}
+                <Link href={r.href} className="group flex h-full overflow-hidden rounded-2xl border border-line bg-canvas transition-colors hover:border-line-strong sm:flex-col">
+                  <div className="relative w-28 shrink-0 overflow-hidden bg-canvas-2 sm:aspect-[16/10] sm:w-full">
+                    <Image src={r.image} alt={r.alt} fill sizes="(min-width: 1024px) 22vw, (min-width: 640px) 46vw, 112px" className="object-cover transition duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="flex flex-1 items-start justify-between gap-3 p-4 sm:p-5">
+                    <span>
+                      <span className="block text-[1.15rem] font-medium leading-snug tracking-tight group-hover:text-accent">{r.label}</span>
+                      <span className="mt-1.5 block text-[14.5px] leading-snug text-fg-2">{r.blurb}</span>
+                    </span>
+                    <span aria-hidden className="mt-0.5 text-fg-3 transition group-hover:translate-x-1 group-hover:text-accent">→</span>
+                  </div>
                 </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+            {supportRoutes.map((s) => (
+              <li key={s.label} className="rounded-2xl border border-line bg-canvas-2 p-5">
+                <h3 className="text-[1.05rem] font-medium tracking-tight">{s.label}</h3>
+                <ul className="mt-2 space-y-1.5">
+                  {s.links.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} className="group inline-flex items-baseline gap-2 py-1 text-[15px] text-fg-2 hover:text-accent">
+                        {l.label}
+                        <span aria-hidden className="transition group-hover:translate-x-0.5">→</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>
         </Wrap>
       </section>
 
-
-      {/* What's the problem? */}
-      <section className="py-14 sm:py-20">
-        <Wrap>
-          <div className="mb-12 max-w-2xl" data-reveal>
-            <p className="label text-fg-3">Start here</p>
-            <h2 className="display mt-4 text-display-l">What’s the problem?</h2>
-            <p className="mt-4 text-[16px] leading-relaxed text-fg-2">Pick the one closest to yours.</p>
+      {/* 4. Our approach: why not poison, and the steps any job follows */}
+      <section data-theme="dark" aria-labelledby="approach" className="relative isolate overflow-hidden">
+        <Image src="/images/owlet-in-owl-box.jpg" alt="" fill sizes="100vw" className="-z-10 object-cover" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/75 via-black/45 to-black/50" />
+        <Wrap className="py-16 sm:py-20">
+          <div className="max-w-2xl">
+            <p className="label text-accent">Our approach</p>
+            <h2 id="approach" className="display mt-4 text-display-l">
+              Poison doesn’t stay with the rat.
+            </h2>
+            <p className="mt-6 text-[17px] leading-relaxed text-fg">
+              A poisoned rat takes days to die, and the owls, cats and dogs that catch it are poisoned too, while rodents grow resistant. We deal with why animals are there instead.
+            </p>
           </div>
-          <ProblemPicker problems={problems} />
+          <ol className="mt-10 grid gap-6 sm:grid-cols-3">
+            {steps.map((s, i) => (
+              <li key={s.t} className="border-t border-white/25 pt-5">
+                <span className="label text-accent">0{i + 1}</span>
+                <h3 className="mt-2 text-[1.15rem] font-medium tracking-tight">{s.t}</h3>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-fg-2">{s.d}</p>
+              </li>
+            ))}
+          </ol>
+          <Link href="/non-toxic-pest-control" className="mt-10 inline-flex items-baseline gap-2 text-[15px] text-fg hover:text-accent">
+            More on non-toxic pest control <span aria-hidden>→</span>
+          </Link>
         </Wrap>
       </section>
 
-      {/* Why not poison */}
-      <section data-theme="dark" className="relative isolate overflow-hidden">
-        <Image src="/images/owlet-in-owl-box.jpg" alt="A Spotted Eagle owlet looking out of an EcoSolutions owl box" fill sizes="100vw" className="-z-10 object-cover" />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
-        <Wrap className="py-16 sm:py-24">
-          <div className="max-w-xl" data-reveal>
-            <p className="label text-accent">Why not just use poison?</p>
-            <h2 className="display mt-4 text-display-l">Poison doesn’t stay with the rat.</h2>
-            <p className="mt-6 text-[17px] leading-relaxed text-fg">
-              A poisoned rat takes days to die, and the owls, cats and dogs that catch it are poisoned too. Meanwhile, rodents are becoming resistant.
-            </p>
-            <ul className="mt-8 border-t border-white/20">
-              {whyNotPoison.map((l) => {
-                const item = news.find((n) => n.path === l.href);
-                const href = item ? newsHref(item) : l.href;
+      {/* 5. Results and customer experiences */}
+      <section aria-labelledby="results" className="py-14 sm:py-20">
+        <Wrap className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <h2 id="results" className="display text-display-l">Results and experiences</h2>
+            <dl className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="rounded-2xl border border-line p-5">
+                <dt className="label text-fg-3">Occupied-box map</dt>
+                <dd className="mt-3">
+                  <span className="display block text-[2.4rem] leading-none">{boxes.length}</span>
+                  <span className="mt-2 block text-[14.5px] leading-snug text-fg-2">
+                    owl boxes on our public map where owls have been recorded{firstYear ? `, since ${firstYear}` : ""}.
+                  </span>
+                  <Link href="/more/occupied-owl-box-map" className="mt-3 inline-block text-[14px] text-fg-2 underline underline-offset-2 hover:text-accent">
+                    See the map
+                  </Link>
+                </dd>
+              </div>
+              <div className="rounded-2xl border border-line p-5">
+                <dt className="label text-fg-3">Case study · Irene, Gauteng</dt>
+                <dd className="mt-3">
+                  <span className="display block text-[2.4rem] leading-none">9,000+</span>
+                  <span className="mt-2 block text-[14.5px] leading-snug text-fg-2">
+                    rodents a year eaten by Barn Owls from 12 boxes, measured by pellet analysis.
+                  </span>
+                  <Link href="/non-toxic-pest-control/owls-and-agricultural-rodent-control-1" className="mt-3 inline-block text-[14px] text-fg-2 underline underline-offset-2 hover:text-accent">
+                    About the project
+                  </Link>
+                </dd>
+              </div>
+            </dl>
+          </div>
+          {/* Stretches to the results column; the link sits at the bottom so both columns end level. */}
+          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-between lg:border-l lg:border-line lg:pl-10">
+            <ul className="space-y-7">
+              {quotes.map((q) => (
+                <li key={q.who}>
+                  <blockquote className="text-[16.5px] leading-relaxed">“{q.quote}”</blockquote>
+                  <p className="mt-2 text-[14px] text-fg-3">
+                    {q.who} · {q.job}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <Link href="/testimonials" className="link-underline mt-8 inline-block text-[15px]">
+              Read all testimonials
+            </Link>
+          </div>
+        </Wrap>
+      </section>
+
+      {/* 6. From the field: two recent items and our non-profit */}
+      <section aria-labelledby="field" className="border-t border-line py-14 sm:py-20">
+        <Wrap className="grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <h2 id="field" className="display text-display-m">From the field</h2>
+              <Link href="/news" className="link-underline text-[15px]">
+                All news
+              </Link>
+            </div>
+            <ul className="mt-8 grid gap-6 sm:grid-cols-2">
+              {latest.map((n) => {
+                const href = newsHref(n);
+                const external = href.startsWith("http");
                 return (
-                  <li key={l.href} className="border-b border-white/20">
-                    <a href={href} rel={href.startsWith("http") ? "noopener" : undefined} className="group flex items-baseline justify-between gap-4 py-3.5 text-[15px] text-fg hover:text-accent">
-                      <span>{l.label}</span>
-                      <span aria-hidden>{href.startsWith("http") ? "↗" : "→"}</span>
+                  <li key={n.slug}>
+                    <a href={href} rel={external ? "noopener" : undefined} className="group block">
+                      <p className="label text-fg-3">
+                        {fmtDate(n.date)} · {newsCategory(n)}
+                      </p>
+                      <h3 className="mt-2 text-[1.1rem] font-medium leading-snug tracking-tight group-hover:text-accent">
+                        {n.title}
+                        {external && <span aria-label=" (opens another site)"> ↗</span>}
+                      </h3>
+                      {n.description && <p className="mt-2 text-[14.5px] leading-relaxed text-fg-2">{firstSentence(n.description)}</p>}
                     </a>
                   </li>
                 );
               })}
             </ul>
           </div>
-        </Wrap>
-      </section>
-
-      {/* How we do it, with layered photos */}
-      <section className="overflow-hidden py-14 sm:py-24">
-        <Wrap className="grid items-center gap-16 lg:grid-cols-12">
-          <div className="relative h-[420px] sm:h-[540px] lg:col-span-6" aria-hidden>
-            <div className="drift-slow absolute left-0 top-0 h-[78%] w-[78%] overflow-hidden rounded-3xl">
-              <Image src="/images/bat-bank-at-sunset.jpg" alt="" fill sizes="(min-width: 1024px) 38vw, 78vw" className="object-cover" />
-            </div>
-            <div className="drift-fast absolute bottom-0 right-0 h-[52%] w-[50%] overflow-hidden rounded-3xl border-[6px] border-canvas shadow-2xl shadow-black/30">
-              <Image src="/images/owl-box-service.jpg" alt="" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 lg:pl-6">
-            <p className="label text-fg-3" data-reveal>How we do it</p>
-            <h2 className="display mt-4 text-display-l" data-reveal>
-              Three steps.
-              <br />
-              <span className="text-fg-3">No poison.</span>
-            </h2>
-            <ol className="mt-10">
-              {steps.map((s, i) => (
-                <li key={s.t} className="grid grid-cols-[3rem_1fr] gap-4 border-t border-line py-6" data-reveal style={delay(i, 100)}>
-                  <span className="label pt-1.5 text-accent">0{i + 1}</span>
-                  <div>
-                    <h3 className="text-[1.3rem] font-medium tracking-tight">{s.t}</h3>
-                    <p className="mt-2 max-w-xl text-[15.5px] leading-relaxed text-fg-2">{s.d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Wrap>
-      </section>
-
-      {/* Testimonials: Jane Goodall leads; every quote links to the full page */}
-      <section className="border-t border-line py-14 sm:py-20">
-        <Wrap className="grid gap-14 lg:grid-cols-12">
-          <Link href="/testimonials" className="group block lg:col-span-7" data-reveal>
-            <p className="label text-fg-3">From Dr Jane Goodall</p>
-            <blockquote className="display mt-6 text-[clamp(1.6rem,1.2rem+1.6vw,2.5rem)] leading-[1.2]">
-              <span className="text-accent">“</span>Together we can make this a better world for all, save some of the amazing animals with whom we share this planet. What you are doing is amazing &amp; I truly look forward to working with you.”
-            </blockquote>
-            <p className="mt-6 flex items-center gap-2 text-[15px] text-fg-3">
-              Handwritten note to Jonathan Haw
-              <span className="text-accent transition-transform group-hover:translate-x-1">→ see the letter</span>
-            </p>
-          </Link>
-          <ul className="space-y-8 lg:col-span-5 lg:border-l lg:border-line lg:pl-10">
-            {quotes.slice(0, 3).map((q, i) => (
-              <li key={q.who} data-reveal style={delay(i, 90)}>
-                <Link href="/testimonials" className="group block">
-                  <p className="text-[15.5px] leading-relaxed text-fg-2 transition-colors group-hover:text-fg">“{q.quote}”</p>
-                  <p className="mt-2 text-[14px] text-fg-3">{q.who}</p>
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href="/testimonials" className="link-underline text-[15px]">
-                Read all testimonials
-              </Link>
-            </li>
-          </ul>
-        </Wrap>
-      </section>
-
-      {/* Shop */}
-      <section className="py-14 sm:py-20">
-        <Wrap>
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6" data-reveal>
-            <div>
-              <p className="label text-fg-3">Made, installed &amp; serviced by us</p>
-              <h2 className="display mt-4 text-display-l">Homes for the pest controllers</h2>
-            </div>
-            <ButtonLink href="/shop" variant="outline-light">
-              Visit the shop
-            </ButtonLink>
-          </div>
-          <Rail label="Featured products">
-            {rail.map((p) => (
-              <li key={p.handle} className="w-[64%] shrink-0 snap-start min-[480px]:w-[calc(50%-10px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)]">
-                <Link href={`/shop/${p.handle}`} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-canvas-2">
-                    {p.images[0] && (
-                      <Image src={shopImg(p.images[0].src, 700)} alt={p.images[0].alt} fill unoptimized className="object-cover transition duration-700 group-hover:scale-105" />
-                    )}
-                  </div>
-                  <div className="mt-4 flex items-start justify-between gap-3">
-                    <span className="line-clamp-2 text-[15px] font-medium leading-snug tracking-tight group-hover:text-accent">{p.title}</span>
-                    <span className="shrink-0 text-[13.5px] tabular-nums text-fg-2">
-                      {p.variants.length > 1 && <span className="text-fg-3">from </span>}
-                      {formatRand(p.priceFrom)}
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </Rail>
-        </Wrap>
-      </section>
-
-      {/* News */}
-      <section className="border-t border-line py-14 sm:py-20">
-        <Wrap>
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6" data-reveal>
-            <div>
-              <p className="label text-fg-3">News &amp; press</p>
-              <h2 className="display mt-4 text-display-l">From the field</h2>
-            </div>
-            <ButtonLink href="/news" variant="outline-light">
-              All news
-            </ButtonLink>
-          </div>
-          <Rail label="Latest news">
-            {latest.map((n) => (
-              <li key={n.slug} className="w-[64%] shrink-0 snap-start min-[480px]:w-[calc(50%-10px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)]">
-                <a href={newsHref(n)} rel={n.kind === "link" ? "noopener" : undefined} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-canvas-2">
-                    {n.image && <Image src={n.image.src} alt="" fill sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 64vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
-                  </div>
-                  <p className="label mt-4 text-fg-3">
-                    {n.date && new Date(n.date).toLocaleDateString("en-ZA", { day: "numeric", month: "short", year: "numeric" })}
-                    {n.kind === "link" && " · press ↗"}
-                  </p>
-                  <h3 className="mt-1.5 line-clamp-2 text-[15px] font-medium leading-snug tracking-tight transition-colors group-hover:text-accent">{n.title}</h3>
-                </a>
-              </li>
-            ))}
-          </Rail>
-        </Wrap>
-      </section>
-
-      {/* Owlproject */}
-      <section className="border-t border-line py-14 sm:py-16">
-        <Wrap className="grid items-center gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7" data-reveal>
+          <div className="rounded-2xl bg-canvas-2 p-6 lg:col-span-4">
             <p className="label text-fg-3">Our non-profit</p>
-            <h2 className="display mt-4 text-display-m">
-              Owlproject.org puts owl boxes in townships and schools, <span className="text-fg-3">and changes what children think of owls.</span>
-            </h2>
-          </div>
-          <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-            <ButtonLink href="/owlproject" variant="ink">
-              About Owlproject.org
-            </ButtonLink>
-            <ButtonLink href={site.owlproject} variant="outline-light">
-              owlproject.org ↗
-            </ButtonLink>
+            <h3 className="mt-3 text-[1.2rem] font-medium leading-snug tracking-tight">Owlproject.org</h3>
+            <p className="mt-2 text-[15px] leading-relaxed text-fg-2">Owl boxes and lessons in townships and schools, changing what children think of owls.</p>
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[15px]">
+              <Link href="/owlproject" className="link-underline">
+                About Owlproject.org
+              </Link>
+              <a href={site.owlproject} rel="noopener" className="link-underline">
+                owlproject.org ↗
+              </a>
+            </div>
           </div>
         </Wrap>
       </section>
 
-      <CtaBand />
+      {/* 7. Final contact, for people unsure what they need */}
+      <CtaBand
+        title="Not sure what you need? Tell us what’s happening."
+        body="Describe what you’ve seen or heard, and where. One of our consultants will get back to you to arrange a site visit or, where it suits, a remote assessment using satellite imagery."
+        cta={{ label: "Contact our team", href: "/contact-us" }}
+        phone
+      />
     </>
   );
 }

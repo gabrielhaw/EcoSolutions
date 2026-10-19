@@ -17,6 +17,8 @@ export type PageSeo = {
   faqs?: Faq[];
   /** "At a glance" numbers shown above the long-form article, with sources where the article cites them. */
   facts?: Fact[];
+  /** Copy of a page that lives elsewhere: Google is pointed at the original and it leaves the sitemap. */
+  canonical?: string;
 };
 
 export type Fact = { figure: string; label: string; source?: string };
@@ -39,9 +41,10 @@ export const seo: Record<string, PageSeo> = {
       { figure: "Steel", label: "or copper wool behind every foam seal. Foam on its own gets chewed through" },
       { figure: "0", label: "poison used. Proofing and habitat changes are permanent" },
     ],
-    title: "Non-Toxic Rodent Control | Poison-Free Rat Control",
+    // Search Console: "rodent control" (3.8K impressions) and "rodent control johannesburg" rank 13–20 with almost no clicks.
+    title: "Rodent Control Johannesburg | Non-Toxic Rat & Mouse Control",
     description:
-      "Get rid of rats and mice without poison. EcoSolutions seals entry points, removes harbourage and installs humane traps for homes and businesses in Gauteng.",
+      "Rodent control in Johannesburg and Gauteng without poison. EcoSolutions seals entry points, removes harbourage and installs humane traps for homes and businesses.",
     h1: "Non-toxic rodent control",
     lede: "Rat poison is a short-term fix that harms pets and owls. Proofing your property against rodents lasts much longer.",
     service: { name: "Non-toxic rodent control", serviceType: "Rodent control", cta: { label: "Book a rodent consultation", href: "/contact-us?topic=rodents" } },
@@ -67,8 +70,10 @@ export const seo: Record<string, PageSeo> = {
     faqs: [
       { q: "How do I know if there are bats in my roof?", a: "Look out for squeaking and scratching at dusk, droppings (guano) and white streaks of urine on the walls near where the bats get in and out." },
       { q: "Is it legal to remove bats myself?", a: "No. Bats are protected under the NEMBA Act 10 of 2004 and the Gauteng Nature Conservation Bill. You need a permit to catch, capture, keep or transport them. Spraying them with chemicals is illegal and unethical." },
-      { q: "How does a bat exclusion work?", a: "After an evening site visit and dusk survey, we seal every secondary gap and fit a one-way valve to the main exit. The bats leave at night and can't come back. Once the roof is clear, the valve comes off and the hole is sealed permanently." },
+      { q: "How do I get rid of bats in my roof?", a: "After an evening site visit and dusk survey, we seal every secondary gap and fit a one-way valve to the main exit. The bats leave at night and can't come back. Once the roof is clear, the valve comes off and the hole is sealed permanently." },
       { q: "Why do you install a bat house?", a: "Bats are very loyal to their roosts. A nearby bat house gives them an alternative, which makes the exclusion far more likely to succeed. We don't do exclusions without one." },
+      // Search Console: "bat repellent" queries have 4.5K impressions; answer them with the humane, legal route.
+      { q: "Will a bat repellent or spray get bats out of my roof?", a: "Spraying bats with ammonia or other chemicals is unethical and illegal under the NEMBA Act and the Gauteng Nature Conservation Bill, and bats are so loyal to their roost that they try to return. A permitted exclusion with a one-way valve, followed by sealing and a nearby bat house, removes them humanely and keeps them out." },
     ],
   },
   "/non-toxic-pest-control/owls-and-agricultural-rodent-control-1": {
@@ -121,7 +126,7 @@ export const seo: Record<string, PageSeo> = {
   "/owls-and-owl-boxes/join-the-owl-box-project": {
     title: "Join the Owl Box Project | Get an Owl Box Installed",
     description:
-      "Join the Owl Box Project and give Spotted Eagle Owls and Barn Owls a safe place to breed. Installation, annual servicing and monitoring in Gauteng.",
+      "Join the Owl Box Project and give Spotted Eagle Owls and Barn Owls a safe place to breed. Installation, annual servicing and monitoring across South Africa.",
     lede: "We install an owl box for Spotted Eagle Owls or Barn Owls, service it every year and keep records on it. You get owls; the owls get a safe place to breed.",
     service: { name: "Owl Box Project package", serviceType: "Owl box installation and servicing", cta: { label: "See the package", href: "/shop/owl-box-project-package-installation-5-year-service-plan" } },
     facts: [
@@ -153,6 +158,12 @@ export const seo: Record<string, PageSeo> = {
     description:
       "EcoSolutions makes, installs and services owl boxes for Spotted Eagle Owls and Barn Owls, with more than 150 occupied boxes nationally. Order yours online.",
     service: { name: "Owl box supply and installation", serviceType: "Owl box installation", cta: { label: "Order an owl box", href: "/shop?c=owls" } },
+    faqs: [
+      { q: "Which owls are your boxes for?", a: "We make two designs: one for Spotted Eagle Owls (Bubo africanus), our most successful owl box occupants, and one for Barn Owls (Tyto alba), the rodent specialists of the owl world." },
+      { q: "Why does an owl box need an annual service?", a: "Squirrels, Egyptian geese, genets and other birds use owl boxes out of season and fill them with sticks, paper and litter. Unless that is removed and the substrate replaced, owls won’t breed in the box. The service also checks that the box is still firmly attached, re-varnishes it and renews the bee-proofing." },
+      { q: "What if I can’t commit to the annual service?", a: "Then it may be worth not installing one. Without fresh substrate each year owls won’t use the box, and an empty box usually brings disappointment." },
+      { q: "Can I collect a box instead of having it installed?", a: "Yes. Each box is available with installation, with installation on a gum pole, or ready for collection." },
+    ],
   },
   "/products-services/bat-boxes": {
     facts: [
@@ -160,10 +171,16 @@ export const seo: Record<string, PageSeo> = {
       { figure: "300", label: "bats in a Nursery or Rocket bat hotel on a gum pole" },
       { figure: "60,000", label: "insects a night eaten by one occupied bat house" },
     ],
-    title: "Bat Houses & Bat Boxes | Installed in Gauteng",
+    title: "Bat Houses & Bat Boxes | Installed Across South Africa",
     description:
       "Slimline bat houses (up to 100 bats) and Nursery and Rocket bat hotels (up to 300 bats), made and installed by EcoSolutions. Natural mosquito control.",
     service: { name: "Bat house supply and installation", serviceType: "Bat house installation", cta: { label: "Order a bat house", href: "/shop?c=bats" } },
+    faqs: [
+      { q: "Which bat house should I choose?", a: "The Slimline bat house holds up to 100 bats and goes against a wall that gets afternoon sun. The Nursery and Rocket bat hotels hold up to 300 bats and are mounted on a gum pole in full sun." },
+      { q: "Are bats harmful to people or pets?", a: "No. Bats are unobtrusive, aren’t harmful to you or your pets and have no interest in getting caught in your hair. They help keep mosquitoes under control." },
+      { q: "Does a bat house need servicing?", a: "Yes, once a year. Without it a bat house deteriorates and becomes uninhabitable. The service covers re-varnishing, a bee treatment, an occupancy check and fixing or replacing worn boxes." },
+      { q: "Why is my bat house still empty?", a: "Placement, heat and patience all play a part. Our guide “Why is my bat box empty?” explains what to check." },
+    ],
   },
   "/products-services/barbet-nesting-logs": {
     title: "Barbet Nesting Logs | 100% Sisal Barbet Logs",
@@ -176,7 +193,14 @@ export const seo: Record<string, PageSeo> = {
       "Annual servicing keeps owl boxes and bat houses occupied: structural checks, new substrate, re-varnishing and bee-proofing before breeding season.",
     service: { name: "Annual owl box and bat house service", serviceType: "Wildlife habitat maintenance", cta: { label: "Book a service", href: site.bookService } },
   },
+  "/online-order-form": {
+    title: "Order Owl Boxes, Bat Houses & Services Online",
+    description: "Order EcoSolutions owl boxes, bat houses and annual services online, or ask us to call you back. Installation across South Africa; secure payment through Shopify.",
+    h1: "Order online",
+    lede: "Owl boxes, bat houses and annual services are in our online shop. For anything else, call, WhatsApp or ask us to call you back.",
+  },
   "/faqs": { title: "Owl Box FAQs", description: "Answers to common questions about owl box occupancy, orientation, location and servicing." },
+  "/owls-and-owl-boxes/autumn-newsletter-2017": { canonical: "/news/autumn-newsletter-2017" },
   "/testimonials": { title: "Client Testimonials", description: "What homeowners, estates and conservationists say about EcoSolutions' owl box, bat house and bat exclusion work." },
 };
 
@@ -206,6 +230,7 @@ export function organizationJsonLd() {
       "@type": "PostalAddress",
       streetAddress: site.address.street,
       addressLocality: `${site.address.suburb}, ${site.address.city}`,
+      postalCode: site.address.postalCode,
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
@@ -295,4 +320,36 @@ export function articleJsonLd(a: { path: string; title: string; description: str
     author: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
   };
+}
+
+/**
+ * Product page titles, worded the way people search for them (Google Search
+ * Console for the Shopify store, 16 months to Oct 2026). The " | EcoSolutions"
+ * suffix is added by the layout. Products not listed get "<title> for Sale | South Africa".
+ */
+export const productTitles: Record<string, string> = {
+  // "spotted eagle owl box", "owl for sale", "owl price south africa", "owl box south africa"
+  "spotted-eagle-owl-box": "Spotted Eagle Owl Box for Sale | South Africa",
+  "barn-owl-box": "Barn Owl Box for Sale | South Africa",
+  // "bush baby nesting box", "bush baby box"
+  "bush-baby-box": "Bush Baby Nesting Box for Sale | South Africa",
+  // "bat box", "bat house", "bat houses for sale", "bat boxes south africa"
+  "bat-box": "Slimline Bat Box for Sale | South Africa",
+  // "bat hotel", "bat hotels"
+  "bat-hotel": "Nursery Bat Hotel for Sale | South Africa",
+  "rocket-bat-box": "Rocket Bat Hotel for Sale | South Africa",
+  // "bat removal", "bat removal johannesburg", "bats in roof"
+  "bat-exclusion": "Bat Removal Site Visit | Bats in Your Roof?",
+  // "rodent control johannesburg"
+  "rodent-consultation": "Rodent Control Consultation | South Africa",
+  "annual-owl-box-service-1": "Annual Owl Box Service | South Africa",
+  "annual-owl-box-service": "Annual Bat House Service | South Africa",
+  "owl-box-project-package-installation-5-year-service-plan": "Owl Box Installation + 5-Year Service Plan",
+  // "how to build an owl box", "owl box plans"
+  "build-it-kit-diy-owl-home": "DIY Owl Box Kit | Build Your Own Owl Box",
+  "bats-and-stables": "Bat Bank for Farms & Stables | Bat Houses",
+};
+
+export function productTitle(handle: string, title: string) {
+  return productTitles[handle] ?? `${title} for Sale | South Africa`;
 }

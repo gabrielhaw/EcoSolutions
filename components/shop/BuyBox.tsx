@@ -1,14 +1,22 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import { formatRand, shopImg, SHOP_ORIGIN, type Product } from "@/lib/shop";
+import { formatRand, type Product } from "@/lib/shop";
+import ShopImage from "./ShopImage";
+import { site } from "@/lib/site";
 import { useCart } from "./Cart";
 
 /** Photo gallery + option picker + add to cart for one product. */
 export default function BuyBox({ product }: { product: Product }) {
   const { add } = useCart();
   const [img, setImg] = useState(0);
+  const [seen, setSeen] = useState<ReadonlySet<number>>(() => new Set([0]));
+  const preload = (i: number) => setSeen((s) => (s.has(i) ? s : new Set(s).add(i)));
+  const show = (i: number) => {
+    preload(i);
+    setImg(i);
+  };
   const [vid, setVid] = useState(product.variants.find((v) => v.available)?.id ?? product.variants[0].id);
   const [qty, setQty] = useState(1);
   const variant = product.variants.find((v) => v.id === vid)!;
@@ -19,17 +27,20 @@ export default function BuyBox({ product }: { product: Product }) {
     <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
       <div className="lg:col-span-7">
         <div className="relative aspect-square overflow-hidden rounded-3xl bg-canvas-2">
-          {product.images.map((im, i) => (
-            <Image
-              key={im.src}
-              src={shopImg(im.src, 1400)}
-              alt={im.alt}
-              fill
-              unoptimized
-              priority={i === 0}
-              className={`object-cover transition-opacity duration-500 ${i === img ? "opacity-100" : "opacity-0"}`}
-            />
-          ))}
+          {/* Only photos already shown (or hovered in the strip) are loaded, not the whole gallery up front. */}
+          {product.images.map((im, i) =>
+            seen.has(i) ? (
+              <ShopImage aspect={1}
+                key={im.src}
+                src={im.src}
+                alt={im.alt}
+                fill
+                sizes="(min-width: 1280px) 720px, (min-width: 1024px) 56vw, 92vw"
+                priority={i === 0}
+                className={`object-cover transition-opacity duration-500 ${i === img ? "opacity-100" : "opacity-0"}`}
+              />
+            ) : null,
+          )}
         </div>
         {product.images.length > 1 && (
           <div className="mt-3 flex gap-3">
@@ -37,11 +48,13 @@ export default function BuyBox({ product }: { product: Product }) {
               <button
                 key={im.src}
                 type="button"
-                onClick={() => setImg(i)}
+                onClick={() => show(i)}
+                onPointerEnter={() => preload(i)}
+                onFocus={() => preload(i)}
                 aria-label={`Show photo ${i + 1}`}
                 className={`relative size-20 overflow-hidden rounded-xl border-2 transition ${i === img ? "border-accent" : "border-transparent opacity-60 hover:opacity-100"}`}
               >
-                <Image src={shopImg(im.src, 200)} alt="" fill unoptimized className="object-cover" />
+                <ShopImage aspect={1} src={im.src} alt="" fill sizes="80px" className="object-cover" />
               </button>
             ))}
           </div>
@@ -52,7 +65,7 @@ export default function BuyBox({ product }: { product: Product }) {
         <div className="lg:sticky lg:top-28">
           <h1 className="display text-display-m">{product.title}</h1>
           <p className="mt-4 text-2xl tabular-nums">
-            {sellsHere ? formatRand(variant.price) : "Choose an amount"}
+            {sellsHere ? formatRand(variant.price) : "Amount of your choice"}
             {product.poa && <span className="ml-2 align-middle text-[13px] text-fg-3">deposit · final price on quote</span>}
           </p>
           <p className="mt-5 text-[16px] leading-relaxed text-fg-2">{product.summary}</p>
@@ -100,13 +113,19 @@ export default function BuyBox({ product }: { product: Product }) {
               </button>
             </div>
           ) : (
-            <a href={`${SHOP_ORIGIN}/products/${product.handle}`} rel="noopener" className="mt-8 inline-flex rounded-full bg-accent px-6 py-3.5 font-medium text-canvas hover:bg-accent-2">
-              Choose an amount ↗
-            </a>
+            // No fixed price (gift vouchers): Shopify has no amount picker either, so arrange it with us.
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/contact-us?topic=voucher" className="inline-flex rounded-full bg-accent px-6 py-3.5 font-medium text-canvas hover:bg-accent-2">
+                Ask for a voucher
+              </Link>
+              <a href={`https://wa.me/${site.whatsapp}`} rel="noopener" className="inline-flex rounded-full border border-line-strong px-6 py-3.5 font-medium hover:border-fg">
+                WhatsApp us
+              </a>
+            </div>
           )}
 
           <ul className="mt-8 grid gap-2 border-t border-line pt-6 text-[14px] text-fg-2">
-            <li>✓ Made and installed by our own team in Gauteng</li>
+            <li>✓ Made and installed by our own team</li>
             <li>✓ Secure payment through Shopify</li>
             <li>✓ Questions? WhatsApp 072 365 9777</li>
           </ul>
